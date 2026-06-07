@@ -1,4 +1,4 @@
-const BUSINESSES = [
+window.BUSINESSES = [
   {
     citySlug: "los-cabos",
     categorySlug: "plomeros",
