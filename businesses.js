@@ -269,5 +269,94 @@ window.BUSINESSES = [
         ]
       }
     ]
+  },
+  {
+    citySlug: "cabo-san-lucas",
+    categorySlug: "aire-acondicionado",
+    businessSlug: "carmona-hnos-climas-refrigeracion",
+    name: "Carmona Hnos Climas y Refrigeración",
+    city: "Cabo San Lucas, B.C.S.",
+    category: "Aire acondicionado y refrigeración",
+    phone: "6241152835",
+    whatsapp: "526241152835",
+    currency: "MXN",
+    currencyLabel: "pesos mexicanos",
+    zones: [
+      { label: "Cabo San Lucas", factor: 1.0 },
+      { label: "Corredor turístico de Los Cabos", factor: 1.15 },
+      { label: "Propiedades residenciales", factor: 1.0 },
+      { label: "Propiedades de lujo", factor: 1.25 }
+    ],
+    services: [
+      {
+        id: "instalacion-climas",
+        name: "Instalación de climas",
+        // Rango demo editable en MXN; reemplazar con precios confirmados por el negocio.
+        base: [2200, 4200],
+        questions: [
+          { id: "capacidad", label: "¿Qué capacidad tiene el equipo?", options: [
+            { label: "1 tonelada", factor: 1.0 },
+            { label: "1.5 toneladas", factor: 1.15 },
+            { label: "2 toneladas o más", factor: 1.35 }
+          ] },
+          { id: "preparacion", label: "¿El espacio ya tiene preparación para instalarlo?", options: [
+            { label: "Sí, instalación directa", factor: 1.0 },
+            { label: "No estoy seguro", factor: 1.2 },
+            { label: "No, requiere preparación", factor: 1.5 }
+          ] },
+          { id: "acceso", label: "¿Dónde se instalará la unidad exterior?", options: [
+            { label: "Planta baja y fácil acceso", factor: 1.0 },
+            { label: "Segundo piso", factor: 1.2 },
+            { label: "Azotea o acceso especial", factor: 1.4 }
+          ] }
+        ]
+      },
+      {
+        id: "mantenimiento-aire-acondicionado",
+        name: "Mantenimiento de aire acondicionado",
+        // Rango demo editable en MXN; reemplazar con precios confirmados por el negocio.
+        base: [650, 1100],
+        questions: [
+          { id: "equipos", label: "¿Cuántos equipos necesitan mantenimiento?", options: [
+            { label: "1 equipo", factor: 1.0 },
+            { label: "2 equipos", factor: 1.75 },
+            { label: "3 o más equipos", factor: 2.4 }
+          ] },
+          { id: "tipo-equipo", label: "¿Qué tipo de aire acondicionado es?", options: [
+            { label: "Minisplit", factor: 1.0 },
+            { label: "Paquete o cassette", factor: 1.35 },
+            { label: "Sistema central", factor: 1.7 }
+          ] },
+          { id: "estado", label: "¿Cuándo recibió su último mantenimiento?", options: [
+            { label: "Hace menos de un año", factor: 1.0 },
+            { label: "Hace más de un año", factor: 1.15 },
+            { label: "No lo sé o requiere limpieza profunda", factor: 1.3 }
+          ] }
+        ]
+      },
+      {
+        id: "reparacion-refrigeracion",
+        name: "Reparación de refrigeración",
+        // Rango demo editable en MXN; reemplazar con precios confirmados por el negocio.
+        base: [850, 1900],
+        questions: [
+          { id: "equipo", label: "¿Qué equipo necesita reparación?", options: [
+            { label: "Refrigerador doméstico", factor: 1.0 },
+            { label: "Congelador o vitrina", factor: 1.25 },
+            { label: "Equipo de refrigeración comercial", factor: 1.6 }
+          ] },
+          { id: "falla", label: "¿Qué falla presenta?", options: [
+            { label: "Enfría poco o de forma irregular", factor: 1.0 },
+            { label: "Hace ruido, fuga agua o genera hielo", factor: 1.15 },
+            { label: "No enciende o no enfría", factor: 1.4 }
+          ] },
+          { id: "urgencia", label: "¿Cuándo necesitas el servicio?", options: [
+            { label: "En los próximos días", factor: 1.0 },
+            { label: "Lo antes posible", factor: 1.15 },
+            { label: "Hoy / emergencia", factor: 1.35 }
+          ] }
+        ]
+      }
+    ]
   }
 ];
