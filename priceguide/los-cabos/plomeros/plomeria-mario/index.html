@@ -26,11 +26,22 @@
     document.head.appendChild(script);
   }
 
+  function showLoadError() {
+    const app = document.getElementById("app");
+    app.innerHTML = "<p>No se pudo cargar la guía de precios. Recarga la página para intentar de nuevo.</p>";
+  }
+
   function loadFrom(index) {
     const base = candidates[index];
-    if (base === undefined) return;
+    if (base === undefined) {
+      showLoadError();
+      return;
+    }
+
     loadScript(base + "/businesses.js", function () {
-      loadScript(base + "/app.js");
+      loadScript(base + "/app.js", null, function () {
+        loadFrom(index + 1);
+      });
     }, function () {
       loadFrom(index + 1);
     });
