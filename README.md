@@ -22,7 +22,7 @@ Configure the static host to serve `index.html` as the fallback for nested URLs.
 
 `404.html` is a GitHub Pages fallback containing the same static application shell as `index.html`. The shared loader explicitly detects the GitHub Pages project path `/priceguide/` and loads `businesses.js` and `app.js` from that prefix. Outside `/priceguide/`, it loads the same assets from the site root, so custom-domain routes continue to work.
 
-The route resolver matches the final three pathname segments. GitHub Pages can therefore serve the fallback directly for these customer-facing pages:
+Each advertised business route also has a real static `index.html` file, so GitHub Pages serves known customer-facing pages with a successful HTTP status instead of relying on the 404 fallback. The route resolver still matches the final three pathname segments, and `404.html` remains the fallback for unknown URLs.
 
 - `/priceguide/los-cabos/plomeros/plomeria-mario`
 - `/priceguide/mazatlan/aire-acondicionado/frio-express`
