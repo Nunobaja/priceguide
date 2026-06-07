@@ -62,7 +62,7 @@
     const links = businesses.map(item => `
       <a class="landing-link" href="${withPrefix(businessPath(item), prefix)}/">
         ${item.name}
-        <small>${item.city} · ${item.category}</small>
+        <small>${item.city} · ${item.categoryLabel || item.category}</small>
       </a>`).join("");
 
     $("#app").innerHTML = `
@@ -109,7 +109,7 @@
     $("#bizName").textContent = business.name;
     $("#legalName").textContent = business.name;
     $("#bizCity").textContent = business.city;
-    $("#bizCat").textContent = business.category;
+    $("#bizCat").textContent = business.categoryLabel || business.category;
     $("#logoInit").textContent = business.name.charAt(0);
     $("#monedaOut").textContent = business.currencyLabel;
     $("#telText").textContent = formatPhone(business.phone);

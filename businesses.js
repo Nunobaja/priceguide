@@ -447,5 +447,282 @@ window.BUSINESSES = [
         ]
       }
     ]
+  },
+  {
+    citySlug: "puerto-vallarta",
+    categorySlug: "electricista",
+    businessSlug: "instal-pv",
+    name: "Instal PV",
+    city: "Puerto Vallarta, Jal.",
+    category: "Electricista",
+    categoryLabel: "Servicio eléctrico y plomería",
+    phone: "3221752229",
+    // Mismo número que el teléfono por ahora. WhatsApp sin confirmar y editable aquí.
+    whatsapp: "523221752229",
+    currency: "MXN",
+    currencyLabel: "pesos mexicanos",
+    // Rangos base, factores y add-ons son valores demo configurables en este archivo.
+    // Confirmar precios, cobertura y ajustes con el negocio antes de publicarlos como definitivos.
+    zones: [
+      { label: "Puerto Vallarta", factor: 1.0 },
+      { label: "Díaz Ordaz", factor: 1.05 },
+      { label: "Zona urbana de Puerto Vallarta", factor: 1.1 }
+    ],
+    services: [
+      {
+        id: "diagnostico-reparacion-fallas",
+        name: "Diagnóstico y reparación de fallas eléctricas",
+        // Rango demo editable en MXN; no es un precio final aprobado por el negocio.
+        base: [450, 950],
+        questions: [
+          { id: "tipo-falla", label: "¿Qué falla eléctrica presenta?", options: [
+            { label: "Contacto, apagador o lámpara", factor: 1.0 },
+            { label: "Circuito sin energía o apagones", factor: 1.3 },
+            { label: "Corto, olor a quemado o calentamiento", factor: 1.55 }
+          ] },
+          { id: "alcance-diagnostico", label: "¿Cuántos puntos requieren revisión?", options: [
+            { label: "1 punto", factor: 1.0 },
+            { label: "2 o 3 puntos", factor: 1.35 },
+            { label: "4 o más puntos", factor: 1.75 }
+          ] },
+          { id: "urgencia-diagnostico", label: "¿Cuándo necesitas la visita?", options: [
+            { label: "En los próximos días", factor: 1.0 },
+            { label: "Lo antes posible", factor: 1.15 },
+            { label: "Hoy / emergencia", factor: 1.35, add: 150 }
+          ] }
+        ]
+      },
+      {
+        id: "instalaciones-electricas",
+        name: "Instalaciones eléctricas",
+        // Rango demo editable en MXN; no es un precio final aprobado por el negocio.
+        base: [550, 1200],
+        questions: [
+          { id: "elemento-instalar", label: "¿Qué necesitas instalar?", options: [
+            { label: "Contacto, apagador o lámpara", factor: 1.0 },
+            { label: "Ventilador, bomba o equipo dedicado", factor: 1.35 },
+            { label: "Centro de carga o circuito nuevo", factor: 1.7 }
+          ] },
+          { id: "cantidad-instalacion", label: "¿Cuántos puntos o equipos son?", options: [
+            { label: "1", factor: 1.0 },
+            { label: "2 o 3", factor: 1.5 },
+            { label: "4 o más", factor: 2.1 }
+          ] },
+          { id: "preparacion-instalacion", label: "¿Ya existe cableado y preparación?", options: [
+            { label: "Sí, solo es conexión o reemplazo", factor: 1.0 },
+            { label: "Existe parcialmente", factor: 1.25 },
+            { label: "Se requiere cableado nuevo", factor: 1.55, add: 200 }
+          ] }
+        ]
+      },
+      {
+        id: "proyectos-residenciales",
+        name: "Proyectos eléctricos residenciales",
+        // Rango demo editable en MXN; no es un precio final aprobado por el negocio.
+        base: [1800, 4200],
+        questions: [
+          { id: "tipo-proyecto", label: "¿Qué tipo de proyecto residencial es?", options: [
+            { label: "Ampliación o remodelación pequeña", factor: 1.0 },
+            { label: "Remodelación de varias áreas", factor: 1.5 },
+            { label: "Instalación eléctrica integral", factor: 2.2 }
+          ] },
+          { id: "tamano-proyecto", label: "¿Qué tamaño aproximado tiene el área?", options: [
+            { label: "Hasta 50 m²", factor: 1.0 },
+            { label: "De 51 a 120 m²", factor: 1.45 },
+            { label: "Más de 120 m²", factor: 1.9 }
+          ] },
+          { id: "estado-proyecto", label: "¿En qué etapa está el proyecto?", options: [
+            { label: "Planeación y levantamiento", factor: 1.0 },
+            { label: "Obra en proceso", factor: 1.15 },
+            { label: "Se requiere corregir una instalación existente", factor: 1.35, add: 350 }
+          ] }
+        ]
+      }
+    ]
+  },
+  {
+    citySlug: "puerto-vallarta",
+    categorySlug: "electricista",
+    businessSlug: "servicios-profesionales-electricidad-plomeria-martinez",
+    name: "Servicios Profesionales de Electricidad y Plomería Martínez",
+    city: "Puerto Vallarta, Jal.",
+    category: "Electricista",
+    categoryLabel: "Electricidad y plomería",
+    phone: "3221830299",
+    // Mismo número que el teléfono por ahora. WhatsApp sin confirmar y editable aquí.
+    whatsapp: "523221830299",
+    currency: "MXN",
+    currencyLabel: "pesos mexicanos",
+    // Rangos base, factores y add-ons son valores demo configurables en este archivo.
+    // Confirmar precios, cobertura y ajustes con el negocio antes de publicarlos como definitivos.
+    zones: [
+      { label: "Puerto Vallarta", factor: 1.0 },
+      { label: "Campestre Las Palmas", factor: 1.1 },
+      { label: "Zona sur de Puerto Vallarta", factor: 1.15 },
+      { label: "Zona urbana de Puerto Vallarta", factor: 1.05 }
+    ],
+    services: [
+      {
+        id: "instalacion-electrica",
+        name: "Instalación eléctrica",
+        // Rango demo editable en MXN; no es un precio final aprobado por el negocio.
+        base: [550, 1250],
+        questions: [
+          { id: "trabajo-electrico", label: "¿Qué trabajo eléctrico necesitas?", options: [
+            { label: "Instalar o reemplazar un punto", factor: 1.0 },
+            { label: "Agregar un circuito", factor: 1.45 },
+            { label: "Actualizar centro de carga o instalación", factor: 1.85 }
+          ] },
+          { id: "puntos-electricos", label: "¿Cuántos puntos eléctricos son?", options: [
+            { label: "1 punto", factor: 1.0 },
+            { label: "2 o 3 puntos", factor: 1.5 },
+            { label: "4 o más puntos", factor: 2.1 }
+          ] },
+          { id: "acceso-electrico", label: "¿Cómo es el acceso al cableado?", options: [
+            { label: "Visible o con preparación existente", factor: 1.0 },
+            { label: "Por plafón o canalización existente", factor: 1.2 },
+            { label: "Requiere nueva canalización", factor: 1.5, add: 200 }
+          ] }
+        ]
+      },
+      {
+        id: "calentadores-bombas",
+        name: "Instalación de calentadores y bombas de agua",
+        // Rango demo editable en MXN; no es un precio final aprobado por el negocio.
+        base: [850, 1900],
+        questions: [
+          { id: "equipo-agua", label: "¿Qué equipo necesitas instalar?", options: [
+            { label: "Calentador", factor: 1.0 },
+            { label: "Bomba de agua", factor: 1.2 },
+            { label: "Calentador y bomba", factor: 1.75 }
+          ] },
+          { id: "tipo-instalacion-agua", label: "¿Es reemplazo o instalación nueva?", options: [
+            { label: "Reemplazo con conexiones listas", factor: 1.0 },
+            { label: "Reemplazo con ajustes de conexiones", factor: 1.25 },
+            { label: "Instalación nueva", factor: 1.55, add: 250 }
+          ] },
+          { id: "ubicacion-equipo", label: "¿Dónde se instalará el equipo?", options: [
+            { label: "Planta baja y fácil acceso", factor: 1.0 },
+            { label: "Azotea o espacio reducido", factor: 1.2 },
+            { label: "Acceso complicado o altura", factor: 1.4 }
+          ] }
+        ]
+      },
+      {
+        id: "plomeria-reparacion-instalacion",
+        name: "Reparación e instalación de plomería",
+        // Rango demo editable en MXN; no es un precio final aprobado por el negocio.
+        base: [500, 1100],
+        questions: [
+          { id: "trabajo-plomeria", label: "¿Qué servicio de plomería necesitas?", options: [
+            { label: "Reparar fuga o conexión", factor: 1.0 },
+            { label: "Instalar llave, lavabo o sanitario", factor: 1.35 },
+            { label: "Instalar o reemplazar tubería", factor: 1.65 }
+          ] },
+          { id: "cantidad-plomeria", label: "¿Cuántos puntos requieren trabajo?", options: [
+            { label: "1 punto", factor: 1.0 },
+            { label: "2 o 3 puntos", factor: 1.5 },
+            { label: "4 o más puntos", factor: 2.0 }
+          ] },
+          { id: "acceso-plomeria", label: "¿La tubería es accesible?", options: [
+            { label: "Sí, está visible", factor: 1.0 },
+            { label: "Está dentro de mueble o espacio reducido", factor: 1.2 },
+            { label: "Está dentro de muro o piso", factor: 1.55, add: 200 }
+          ] }
+        ]
+      }
+    ]
+  },
+  {
+    citySlug: "puerto-vallarta",
+    categorySlug: "electricista",
+    businessSlug: "solara-proyectos-electricos-paneles-solares",
+    name: "Solara Proyectos Eléctricos y Paneles Solares",
+    city: "Puerto Vallarta, Jal.",
+    category: "Electricista",
+    categoryLabel: "Instalaciones eléctricas y paneles solares",
+    phone: "3221818350",
+    // Mismo número que el teléfono por ahora. WhatsApp sin confirmar y editable aquí.
+    whatsapp: "523221818350",
+    currency: "MXN",
+    currencyLabel: "pesos mexicanos",
+    // Rangos base, factores y add-ons son valores demo configurables en este archivo.
+    // Confirmar precios, cobertura y ajustes con el negocio antes de publicarlos como definitivos.
+    zones: [
+      { label: "Puerto Vallarta", factor: 1.0 },
+      { label: "Brisas del Pacífico", factor: 1.05 },
+      { label: "Zona urbana de Puerto Vallarta", factor: 1.1 }
+    ],
+    services: [
+      {
+        id: "proyectos-instalaciones-electricas",
+        name: "Proyectos e instalaciones eléctricas",
+        // Rango demo editable en MXN; no es un precio final aprobado por el negocio.
+        base: [1200, 3000],
+        questions: [
+          { id: "alcance-proyecto-electrico", label: "¿Qué alcance tiene el trabajo eléctrico?", options: [
+            { label: "Agregar o renovar algunos puntos", factor: 1.0 },
+            { label: "Instalación de una zona completa", factor: 1.55 },
+            { label: "Proyecto eléctrico integral", factor: 2.25 }
+          ] },
+          { id: "tipo-inmueble", label: "¿En qué tipo de inmueble se realizará?", options: [
+            { label: "Casa o departamento pequeño", factor: 1.0 },
+            { label: "Casa grande o condominio", factor: 1.35 },
+            { label: "Local o edificio", factor: 1.65 }
+          ] },
+          { id: "estado-instalacion", label: "¿Cuál es el estado de la instalación actual?", options: [
+            { label: "Nueva o con preparación lista", factor: 1.0 },
+            { label: "Requiere adecuaciones", factor: 1.25 },
+            { label: "Requiere diagnóstico y correcciones", factor: 1.5, add: 300 }
+          ] }
+        ]
+      },
+      {
+        id: "paneles-solares",
+        name: "Instalación de paneles solares",
+        // Rango demo editable en MXN; no es un precio final aprobado por el negocio.
+        base: [3500, 7500],
+        questions: [
+          { id: "etapa-solar", label: "¿Qué necesitas para tu proyecto solar?", options: [
+            { label: "Visita técnica y propuesta", factor: 1.0 },
+            { label: "Ampliar un sistema existente", factor: 1.45 },
+            { label: "Instalación de sistema nuevo", factor: 2.2 }
+          ] },
+          { id: "consumo-solar", label: "¿Cómo describirías tu consumo eléctrico?", options: [
+            { label: "Bajo: casa pequeña", factor: 1.0 },
+            { label: "Medio: casa con varios equipos", factor: 1.4 },
+            { label: "Alto: casa grande o negocio", factor: 1.9 }
+          ] },
+          { id: "tipo-techo", label: "¿Cómo es el área de instalación?", options: [
+            { label: "Techo plano con acceso sencillo", factor: 1.0 },
+            { label: "Techo inclinado o espacio limitado", factor: 1.2 },
+            { label: "Requiere estructura o acceso especial", factor: 1.45, add: 500 }
+          ] }
+        ]
+      },
+      {
+        id: "mantenimiento-reparacion-electrica",
+        name: "Mantenimiento y reparación eléctrica",
+        // Rango demo editable en MXN; no es un precio final aprobado por el negocio.
+        base: [500, 1100],
+        questions: [
+          { id: "servicio-mantenimiento", label: "¿Qué tipo de atención necesitas?", options: [
+            { label: "Mantenimiento preventivo", factor: 1.0 },
+            { label: "Diagnóstico y reparación", factor: 1.3 },
+            { label: "Falla intermitente o corto", factor: 1.55 }
+          ] },
+          { id: "puntos-mantenimiento", label: "¿Cuántos circuitos o puntos requieren revisión?", options: [
+            { label: "1 punto o circuito", factor: 1.0 },
+            { label: "2 o 3", factor: 1.4 },
+            { label: "4 o más", factor: 1.85 }
+          ] },
+          { id: "urgencia-mantenimiento", label: "¿Cuándo necesitas el servicio?", options: [
+            { label: "En los próximos días", factor: 1.0 },
+            { label: "Lo antes posible", factor: 1.15 },
+            { label: "Hoy / emergencia", factor: 1.35, add: 150 }
+          ] }
+        ]
+      }
+    ]
   }
 ];
