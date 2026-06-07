@@ -252,8 +252,37 @@
       </div>`;
   }
 
+  function updateMetaTag(attribute, key, content) {
+    let tag = document.querySelector(`meta[${attribute}="${key}"]`);
+    if (!tag) {
+      tag = document.createElement("meta");
+      tag.setAttribute(attribute, key);
+      document.head.appendChild(tag);
+    }
+    tag.setAttribute("content", content);
+  }
+
+  function updateBusinessMetadata() {
+    const fallbackTitle = `${business.name} · Guía de precios · Precios Locales`;
+    const fallbackDescription = `Calcula un rango estimado para servicios de ${business.category} en ${business.city} antes de contactar por WhatsApp.`;
+    const metaTitle = business.metaTitle || fallbackTitle;
+    const metaDescription = business.metaDescription || fallbackDescription;
+    const shareTitle = business.shareTitle || metaTitle;
+    const shareDescription = business.shareDescription || metaDescription;
+
+    document.title = metaTitle;
+    updateMetaTag("name", "description", metaDescription);
+    updateMetaTag("property", "og:title", shareTitle);
+    updateMetaTag("property", "og:description", shareDescription);
+    updateMetaTag("property", "og:type", "website");
+    updateMetaTag("property", "og:url", window.location.href);
+    updateMetaTag("name", "twitter:card", "summary");
+    updateMetaTag("name", "twitter:title", shareTitle);
+    updateMetaTag("name", "twitter:description", shareDescription);
+  }
+
   function renderBusiness() {
-    document.title = `Guía de Precios — ${business.name}`;
+    updateBusinessMetadata();
     $("#app").innerHTML = businessTemplate;
     $("#bizName").textContent = business.name;
     $("#legalName").textContent = business.name;
