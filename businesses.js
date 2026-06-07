@@ -289,6 +289,16 @@ window.BUSINESSES = [
     whatsappHelperText: "Abriremos WhatsApp con tu solicitud ya escrita para que el negocio pueda revisar tu caso más rápido.",
     serviceAreaNote: "Atiende Cabo San Lucas y corredor turístico de Los Cabos.",
     pricingNotes: "Los rangos son demostrativos y deben ajustarse con precios reales del negocio antes de usar esta guía comercialmente.",
+    english: {
+      heroHeadline: "Get an estimated price range for air conditioning service in Cabo San Lucas.",
+      heroSubheadline: "Answer a few quick questions and get an initial idea before sending a WhatsApp message.",
+      estimateIntro: "Choose the service you need to estimate an initial range. Final prices depend on the equipment, installation conditions, height, distance, and site review.",
+      priceDisclaimer: "This is an estimated range. The final price may vary depending on equipment type, materials, property conditions, height, distance, and the real scope of the service.",
+      whatsappCtaLabel: "Send request by WhatsApp",
+      whatsappHelperText: "We’ll open WhatsApp with your request already written so the business can review your case faster.",
+      serviceAreaNote: "Serves Cabo San Lucas and the Los Cabos tourist corridor.",
+      pricingNotes: "Ranges are demo values and should be adjusted with the business’s real prices before using this guide commercially."
+    },
     zones: [
       { label: "Cabo San Lucas", factor: 1.0 },
       { label: "Corredor turístico de Los Cabos", factor: 1.15 },
