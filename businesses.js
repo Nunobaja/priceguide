@@ -300,78 +300,81 @@ window.BUSINESSES = [
       pricingNotes: "Ranges are demo values and should be adjusted with the business’s real prices before using this guide commercially."
     },
     zones: [
-      { label: "Cabo San Lucas", factor: 1.0 },
-      { label: "Corredor turístico de Los Cabos", factor: 1.15 },
-      { label: "Propiedades residenciales", factor: 1.0 },
-      { label: "Propiedades de lujo", factor: 1.25 }
+      { label: "Cabo San Lucas", labelEn: "Cabo San Lucas", factor: 1.0 },
+      { label: "Corredor turístico de Los Cabos", labelEn: "Los Cabos tourist corridor", factor: 1.15 },
+      { label: "Propiedades residenciales", labelEn: "Residential properties", factor: 1.0 },
+      { label: "Propiedades de lujo", labelEn: "Luxury properties", factor: 1.25 }
     ],
     services: [
       {
         id: "instalacion-climas",
         name: "Instalación de climas",
+        nameEn: "AC installation",
         // Rango demo editable en MXN; reemplazar con precios confirmados por el negocio.
         base: [2200, 4200],
         questions: [
-          { id: "capacidad", label: "¿Qué capacidad tiene el equipo?", options: [
-            { label: "1 tonelada", factor: 1.0 },
-            { label: "1.5 toneladas", factor: 1.15 },
-            { label: "2 toneladas o más", factor: 1.35 }
+          { id: "capacidad", label: "¿Qué capacidad tiene el equipo?", labelEn: "What is the unit capacity?", options: [
+            { label: "1 tonelada", labelEn: "1 ton", factor: 1.0 },
+            { label: "1.5 toneladas", labelEn: "1.5 tons", factor: 1.15 },
+            { label: "2 toneladas o más", labelEn: "2 tons or more", factor: 1.35 }
           ] },
-          { id: "preparacion", label: "¿El espacio ya tiene preparación para instalarlo?", options: [
-            { label: "Sí, instalación directa", factor: 1.0 },
-            { label: "No estoy seguro", factor: 1.2 },
-            { label: "No, requiere preparación", factor: 1.5 }
+          { id: "preparacion", label: "¿El espacio ya tiene preparación para instalarlo?", labelEn: "Is the space already prepared for installation?", options: [
+            { label: "Sí, instalación directa", labelEn: "Yes, straightforward installation", factor: 1.0 },
+            { label: "No estoy seguro", labelEn: "I’m not sure", factor: 1.2 },
+            { label: "No, requiere preparación", labelEn: "No, preparation is needed", factor: 1.5 }
           ] },
-          { id: "acceso", label: "¿Dónde se instalará la unidad exterior?", options: [
-            { label: "Planta baja y fácil acceso", factor: 1.0 },
-            { label: "Segundo piso", factor: 1.2 },
-            { label: "Azotea o acceso especial", factor: 1.4 }
+          { id: "acceso", label: "¿Dónde se instalará la unidad exterior?", labelEn: "Where will the outdoor unit be installed?", options: [
+            { label: "Planta baja y fácil acceso", labelEn: "Ground floor with easy access", factor: 1.0 },
+            { label: "Segundo piso", labelEn: "Second floor", factor: 1.2 },
+            { label: "Azotea o acceso especial", labelEn: "Rooftop or special access", factor: 1.4 }
           ] }
         ]
       },
       {
         id: "mantenimiento-aire-acondicionado",
         name: "Mantenimiento de aire acondicionado",
+        nameEn: "AC maintenance",
         // Rango demo editable en MXN; reemplazar con precios confirmados por el negocio.
         base: [650, 1100],
         questions: [
-          { id: "equipos", label: "¿Cuántos equipos necesitan mantenimiento?", options: [
-            { label: "1 equipo", factor: 1.0 },
-            { label: "2 equipos", factor: 1.75 },
-            { label: "3 o más equipos", factor: 2.4 }
+          { id: "equipos", label: "¿Cuántos equipos necesitan mantenimiento?", labelEn: "How many units need maintenance?", options: [
+            { label: "1 equipo", labelEn: "1 unit", factor: 1.0 },
+            { label: "2 equipos", labelEn: "2 units", factor: 1.75 },
+            { label: "3 o más equipos", labelEn: "3 or more units", factor: 2.4 }
           ] },
-          { id: "tipo-equipo", label: "¿Qué tipo de aire acondicionado es?", options: [
+          { id: "tipo-equipo", label: "¿Qué tipo de aire acondicionado es?", labelEn: "What type of air conditioner is it?", options: [
             { label: "Minisplit", factor: 1.0 },
-            { label: "Paquete o cassette", factor: 1.35 },
-            { label: "Sistema central", factor: 1.7 }
+            { label: "Paquete o cassette", labelEn: "Packaged or cassette unit", factor: 1.35 },
+            { label: "Sistema central", labelEn: "Central air system", factor: 1.7 }
           ] },
-          { id: "estado", label: "¿Cuándo recibió su último mantenimiento?", options: [
-            { label: "Hace menos de un año", factor: 1.0 },
-            { label: "Hace más de un año", factor: 1.15 },
-            { label: "No lo sé o requiere limpieza profunda", factor: 1.3 }
+          { id: "estado", label: "¿Cuándo recibió su último mantenimiento?", labelEn: "When was it last serviced?", options: [
+            { label: "Hace menos de un año", labelEn: "Less than a year ago", factor: 1.0 },
+            { label: "Hace más de un año", labelEn: "More than a year ago", factor: 1.15 },
+            { label: "No lo sé o requiere limpieza profunda", labelEn: "I’m not sure, or it needs a deep cleaning", factor: 1.3 }
           ] }
         ]
       },
       {
         id: "reparacion-refrigeracion",
         name: "Reparación de refrigeración",
+        nameEn: "Refrigeration repair",
         // Rango demo editable en MXN; reemplazar con precios confirmados por el negocio.
         base: [850, 1900],
         questions: [
-          { id: "equipo", label: "¿Qué equipo necesita reparación?", options: [
-            { label: "Refrigerador doméstico", factor: 1.0 },
-            { label: "Congelador o vitrina", factor: 1.25 },
-            { label: "Equipo de refrigeración comercial", factor: 1.6 }
+          { id: "equipo", label: "¿Qué equipo necesita reparación?", labelEn: "What equipment needs repair?", options: [
+            { label: "Refrigerador doméstico", labelEn: "Household refrigerator", factor: 1.0 },
+            { label: "Congelador o vitrina", labelEn: "Freezer or display case", factor: 1.25 },
+            { label: "Equipo de refrigeración comercial", labelEn: "Commercial refrigeration equipment", factor: 1.6 }
           ] },
-          { id: "falla", label: "¿Qué falla presenta?", options: [
-            { label: "Enfría poco o de forma irregular", factor: 1.0 },
-            { label: "Hace ruido, fuga agua o genera hielo", factor: 1.15 },
-            { label: "No enciende o no enfría", factor: 1.4 }
+          { id: "falla", label: "¿Qué falla presenta?", labelEn: "What problem is it having?", options: [
+            { label: "Enfría poco o de forma irregular", labelEn: "Cooling is weak or inconsistent", factor: 1.0 },
+            { label: "Hace ruido, fuga agua o genera hielo", labelEn: "It is noisy, leaking water, or building up ice", factor: 1.15 },
+            { label: "No enciende o no enfría", labelEn: "It won’t turn on or cool", factor: 1.4 }
           ] },
-          { id: "urgencia", label: "¿Cuándo necesitas el servicio?", options: [
-            { label: "En los próximos días", factor: 1.0 },
-            { label: "Lo antes posible", factor: 1.15 },
-            { label: "Hoy / emergencia", factor: 1.35 }
+          { id: "urgencia", label: "¿Cuándo necesitas el servicio?", labelEn: "When do you need service?", options: [
+            { label: "En los próximos días", labelEn: "Within the next few days", factor: 1.0 },
+            { label: "Lo antes posible", labelEn: "As soon as possible", factor: 1.15 },
+            { label: "Hoy / emergencia", labelEn: "Today / emergency", factor: 1.35 }
           ] }
         ]
       }
