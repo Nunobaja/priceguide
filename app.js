@@ -284,11 +284,12 @@
   function renderBusiness() {
     updateBusinessMetadata();
     $("#app").innerHTML = businessTemplate;
-    $("#bizName").textContent = business.name;
+    applyBusinessAccentColor();
+    $("#bizName").textContent = getBrandLogoText();
     $("#legalName").textContent = business.name;
     $("#bizCity").textContent = business.city;
     $("#bizCat").textContent = business.categoryLabel || business.category;
-    $("#logoInit").textContent = business.name.charAt(0);
+    $("#logoInit").textContent = getBrandInitial();
     $("#telText").textContent = formatPhone(business.phone);
     $("#lnkTel").href = "tel:+52" + business.phone;
     $("#lnkWa").href = "https://wa.me/" + business.whatsapp;
@@ -319,6 +320,26 @@
     return business.english && Object.values(business.english).some(value =>
       typeof value === "string" && value.trim()
     );
+  }
+
+  function getOptionalBusinessText(field) {
+    const value = business[field];
+    return typeof value === "string" && value.trim() ? value.trim() : "";
+  }
+
+  function getBrandInitial() {
+    return getOptionalBusinessText("brandInitial") || business.name.charAt(0);
+  }
+
+  function getBrandLogoText() {
+    return getOptionalBusinessText("brandLogoText") || business.name;
+  }
+
+  function applyBusinessAccentColor() {
+    const color = getOptionalBusinessText("brandAccentColor");
+    if (!color) return;
+    document.documentElement.style.setProperty("--amber", color);
+    document.documentElement.style.setProperty("--amber-deep", color);
   }
 
   function setLanguage(language) {
