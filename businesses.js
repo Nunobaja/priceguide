@@ -358,5 +358,94 @@ window.BUSINESSES = [
         ]
       }
     ]
+  },
+  {
+    citySlug: "cabo-san-lucas",
+    categorySlug: "plomeria",
+    businessSlug: "de-la-hoz-plomeria",
+    name: "De la Hoz Plomería",
+    city: "Cabo San Lucas, B.C.S.",
+    category: "Plomería residencial",
+    phone: "6241431760",
+    // WhatsApp demo sin confirmar; mantener este valor editable hasta validarlo con el negocio.
+    whatsapp: "526241431760",
+    currency: "MXN",
+    currencyLabel: "pesos mexicanos",
+    zones: [
+      { label: "Cabo San Lucas", factor: 1.0 },
+      { label: "Ampliación Juárez", factor: 1.0 },
+      { label: "Colonias aledañas", factor: 1.1 }
+    ],
+    services: [
+      {
+        id: "reparacion-fugas",
+        name: "Reparación de fugas",
+        // Rango demo editable en MXN; reemplazar con precios confirmados por el negocio.
+        base: [500, 1100],
+        questions: [
+          { id: "ubicacion-fuga", label: "¿Dónde se encuentra la fuga?", options: [
+            { label: "Llave, lavabo o sanitario", factor: 1.0 },
+            { label: "Tubería visible", factor: 1.2 },
+            { label: "Dentro de muro o piso", factor: 1.7 }
+          ] },
+          { id: "intensidad-fuga", label: "¿Qué tan fuerte es la fuga?", options: [
+            { label: "Goteo leve", factor: 1.0 },
+            { label: "Flujo constante", factor: 1.2 },
+            { label: "Fuga abundante o emergencia", factor: 1.45 }
+          ] },
+          { id: "acceso-fuga", label: "¿La zona de la fuga es de fácil acceso?", options: [
+            { label: "Sí, está despejada", factor: 1.0 },
+            { label: "No estoy seguro", factor: 1.1 },
+            { label: "Requiere retirar acabado o mueble", factor: 1.35 }
+          ] }
+        ]
+      },
+      {
+        id: "instalacion-reparacion-tuberias",
+        name: "Instalación y reparación de tuberías",
+        // Rango demo editable en MXN; reemplazar con precios confirmados por el negocio.
+        base: [900, 2200],
+        questions: [
+          { id: "trabajo-tuberia", label: "¿Qué trabajo necesitas en la tubería?", options: [
+            { label: "Reparar una sección", factor: 1.0 },
+            { label: "Reemplazar una sección", factor: 1.3 },
+            { label: "Instalar una línea nueva", factor: 1.6 }
+          ] },
+          { id: "longitud-tuberia", label: "¿Qué longitud aproximada requiere trabajo?", options: [
+            { label: "Hasta 2 metros", factor: 1.0 },
+            { label: "De 3 a 5 metros", factor: 1.35 },
+            { label: "Más de 5 metros", factor: 1.8 }
+          ] },
+          { id: "acceso-tuberia", label: "¿Dónde está ubicada la tubería?", options: [
+            { label: "Visible y de fácil acceso", factor: 1.0 },
+            { label: "Dentro de un mueble o espacio reducido", factor: 1.2 },
+            { label: "Dentro de muro, piso o techo", factor: 1.55 }
+          ] }
+        ]
+      },
+      {
+        id: "plomeria-general",
+        name: "Mantenimiento e instalación de plomería en general",
+        // Rango demo editable en MXN; reemplazar con precios confirmados por el negocio.
+        base: [600, 1500],
+        questions: [
+          { id: "tipo-servicio-general", label: "¿Qué tipo de servicio necesitas?", options: [
+            { label: "Mantenimiento preventivo", factor: 1.0 },
+            { label: "Reparación general", factor: 1.25 },
+            { label: "Instalación de accesorios o muebles", factor: 1.45 }
+          ] },
+          { id: "cantidad-puntos", label: "¿Cuántos puntos de plomería requieren atención?", options: [
+            { label: "1 punto", factor: 1.0 },
+            { label: "2 o 3 puntos", factor: 1.5 },
+            { label: "4 o más puntos", factor: 2.0 }
+          ] },
+          { id: "materiales", label: "¿Ya cuentas con los materiales o accesorios?", options: [
+            { label: "Sí, ya los tengo", factor: 1.0 },
+            { label: "Tengo algunos", factor: 1.1 },
+            { label: "Necesito que los consigan", factor: 1.25 }
+          ] }
+        ]
+      }
+    ]
   }
 ];
