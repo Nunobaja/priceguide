@@ -2,9 +2,86 @@
   const STYLE_ID = "precios-locales-style";
   const ROOT_SEGMENT = "priceguide";
   const css = ':root{\n    --ink:#16120D;\n    --ink-soft:#4A4238;\n    --paper:#F6F1E8;\n    --card:#FFFDF8;\n    --line:#E4DACA;\n    --amber:#E08A2B;\n    --amber-deep:#B96A12;\n    --wa:#1FAE5A;\n    --wa-deep:#168B47;\n    --shadow:0 1px 0 rgba(22,18,13,.04), 0 18px 40px -22px rgba(22,18,13,.35);\n  }\n  *{box-sizing:border-box;margin:0;padding:0}\n  html{-webkit-text-size-adjust:100%}\n  body{\n    font-family:\'Hanken Grotesk\',system-ui,sans-serif;\n    color:var(--ink);\n    background:var(--paper);\n    background-image:\n      radial-gradient( at 100% 0%, rgba(224,138,43,.10), transparent 45%),\n      radial-gradient(at 0% 100%, rgba(31,174,90,.06), transparent 40%);\n    background-attachment:fixed;\n    line-height:1.45;\n    -webkit-font-smoothing:antialiased;\n    min-height:100vh;\n  }\n  /* subtle grain */\n  body::before{\n    content:"";position:fixed;inset:0;pointer-events:none;opacity:.4;z-index:0;\n    background-image:url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'120\' height=\'120\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'.9\' numOctaves=\'2\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\' opacity=\'.035\'/%3E%3C/svg%3E");\n  }\n  .wrap{position:relative;z-index:1;max-width:560px;margin:0 auto;padding:0 18px 64px}\n\n  /* HEADER */\n  header{padding:28px 0 18px;display:flex;align-items:center;gap:14px}\n  .logo{\n    width:52px;height:52px;border-radius:14px;flex:none;\n    background:linear-gradient(150deg,var(--amber),var(--amber-deep));\n    display:grid;place-items:center;color:#fff;\n    font-family:\'Fraunces\',serif;font-weight:600;font-size:24px;\n    box-shadow:0 8px 20px -8px rgba(185,106,18,.6);\n  }\n  .biz h1{font-family:\'Fraunces\',serif;font-weight:600;font-size:22px;letter-spacing:-.01em;line-height:1.1}\n  .biz p{font-size:13px;color:var(--ink-soft);margin-top:3px;font-weight:500}\n  .biz .cat{color:var(--amber-deep)}\n\n  /* HERO */\n  .hero{margin:6px 0 22px}\n  .hero h2{\n    font-family:\'Fraunces\',serif;font-weight:600;font-size:30px;\n    line-height:1.08;letter-spacing:-.02em;\n  }\n  .hero h2 em{font-style:italic;color:var(--amber-deep)}\n  .hero p{margin-top:10px;color:var(--ink-soft);font-size:15px;max-width:42ch}\n\n  /* CARD */\n  .card{\n    background:var(--card);border:1px solid var(--line);border-radius:20px;\n    padding:22px 20px;box-shadow:var(--shadow);margin-bottom:16px;\n  }\n  .step-label{\n    font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;\n    color:var(--amber-deep);margin-bottom:12px;display:flex;align-items:center;gap:8px;\n  }\n  .step-label .num{\n    width:20px;height:20px;border-radius:50%;background:var(--amber);color:#fff;\n    display:grid;place-items:center;font-size:11px;letter-spacing:0;\n  }\n\n  /* OPTION CHIPS */\n  .opts{display:flex;flex-wrap:wrap;gap:9px}\n  .opt{\n    border:1.5px solid var(--line);background:#fff;border-radius:12px;\n    padding:11px 15px;font-size:14px;font-weight:600;color:var(--ink);\n    cursor:pointer;transition:all .16s ease;user-select:none;\n  }\n  .opt:hover{border-color:var(--amber)}\n  .opt.sel{border-color:var(--amber);background:#FFF6EA;box-shadow:inset 0 0 0 1px var(--amber)}\n\n  .q{margin-top:20px}\n  .q:first-child{margin-top:0}\n  .q-label{font-size:14px;font-weight:600;margin-bottom:9px}\n\n  /* dynamic block reveal */\n  .reveal{animation:rise .4s cubic-bezier(.2,.7,.2,1) both}\n  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}\n  .hidden{display:none}\n\n  /* CALC BUTTON */\n  .btn{\n    width:100%;border:none;border-radius:14px;padding:16px;font-size:16px;\n    font-weight:700;font-family:\'Hanken Grotesk\',sans-serif;cursor:pointer;\n    transition:transform .12s ease,box-shadow .2s ease,opacity .2s;\n  }\n  .btn:active{transform:translateY(1px)}\n  .btn-amber{background:linear-gradient(150deg,var(--amber),var(--amber-deep));color:#fff;box-shadow:0 12px 24px -10px rgba(185,106,18,.7)}\n  .btn-amber:disabled{opacity:.4;cursor:not-allowed;box-shadow:none}\n  .btn-wa{background:linear-gradient(150deg,var(--wa),var(--wa-deep));color:#fff;box-shadow:0 12px 24px -10px rgba(22,139,71,.7);display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none}\n  .btn-wa svg{width:22px;height:22px;fill:#fff}\n\n  /* RESULT */\n  .result{text-align:center;padding:8px 4px 4px}\n  .result .tag{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}\n  .range{\n    font-family:\'Fraunces\',serif;font-weight:600;letter-spacing:-.02em;\n    font-size:clamp(34px,11vw,52px);line-height:1;margin:10px 0 4px;\n    color:var(--ink);\n  }\n  .range .cur{color:var(--amber-deep);font-size:.55em;vertical-align:super}\n  .range .dash{color:var(--line);font-weight:400}\n  .moneda{font-size:13px;color:var(--ink-soft);font-weight:600}\n  .aviso{\n    font-size:12.5px;color:var(--ink-soft);background:#FBF6ED;border:1px dashed var(--line);\n    border-radius:12px;padding:12px 14px;margin:16px 0;line-height:1.4;text-align:left;\n  }\n  .aviso b{color:var(--ink)}\n\n  /* LEAD */\n  .field{margin-bottom:12px}\n  .field label{font-size:13px;font-weight:600;display:block;margin-bottom:6px}\n  .field input{\n    width:100%;border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;\n    font-size:15px;font-family:\'Hanken Grotesk\',sans-serif;background:#fff;color:var(--ink);\n  }\n  .field input:focus{outline:none;border-color:var(--amber);box-shadow:0 0 0 3px rgba(224,138,43,.15)}\n  .helper{font-size:12px;color:var(--ink-soft);margin-top:6px}\n\n  /* FOOTER biz info */\n  .bizinfo{display:flex;flex-direction:column;gap:8px;font-size:14px}\n  .bizinfo a{color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:10px;font-weight:500}\n  .bizinfo .ic{width:34px;height:34px;border-radius:10px;background:#FFF6EA;display:grid;place-items:center;flex:none;color:var(--amber-deep);font-size:16px}\n  .legal{text-align:center;font-size:11.5px;color:var(--ink-soft);margin-top:26px;line-height:1.5}\n  .legal strong{color:var(--ink-soft)}\n  .landing-list{display:grid;gap:10px;margin-top:16px}\n  .landing-link{display:block;border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:14px 15px;color:var(--ink);text-decoration:none;font-weight:700;transition:all .16s ease}\n  .landing-link:hover{border-color:var(--amber);background:#FFF6EA}\n  .landing-link small{display:block;color:var(--ink-soft);font-weight:500;margin-top:3px}\n  .muted{color:var(--ink-soft)}\n';
-  const businessTemplate = '<header>\n    <div class="logo" id="logoInit">P</div>\n    <div class="biz">\n      <h1 id="bizName">Precios Locales</h1>\n      <p><span id="bizCity">México</span> · <span class="cat" id="bizCat">Servicios para el hogar</span></p>\n    </div>\n  </header>\n\n  <div class="hero">\n    <h2>Calcula un <em>precio estimado</em> antes de contactarnos.</h2>\n    <p>Responde unas preguntas rápidas y te mostramos un rango aproximado. Sin compromiso.</p>\n  </div>\n\n  <!-- PASO 1: servicio -->\n  <div class="card">\n    <div class="step-label"><span class="num">1</span> ¿Qué servicio necesitas?</div>\n    <div class="opts" id="servicios"></div>\n  </div>\n\n  <!-- PASO 2: preguntas (dinámico) -->\n  <div class="card hidden" id="cardPreguntas">\n    <div class="step-label"><span class="num">2</span> Cuéntanos un poco más</div>\n    <div id="preguntas"></div>\n    <button class="btn btn-amber" id="btnCalcular" style="margin-top:22px" disabled>Ver precio estimado</button>\n  </div>\n\n  <!-- PASO 3: resultado -->\n  <div class="card hidden" id="cardResultado">\n    <div class="result">\n      <div class="tag">Tu rango estimado</div>\n      <div class="range" id="rangeOut"></div>\n      <div class="moneda" id="monedaOut">pesos mexicanos</div>\n    </div>\n\n    <div class="aviso">\n      <b>Importante:</b> este es un rango estimado. El precio final puede variar según revisión, materiales, condiciones del lugar y alcance real del servicio.\n    </div>\n\n    <div class="step-label" style="margin-top:6px"><span class="num">3</span> ¿A quién le cotizamos?</div>\n    <div class="field">\n      <label for="leadName">Tu nombre</label>\n      <input type="text" id="leadName" placeholder="Ej. Carlos Méndez" autocomplete="name">\n    </div>\n    <div class="field">\n      <label for="leadTel">Tu teléfono <span style="font-weight:400;color:var(--ink-soft)">(opcional)</span></label>\n      <input type="tel" id="leadTel" placeholder="Ej. 624 123 4567" autocomplete="tel" inputmode="tel">\n    </div>\n\n    <a class="btn btn-wa" id="btnWa" href="#" target="_blank" rel="noopener">\n      <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 0 1 8.413 3.488 11.82 11.82 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.512 5.26l-.999 3.648 3.736-.98zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.692.626.711.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>\n      Cotizar por WhatsApp\n    </a>\n    <p class="helper" style="text-align:center;margin-top:10px">Te abrimos WhatsApp con tu cotización ya escrita. Solo das enviar.</p>\n  </div>\n\n  <!-- datos del negocio -->\n  <div class="card">\n    <div class="step-label"><span class="num">i</span> Datos del negocio</div>\n    <div class="bizinfo">\n      <a href="#" id="lnkTel"><span class="ic">📞</span> <span id="telText"></span></a>\n      <a href="#" id="lnkWa"><span class="ic">💬</span> WhatsApp directo</a>\n      <div style="display:flex;align-items:center;gap:10px;font-weight:500"><span class="ic">📍</span> <span id="zonaText"></span></div>\n    </div>\n  </div>\n\n  <p class="legal">\n    Guía de precios para <strong id="legalName">este negocio</strong> · Los rangos son estimados y no constituyen una cotización formal.\n  </p>';
+  const businessTemplate = `<header>
+    <div class="logo" id="logoInit">P</div>
+    <div class="biz">
+      <h1 id="bizName">Precios Locales</h1>
+      <p><span id="bizCity">México</span> · <span class="cat" id="bizCat">Servicios para el hogar</span></p>
+    </div>
+  </header>
+
+  <div class="hero">
+    <h2 id="heroHeadline"></h2>
+    <p id="heroSubheadline"></p>
+  </div>
+
+  <!-- PASO 1: servicio -->
+  <div class="card">
+    <div class="step-label"><span class="num">1</span> ¿Qué servicio necesitas?</div>
+    <p class="muted" id="estimateIntro" style="margin-bottom:16px"></p>
+    <div class="opts" id="servicios"></div>
+  </div>
+
+  <!-- PASO 2: preguntas (dinámico) -->
+  <div class="card hidden" id="cardPreguntas">
+    <div class="step-label"><span class="num">2</span> Cuéntanos un poco más</div>
+    <div id="preguntas"></div>
+    <button class="btn btn-amber" id="btnCalcular" style="margin-top:22px" disabled>Ver precio estimado</button>
+  </div>
+
+  <!-- PASO 3: resultado -->
+  <div class="card hidden" id="cardResultado">
+    <div class="result">
+      <div class="tag">Tu rango estimado</div>
+      <div class="range" id="rangeOut"></div>
+      <div class="moneda" id="monedaOut">pesos mexicanos</div>
+    </div>
+
+    <div class="aviso">
+      <b>Importante:</b> <span id="priceDisclaimer"></span>
+    </div>
+    <div class="aviso hidden" id="pricingNotes"></div>
+
+    <div class="step-label" style="margin-top:6px"><span class="num">3</span> ¿A quién le cotizamos?</div>
+    <div class="field">
+      <label for="leadName">Tu nombre</label>
+      <input type="text" id="leadName" placeholder="Ej. Carlos Méndez" autocomplete="name">
+    </div>
+    <div class="field">
+      <label for="leadTel">Tu teléfono <span style="font-weight:400;color:var(--ink-soft)">(opcional)</span></label>
+      <input type="tel" id="leadTel" placeholder="Ej. 624 123 4567" autocomplete="tel" inputmode="tel">
+    </div>
+
+    <a class="btn btn-wa" id="btnWa" href="#" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 0 1 8.413 3.488 11.82 11.82 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.512 5.26l-.999 3.648 3.736-.98zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.692.626.711.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+      <span id="whatsappCtaLabel"></span>
+    </a>
+    <p class="helper" id="whatsappHelperText" style="text-align:center;margin-top:10px"></p>
+  </div>
+
+  <!-- datos del negocio -->
+  <div class="card">
+    <div class="step-label"><span class="num">i</span> Datos del negocio</div>
+    <div class="bizinfo">
+      <a href="#" id="lnkTel"><span class="ic">📞</span> <span id="telText"></span></a>
+      <a href="#" id="lnkWa"><span class="ic">💬</span> WhatsApp directo</a>
+      <div style="display:flex;align-items:center;gap:10px;font-weight:500"><span class="ic">📍</span> <span id="serviceAreaNote"></span></div>
+    </div>
+  </div>
+
+  <p class="legal">
+    Guía de precios para <strong id="legalName">este negocio</strong> · Los rangos son estimados y no constituyen una cotización formal.
+  </p>`;
   const $ = selector => document.querySelector(selector);
   const businesses = Array.isArray(window.BUSINESSES) ? window.BUSINESSES : [];
+  const fallbackCopy = {
+    heroHeadline: "Calcula un precio estimado antes de contactarnos.",
+    heroSubheadline: "Responde unas preguntas rápidas y te mostramos un rango aproximado. Sin compromiso.",
+    estimateIntro: "Elige el servicio que necesitas para calcular un rango inicial.",
+    priceDisclaimer: "Este es un rango estimado. El precio final puede variar según revisión, materiales, condiciones del lugar y alcance real del servicio.",
+    whatsappCtaLabel: "Cotizar por WhatsApp",
+    whatsappHelperText: "Te abrimos WhatsApp con tu cotización ya escrita. Solo das enviar."
+  };
   const state = { service: null, answers: {}, zone: null, range: null };
   let business = null;
 
@@ -111,11 +188,25 @@
     $("#bizCity").textContent = business.city;
     $("#bizCat").textContent = business.categoryLabel || business.category;
     $("#logoInit").textContent = business.name.charAt(0);
+    $("#heroHeadline").textContent = getCopy("heroHeadline");
+    $("#heroSubheadline").textContent = getCopy("heroSubheadline");
+    $("#estimateIntro").textContent = getCopy("estimateIntro");
+    $("#priceDisclaimer").textContent = getCopy("priceDisclaimer");
+    $("#whatsappCtaLabel").textContent = getCopy("whatsappCtaLabel");
+    $("#whatsappHelperText").textContent = getCopy("whatsappHelperText");
+    $("#serviceAreaNote").textContent = getCopy(
+      "serviceAreaNote",
+      "Atendemos toda la zona de " + business.city
+    );
+    const pricingNotes = getCopy("pricingNotes", "");
+    if (pricingNotes) {
+      $("#pricingNotes").textContent = pricingNotes;
+      $("#pricingNotes").classList.remove("hidden");
+    }
     $("#monedaOut").textContent = business.currencyLabel;
     $("#telText").textContent = formatPhone(business.phone);
     $("#lnkTel").href = "tel:+52" + business.phone;
     $("#lnkWa").href = "https://wa.me/" + business.whatsapp;
-    $("#zonaText").textContent = "Atendemos toda la zona de " + business.city;
 
     business.services.forEach(service => {
       const button = document.createElement("div");
@@ -129,6 +220,11 @@
     $("#btnCalcular").onclick = calculate;
     $("#leadName").addEventListener("input", buildWhatsAppUrl);
     $("#leadTel").addEventListener("input", buildWhatsAppUrl);
+  }
+
+  function getCopy(field, fallback = fallbackCopy[field]) {
+    const value = business[field];
+    return typeof value === "string" && value.trim() ? value.trim() : fallback;
   }
 
   function formatPhone(phone) {
