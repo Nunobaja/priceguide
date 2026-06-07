@@ -297,7 +297,7 @@
     if (hasEnglishCopy()) {
       $("#languageToggle").classList.remove("hidden");
       $("#languageToggle").querySelectorAll("button").forEach(button => {
-        button.onclick = () => setLanguage(button.dataset.language);
+        button.onclick = () => setLanguage(button.dataset.language, true);
       });
     }
 
@@ -313,7 +313,18 @@
     $("#btnCalcular").onclick = calculate;
     $("#leadName").addEventListener("input", buildWhatsAppUrl);
     $("#leadTel").addEventListener("input", buildWhatsAppUrl);
-    setLanguage("es");
+    setLanguage(getLanguageFromUrl());
+  }
+
+  function getLanguageFromUrl() {
+    return new URL(window.location.href).searchParams.get("lang") === "en" ? "en" : "es";
+  }
+
+  function updateLanguageInUrl(language) {
+    const url = new URL(window.location.href);
+    url.searchParams.set("lang", language);
+    window.history.replaceState(window.history.state, "", url.href);
+    updateMetaTag("property", "og:url", url.href);
   }
 
   function hasEnglishCopy() {
@@ -342,8 +353,9 @@
     document.documentElement.style.setProperty("--amber-deep", color);
   }
 
-  function setLanguage(language) {
+  function setLanguage(language, updateUrl = false) {
     state.language = language === "en" && hasEnglishCopy() ? "en" : "es";
+    if (updateUrl) updateLanguageInUrl(state.language);
     const labels = uiCopy[state.language];
     document.documentElement.lang = state.language === "en" ? "en" : "es-MX";
 
