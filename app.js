@@ -274,7 +274,7 @@
     business.services.forEach(service => {
       const button = document.createElement("div");
       button.className = "opt";
-      button.textContent = service.name;
+      button.textContent = getLocalizedLabel(service, "name");
       button.dataset.id = service.id;
       button.onclick = () => selectService(service, button);
       $("#servicios").appendChild(button);
@@ -325,7 +325,20 @@
       ? labels.mexicanPesos
       : business.currencyLabel;
 
+    business.services.forEach(service => {
+      const button = document.querySelector(`#servicios [data-id="${service.id}"]`);
+      if (button) button.textContent = getLocalizedLabel(service, "name");
+    });
+    if (state.service) renderQuestions(state.service);
     if (state.range) renderRequestSummary();
+  }
+
+  function getLocalizedLabel(item, field = "label", language = state.language) {
+    const englishField = field === "name" ? "nameEn" : "labelEn";
+    const translatedValue = language === "en" ? item[englishField] : null;
+    return typeof translatedValue === "string" && translatedValue.trim()
+      ? translatedValue.trim()
+      : item[field];
   }
 
   function getCopy(field, fallback = fallbackCopy[field]) {
@@ -362,20 +375,17 @@
       wrapper.className = "q";
       const label = document.createElement("div");
       label.className = "q-label";
-      label.textContent = question.label;
+      label.textContent = getLocalizedLabel(question);
       const options = document.createElement("div");
       options.className = "opts";
 
       question.options.forEach(option => {
         const choice = document.createElement("div");
         choice.className = "opt";
-        choice.textContent = option.label;
+        choice.textContent = getLocalizedLabel(option);
+        choice.classList.toggle("sel", state.answers[question.id] === option);
         choice.onclick = () => {
-          state.answers[question.id] = {
-            label: option.label,
-            factor: option.factor || 1,
-            add: option.add || 0
-          };
+          state.answers[question.id] = option;
           options.querySelectorAll(".opt").forEach(item => item.classList.remove("sel"));
           choice.classList.add("sel");
           checkComplete(service);
@@ -400,7 +410,8 @@
     business.zones.forEach(zone => {
       const choice = document.createElement("div");
       choice.className = "opt";
-      choice.textContent = zone.label;
+      choice.textContent = getLocalizedLabel(zone);
+      choice.classList.toggle("sel", state.zone === zone);
       choice.onclick = () => {
         state.zone = zone;
         zoneOptions.querySelectorAll(".opt").forEach(item => item.classList.remove("sel"));
@@ -417,7 +428,7 @@
     const card = $("#cardPreguntas");
     card.classList.remove("hidden");
     card.classList.add("reveal");
-    $("#btnCalcular").disabled = true;
+    checkComplete(service);
   }
 
   function checkComplete(service) {
@@ -434,8 +445,8 @@
     service.questions.forEach(question => {
       const answer = state.answers[question.id];
       if (answer) {
-        multiplier *= answer.factor;
-        addition += answer.add;
+        multiplier *= answer.factor || 1;
+        addition += answer.add || 0;
       }
     });
 
@@ -503,16 +514,16 @@
   }
 
   // This object is the handoff boundary where lead capture can be added later.
-  function getHandoffDetails() {
+  function getHandoffDetails(language = state.language) {
     return {
       businessPath: businessPath(business),
       businessName: business.name,
-      service: state.service.name,
+      service: getLocalizedLabel(state.service, "name", language),
       answers: state.service.questions.map(question => ({
-        question: question.label,
-        answer: state.answers[question.id].label
+        question: getLocalizedLabel(question, "label", language),
+        answer: getLocalizedLabel(state.answers[question.id], "label", language)
       })),
-      zone: state.zone.label,
+      zone: getLocalizedLabel(state.zone, "label", language),
       range: state.range,
       currency: business.currency,
       customerName: $("#leadName").value.trim(),
@@ -522,7 +533,7 @@
 
   function buildWhatsAppUrl() {
     if (!state.range) return;
-    const details = getHandoffDetails();
+    const details = getHandoffDetails("es");
     const lines = [
       "Hola, quiero cotizar.",
       "Servicio: " + details.service,
