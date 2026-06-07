@@ -1,7 +1,7 @@
 (() => {
   const STYLE_ID = "precios-locales-style";
   const ROOT_SEGMENT = "priceguide";
-  const css = ':root{\n    --ink:#16120D;\n    --ink-soft:#4A4238;\n    --paper:#F6F1E8;\n    --card:#FFFDF8;\n    --line:#E4DACA;\n    --amber:#E08A2B;\n    --amber-deep:#B96A12;\n    --wa:#1FAE5A;\n    --wa-deep:#168B47;\n    --shadow:0 1px 0 rgba(22,18,13,.04), 0 18px 40px -22px rgba(22,18,13,.35);\n  }\n  *{box-sizing:border-box;margin:0;padding:0}\n  html{-webkit-text-size-adjust:100%}\n  body{\n    font-family:\'Hanken Grotesk\',system-ui,sans-serif;\n    color:var(--ink);\n    background:var(--paper);\n    background-image:\n      radial-gradient( at 100% 0%, rgba(224,138,43,.10), transparent 45%),\n      radial-gradient(at 0% 100%, rgba(31,174,90,.06), transparent 40%);\n    background-attachment:fixed;\n    line-height:1.45;\n    -webkit-font-smoothing:antialiased;\n    min-height:100vh;\n  }\n  /* subtle grain */\n  body::before{\n    content:"";position:fixed;inset:0;pointer-events:none;opacity:.4;z-index:0;\n    background-image:url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'120\' height=\'120\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'.9\' numOctaves=\'2\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\' opacity=\'.035\'/%3E%3C/svg%3E");\n  }\n  .wrap{position:relative;z-index:1;max-width:560px;margin:0 auto;padding:0 18px 64px}\n\n  /* HEADER */\n  header{padding:28px 0 18px;display:flex;align-items:center;gap:14px}\n  .logo{\n    width:52px;height:52px;border-radius:14px;flex:none;\n    background:linear-gradient(150deg,var(--amber),var(--amber-deep));\n    display:grid;place-items:center;color:#fff;\n    font-family:\'Fraunces\',serif;font-weight:600;font-size:24px;\n    box-shadow:0 8px 20px -8px rgba(185,106,18,.6);\n  }\n  .biz h1{font-family:\'Fraunces\',serif;font-weight:600;font-size:22px;letter-spacing:-.01em;line-height:1.1}\n  .biz p{font-size:13px;color:var(--ink-soft);margin-top:3px;font-weight:500}\n  .biz .cat{color:var(--amber-deep)}\n\n  /* HERO */\n  .hero{margin:6px 0 22px}\n  .hero h2{\n    font-family:\'Fraunces\',serif;font-weight:600;font-size:30px;\n    line-height:1.08;letter-spacing:-.02em;\n  }\n  .hero h2 em{font-style:italic;color:var(--amber-deep)}\n  .hero p{margin-top:10px;color:var(--ink-soft);font-size:15px;max-width:42ch}\n\n  /* CARD */\n  .card{\n    background:var(--card);border:1px solid var(--line);border-radius:20px;\n    padding:22px 20px;box-shadow:var(--shadow);margin-bottom:16px;\n  }\n  .step-label{\n    font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;\n    color:var(--amber-deep);margin-bottom:12px;display:flex;align-items:center;gap:8px;\n  }\n  .step-label .num{\n    width:20px;height:20px;border-radius:50%;background:var(--amber);color:#fff;\n    display:grid;place-items:center;font-size:11px;letter-spacing:0;\n  }\n\n  /* OPTION CHIPS */\n  .opts{display:flex;flex-wrap:wrap;gap:9px}\n  .opt{\n    border:1.5px solid var(--line);background:#fff;border-radius:12px;\n    padding:11px 15px;font-size:14px;font-weight:600;color:var(--ink);\n    cursor:pointer;transition:all .16s ease;user-select:none;\n  }\n  .opt:hover{border-color:var(--amber)}\n  .opt.sel{border-color:var(--amber);background:#FFF6EA;box-shadow:inset 0 0 0 1px var(--amber)}\n\n  .q{margin-top:20px}\n  .q:first-child{margin-top:0}\n  .q-label{font-size:14px;font-weight:600;margin-bottom:9px}\n\n  /* dynamic block reveal */\n  .reveal{animation:rise .4s cubic-bezier(.2,.7,.2,1) both}\n  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}\n  .hidden{display:none}\n\n  /* CALC BUTTON */\n  .btn{\n    width:100%;border:none;border-radius:14px;padding:16px;font-size:16px;\n    font-weight:700;font-family:\'Hanken Grotesk\',sans-serif;cursor:pointer;\n    transition:transform .12s ease,box-shadow .2s ease,opacity .2s;\n  }\n  .btn:active{transform:translateY(1px)}\n  .btn-amber{background:linear-gradient(150deg,var(--amber),var(--amber-deep));color:#fff;box-shadow:0 12px 24px -10px rgba(185,106,18,.7)}\n  .btn-amber:disabled{opacity:.4;cursor:not-allowed;box-shadow:none}\n  .btn-wa{background:linear-gradient(150deg,var(--wa),var(--wa-deep));color:#fff;box-shadow:0 12px 24px -10px rgba(22,139,71,.7);display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none}\n  .btn-wa svg{width:22px;height:22px;fill:#fff}\n\n  /* RESULT */\n  .result{text-align:center;padding:8px 4px 4px}\n  .result .tag{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}\n  .range{\n    font-family:\'Fraunces\',serif;font-weight:600;letter-spacing:-.02em;\n    font-size:clamp(34px,11vw,52px);line-height:1;margin:10px 0 4px;\n    color:var(--ink);\n  }\n  .range .cur{color:var(--amber-deep);font-size:.55em;vertical-align:super}\n  .range .dash{color:var(--line);font-weight:400}\n  .moneda{font-size:13px;color:var(--ink-soft);font-weight:600}\n  .range-note{font-size:12.5px;color:var(--ink-soft);line-height:1.45;margin:12px auto 0;max-width:48ch}\n  .request-summary{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0;margin:18px 0;text-align:left}\n  .request-summary h3{font-size:14px;margin-bottom:10px}\n  .summary-list{display:grid;gap:7px}\n  .summary-row{display:grid;grid-template-columns:88px 1fr;gap:10px;font-size:13px;line-height:1.4}\n  .summary-row dt{color:var(--ink-soft);font-weight:600}\n  .summary-row dd{font-weight:600;min-width:0}\n  .summary-details{display:grid;gap:5px;list-style:none;font-weight:500}\n  .summary-details li{position:relative;padding-left:12px}\n  .summary-details li::before{content:"•";position:absolute;left:0;color:var(--amber-deep)}\n  .summary-details strong{font-weight:700}\n  .handoff-intro{margin:2px 0 16px}\n  .handoff-intro h3{font-family:\'Fraunces\',serif;font-size:20px;line-height:1.2;margin-bottom:5px}\n  .handoff-intro p{font-size:13px;color:var(--ink-soft)}\n  .aviso{\n    font-size:12.5px;color:var(--ink-soft);background:#FBF6ED;border:1px dashed var(--line);\n    border-radius:12px;padding:12px 14px;margin:16px 0;line-height:1.4;text-align:left;\n  }\n  .aviso b{color:var(--ink)}\n\n  /* LEAD */\n  .field{margin-bottom:12px}\n  .field label{font-size:13px;font-weight:600;display:block;margin-bottom:6px}\n  .field input{\n    width:100%;border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;\n    font-size:15px;font-family:\'Hanken Grotesk\',sans-serif;background:#fff;color:var(--ink);\n  }\n  .field input:focus{outline:none;border-color:var(--amber);box-shadow:0 0 0 3px rgba(224,138,43,.15)}\n  .helper{font-size:12px;color:var(--ink-soft);margin-top:6px}\n\n  /* FOOTER biz info */\n  .bizinfo{display:flex;flex-direction:column;gap:8px;font-size:14px}\n  .bizinfo a{color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:10px;font-weight:500}\n  .bizinfo .ic{width:34px;height:34px;border-radius:10px;background:#FFF6EA;display:grid;place-items:center;flex:none;color:var(--amber-deep);font-size:16px}\n  .legal{text-align:center;font-size:11.5px;color:var(--ink-soft);margin-top:26px;line-height:1.5}\n  .legal strong{color:var(--ink-soft)}\n  .landing-list{display:grid;gap:10px;margin-top:16px}\n  .landing-link{display:block;border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:14px 15px;color:var(--ink);text-decoration:none;font-weight:700;transition:all .16s ease}\n  .landing-link:hover{border-color:var(--amber);background:#FFF6EA}\n  .landing-link small{display:block;color:var(--ink-soft);font-weight:500;margin-top:3px}\n  .muted{color:var(--ink-soft)}\n';
+  const css = ':root{\n    --ink:#16120D;\n    --ink-soft:#4A4238;\n    --paper:#F6F1E8;\n    --card:#FFFDF8;\n    --line:#E4DACA;\n    --amber:#E08A2B;\n    --amber-deep:#B96A12;\n    --wa:#1FAE5A;\n    --wa-deep:#168B47;\n    --shadow:0 1px 0 rgba(22,18,13,.04), 0 18px 40px -22px rgba(22,18,13,.35);\n  }\n  *{box-sizing:border-box;margin:0;padding:0}\n  html{-webkit-text-size-adjust:100%}\n  body{\n    font-family:\'Hanken Grotesk\',system-ui,sans-serif;\n    color:var(--ink);\n    background:var(--paper);\n    background-image:\n      radial-gradient( at 100% 0%, rgba(224,138,43,.10), transparent 45%),\n      radial-gradient(at 0% 100%, rgba(31,174,90,.06), transparent 40%);\n    background-attachment:fixed;\n    line-height:1.45;\n    -webkit-font-smoothing:antialiased;\n    min-height:100vh;\n  }\n  /* subtle grain */\n  body::before{\n    content:"";position:fixed;inset:0;pointer-events:none;opacity:.4;z-index:0;\n    background-image:url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'120\' height=\'120\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'.9\' numOctaves=\'2\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\' opacity=\'.035\'/%3E%3C/svg%3E");\n  }\n  .wrap{position:relative;z-index:1;max-width:560px;margin:0 auto;padding:0 18px 64px}\n\n  /* HEADER */\n  header{padding:28px 0 18px;display:flex;align-items:center;gap:14px}\n  .logo{\n    width:52px;height:52px;border-radius:14px;flex:none;\n    background:linear-gradient(150deg,var(--amber),var(--amber-deep));\n    display:grid;place-items:center;color:#fff;\n    font-family:\'Fraunces\',serif;font-weight:600;font-size:24px;\n    box-shadow:0 8px 20px -8px rgba(185,106,18,.6);\n  }\n  .biz h1{font-family:\'Fraunces\',serif;font-weight:600;font-size:22px;letter-spacing:-.01em;line-height:1.1}\n  .biz p{font-size:13px;color:var(--ink-soft);margin-top:3px;font-weight:500}\n  .biz .cat{color:var(--amber-deep)}\n\n  /* HERO */\n  .hero{margin:6px 0 22px}\n  .hero h2{\n    font-family:\'Fraunces\',serif;font-weight:600;font-size:30px;\n    line-height:1.08;letter-spacing:-.02em;\n  }\n  .hero h2 em{font-style:italic;color:var(--amber-deep)}\n  .hero p{margin-top:10px;color:var(--ink-soft);font-size:15px;max-width:42ch}\n\n  /* CARD */\n  .card{\n    background:var(--card);border:1px solid var(--line);border-radius:20px;\n    padding:22px 20px;box-shadow:var(--shadow);margin-bottom:16px;\n  }\n  .step-label{\n    font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;\n    color:var(--amber-deep);margin-bottom:12px;display:flex;align-items:center;gap:8px;\n  }\n  .step-label .num{\n    width:20px;height:20px;border-radius:50%;background:var(--amber);color:#fff;\n    display:grid;place-items:center;font-size:11px;letter-spacing:0;\n  }\n\n  /* OPTION CHIPS */\n  .opts{display:flex;flex-wrap:wrap;gap:9px}\n  .opt{\n    border:1.5px solid var(--line);background:#fff;border-radius:12px;\n    padding:11px 15px;font-size:14px;font-weight:600;color:var(--ink);\n    cursor:pointer;transition:all .16s ease;user-select:none;\n  }\n  .opt:hover{border-color:var(--amber)}\n  .opt.sel{border-color:var(--amber);background:#FFF6EA;box-shadow:inset 0 0 0 1px var(--amber)}\n\n  .q{margin-top:20px}\n  .q:first-child{margin-top:0}\n  .q-label{font-size:14px;font-weight:600;margin-bottom:9px}\n\n  /* dynamic block reveal */\n  .reveal{animation:rise .4s cubic-bezier(.2,.7,.2,1) both}\n  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}\n  .hidden{display:none}\n\n  /* CALC BUTTON */\n  .btn{\n    width:100%;border:none;border-radius:14px;padding:16px;font-size:16px;\n    font-weight:700;font-family:\'Hanken Grotesk\',sans-serif;cursor:pointer;\n    transition:transform .12s ease,box-shadow .2s ease,opacity .2s;\n  }\n  .btn:active{transform:translateY(1px)}\n  .btn-amber{background:linear-gradient(150deg,var(--amber),var(--amber-deep));color:#fff;box-shadow:0 12px 24px -10px rgba(185,106,18,.7)}\n  .btn-amber:disabled{opacity:.4;cursor:not-allowed;box-shadow:none}\n  .btn-wa{background:linear-gradient(150deg,var(--wa),var(--wa-deep));color:#fff;box-shadow:0 12px 24px -10px rgba(22,139,71,.7);display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none}\n  .btn-wa svg{width:22px;height:22px;fill:#fff}\n\n  /* RESULT */\n  .result{text-align:center;padding:8px 4px 4px}\n  .result .tag{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}\n  .range{\n    font-family:\'Fraunces\',serif;font-weight:600;letter-spacing:-.02em;\n    font-size:clamp(34px,11vw,52px);line-height:1;margin:10px 0 4px;\n    color:var(--ink);\n  }\n  .range .cur{color:var(--amber-deep);font-size:.55em;vertical-align:super}\n  .range .dash{color:var(--line);font-weight:400}\n  .moneda{font-size:13px;color:var(--ink-soft);font-weight:600}\n  .range-note{font-size:12.5px;color:var(--ink-soft);line-height:1.45;margin:12px auto 0;max-width:48ch}\n  .request-summary{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0;margin:18px 0;text-align:left}\n  .request-summary h3{font-size:14px;margin-bottom:10px}\n  .summary-list{display:grid;gap:7px}\n  .summary-row{display:grid;grid-template-columns:88px 1fr;gap:10px;font-size:13px;line-height:1.4}\n  .summary-row dt{color:var(--ink-soft);font-weight:600}\n  .summary-row dd{font-weight:600;min-width:0}\n  .summary-details{display:grid;gap:5px;list-style:none;font-weight:500}\n  .summary-details li{position:relative;padding-left:12px}\n  .summary-details li::before{content:"•";position:absolute;left:0;color:var(--amber-deep)}\n  .summary-details strong{font-weight:700}\n  .handoff-intro{margin:2px 0 16px}\n  .handoff-intro h3{font-family:\'Fraunces\',serif;font-size:20px;line-height:1.2;margin-bottom:5px}\n  .handoff-intro p{font-size:13px;color:var(--ink-soft)}\n  .aviso{\n    font-size:12.5px;color:var(--ink-soft);background:#FBF6ED;border:1px dashed var(--line);\n    border-radius:12px;padding:12px 14px;margin:16px 0;line-height:1.4;text-align:left;\n  }\n  .aviso b{color:var(--ink)}\n\n  /* LEAD */\n  .field{margin-bottom:12px}\n  .field label{font-size:13px;font-weight:600;display:block;margin-bottom:6px}\n  .field input{\n    width:100%;border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;\n    font-size:15px;font-family:\'Hanken Grotesk\',sans-serif;background:#fff;color:var(--ink);\n  }\n  .field input:focus{outline:none;border-color:var(--amber);box-shadow:0 0 0 3px rgba(224,138,43,.15)}\n  .helper{font-size:12px;color:var(--ink-soft);margin-top:6px}\n\n  /* FOOTER biz info */\n  .bizinfo{display:flex;flex-direction:column;gap:8px;font-size:14px}\n  .bizinfo a{color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:10px;font-weight:500}\n  .bizinfo .ic{width:34px;height:34px;border-radius:10px;background:#FFF6EA;display:grid;place-items:center;flex:none;color:var(--amber-deep);font-size:16px}\n  .legal{text-align:center;font-size:11.5px;color:var(--ink-soft);margin-top:26px;line-height:1.5}\n  .legal strong{color:var(--ink-soft)}\n  .landing-list{display:grid;gap:10px;margin-top:16px}\n  .landing-link{display:block;border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:14px 15px;color:var(--ink);text-decoration:none;font-weight:700;transition:all .16s ease}\n  .landing-link:hover{border-color:var(--amber);background:#FFF6EA}\n  .landing-link small{display:block;color:var(--ink-soft);font-weight:500;margin-top:3px}\n  .muted{color:var(--ink-soft)}\n  .language-toggle{display:flex;justify-content:flex-end;align-items:center;gap:3px;margin:-5px 0 14px}\n  .language-toggle button{border:0;background:transparent;color:var(--ink-soft);font:600 12px/1.2 \'Hanken Grotesk\',sans-serif;padding:5px 7px;border-radius:7px;cursor:pointer}\n  .language-toggle button[aria-pressed=\"true\"]{background:#FFF6EA;color:var(--amber-deep)}\n  .language-toggle .divider{color:var(--line);font-size:12px}\n';
   const businessTemplate = `<header>
     <div class="logo" id="logoInit">P</div>
     <div class="biz">
@@ -10,6 +10,12 @@
     </div>
   </header>
 
+  <div class="language-toggle hidden" id="languageToggle" aria-label="Idioma / Language">
+    <button type="button" data-language="es" aria-pressed="true">Español</button>
+    <span class="divider" aria-hidden="true">/</span>
+    <button type="button" data-language="en" aria-pressed="false">English</button>
+  </div>
+
   <div class="hero">
     <h2 id="heroHeadline"></h2>
     <p id="heroSubheadline"></p>
@@ -17,49 +23,49 @@
 
   <!-- PASO 1: servicio -->
   <div class="card">
-    <div class="step-label"><span class="num">1</span> ¿Qué servicio necesitas?</div>
+    <div class="step-label"><span class="num">1</span> <span data-ui="servicePrompt"></span></div>
     <p class="muted" id="estimateIntro" style="margin-bottom:16px"></p>
     <div class="opts" id="servicios"></div>
   </div>
 
   <!-- PASO 2: preguntas (dinámico) -->
   <div class="card hidden" id="cardPreguntas">
-    <div class="step-label"><span class="num">2</span> Cuéntanos un poco más</div>
+    <div class="step-label"><span class="num">2</span> <span data-ui="moreDetails"></span></div>
     <div id="preguntas"></div>
-    <button class="btn btn-amber" id="btnCalcular" style="margin-top:22px" disabled>Ver precio estimado</button>
+    <button class="btn btn-amber" id="btnCalcular" style="margin-top:22px" disabled data-ui="showEstimate"></button>
   </div>
 
   <!-- PASO 3: resultado -->
   <div class="card hidden" id="cardResultado">
     <div class="result">
-      <div class="tag">Tu rango estimado</div>
+      <div class="tag" data-ui="estimatedRange"></div>
       <div class="range" id="rangeOut"></div>
-      <div class="moneda" id="monedaOut">pesos mexicanos</div>
-      <p class="range-note">Este rango es una estimación inicial. El negocio confirmará el precio final por WhatsApp según las condiciones reales del servicio.</p>
+      <div class="moneda" id="monedaOut"></div>
+      <p class="range-note" data-ui="initialEstimateNote"></p>
     </div>
 
     <section class="request-summary" aria-labelledby="summaryTitle">
-      <h3 id="summaryTitle">Resumen de solicitud</h3>
+      <h3 id="summaryTitle" data-ui="requestSummary"></h3>
       <dl class="summary-list" id="requestSummary"></dl>
     </section>
 
     <div class="aviso">
-      <b>Importante:</b> <span id="priceDisclaimer"></span>
+      <b data-ui="important"></b> <span id="priceDisclaimer"></span>
     </div>
     <div class="aviso hidden" id="pricingNotes"></div>
 
-    <div class="step-label" style="margin-top:6px"><span class="num">3</span> Siguiente paso</div>
+    <div class="step-label" style="margin-top:6px"><span class="num">3</span> <span data-ui="nextStep"></span></div>
     <div class="handoff-intro">
-      <h3>Envía este resumen por WhatsApp</h3>
-      <p>El negocio recibirá los datos de tu solicitud y podrá confirmar el precio final contigo.</p>
+      <h3 data-ui="sendSummary"></h3>
+      <p data-ui="handoffExplanation"></p>
     </div>
     <div class="field">
-      <label for="leadName">Tu nombre <span style="font-weight:400;color:var(--ink-soft)">(opcional)</span></label>
-      <input type="text" id="leadName" placeholder="Ej. Carlos Méndez" autocomplete="name">
+      <label for="leadName"><span data-ui="yourName"></span> <span style="font-weight:400;color:var(--ink-soft)">(<span data-ui="optional"></span>)</span></label>
+      <input type="text" id="leadName" autocomplete="name" data-placeholder-ui="namePlaceholder">
     </div>
     <div class="field">
-      <label for="leadTel">Tu teléfono <span style="font-weight:400;color:var(--ink-soft)">(opcional)</span></label>
-      <input type="tel" id="leadTel" placeholder="Ej. 624 123 4567" autocomplete="tel" inputmode="tel">
+      <label for="leadTel"><span data-ui="yourPhone"></span> <span style="font-weight:400;color:var(--ink-soft)">(<span data-ui="optional"></span>)</span></label>
+      <input type="tel" id="leadTel" autocomplete="tel" inputmode="tel" data-placeholder-ui="phonePlaceholder">
     </div>
 
     <a class="btn btn-wa" id="btnWa" href="#" target="_blank" rel="noopener">
@@ -71,16 +77,16 @@
 
   <!-- datos del negocio -->
   <div class="card">
-    <div class="step-label"><span class="num">i</span> Datos del negocio</div>
+    <div class="step-label"><span class="num">i</span> <span data-ui="businessDetails"></span></div>
     <div class="bizinfo">
       <a href="#" id="lnkTel"><span class="ic">📞</span> <span id="telText"></span></a>
-      <a href="#" id="lnkWa"><span class="ic">💬</span> WhatsApp directo</a>
+      <a href="#" id="lnkWa"><span class="ic">💬</span> <span data-ui="directWhatsApp"></span></a>
       <div style="display:flex;align-items:center;gap:10px;font-weight:500"><span class="ic">📍</span> <span id="serviceAreaNote"></span></div>
     </div>
   </div>
 
   <p class="legal">
-    Guía de precios para <strong id="legalName">este negocio</strong> · Los rangos son estimados y no constituyen una cotización formal.
+    <span data-ui="legalPrefix"></span> <strong id="legalName">este negocio</strong> · <span data-ui="legalSuffix"></span>
   </p>`;
   const $ = selector => document.querySelector(selector);
   const businesses = Array.isArray(window.BUSINESSES) ? window.BUSINESSES : [];
@@ -92,7 +98,63 @@
     whatsappCtaLabel: "Cotizar por WhatsApp",
     whatsappHelperText: "Te abrimos WhatsApp con tu cotización ya escrita. Solo das enviar."
   };
-  const state = { service: null, answers: {}, zone: null, range: null };
+  const uiCopy = {
+    es: {
+      servicePrompt: "¿Qué servicio necesitas?",
+      moreDetails: "Cuéntanos un poco más",
+      showEstimate: "Ver precio estimado",
+      zoneQuestion: "¿En qué zona estás?",
+      estimatedRange: "Tu rango estimado",
+      mexicanPesos: "pesos mexicanos",
+      initialEstimateNote: "Este rango es una estimación inicial. El negocio confirmará el precio final por WhatsApp según las condiciones reales del servicio.",
+      requestSummary: "Resumen de solicitud",
+      service: "Servicio",
+      zone: "Zona",
+      details: "Detalles",
+      estimate: "Estimado",
+      important: "Importante:",
+      nextStep: "Siguiente paso",
+      sendSummary: "Envía este resumen por WhatsApp",
+      handoffExplanation: "El negocio recibirá los datos de tu solicitud y podrá confirmar el precio final contigo.",
+      yourName: "Tu nombre",
+      yourPhone: "Tu teléfono",
+      optional: "opcional",
+      namePlaceholder: "Ej. Carlos Méndez",
+      phonePlaceholder: "Ej. 624 123 4567",
+      businessDetails: "Datos del negocio",
+      directWhatsApp: "WhatsApp directo",
+      legalPrefix: "Guía de precios para",
+      legalSuffix: "Los rangos son estimados y no constituyen una cotización formal."
+    },
+    en: {
+      servicePrompt: "What service do you need?",
+      moreDetails: "Tell us a little more",
+      showEstimate: "See estimated price",
+      zoneQuestion: "What area are you in?",
+      estimatedRange: "Your estimated range",
+      mexicanPesos: "Mexican pesos",
+      initialEstimateNote: "This is an initial estimate. The business will confirm the final price via WhatsApp based on the actual service conditions.",
+      requestSummary: "Request summary",
+      service: "Service",
+      zone: "Area",
+      details: "Details",
+      estimate: "Estimate",
+      important: "Important:",
+      nextStep: "Next step",
+      sendSummary: "Send this summary by WhatsApp",
+      handoffExplanation: "The business will receive your request details and can confirm the final price with you.",
+      yourName: "Your name",
+      yourPhone: "Your phone",
+      optional: "optional",
+      namePlaceholder: "E.g. Carlos Méndez",
+      phonePlaceholder: "E.g. 624 123 4567",
+      businessDetails: "Business details",
+      directWhatsApp: "Direct WhatsApp",
+      legalPrefix: "Price guide for",
+      legalSuffix: "Ranges are estimates and do not constitute a formal quote."
+    }
+  };
+  const state = { service: null, answers: {}, zone: null, range: null, language: "es" };
   let business = null;
 
   init();
@@ -198,25 +260,16 @@
     $("#bizCity").textContent = business.city;
     $("#bizCat").textContent = business.categoryLabel || business.category;
     $("#logoInit").textContent = business.name.charAt(0);
-    $("#heroHeadline").textContent = getCopy("heroHeadline");
-    $("#heroSubheadline").textContent = getCopy("heroSubheadline");
-    $("#estimateIntro").textContent = getCopy("estimateIntro");
-    $("#priceDisclaimer").textContent = getCopy("priceDisclaimer");
-    $("#whatsappCtaLabel").textContent = getCopy("whatsappCtaLabel");
-    $("#whatsappHelperText").textContent = getCopy("whatsappHelperText");
-    $("#serviceAreaNote").textContent = getCopy(
-      "serviceAreaNote",
-      "Atendemos toda la zona de " + business.city
-    );
-    const pricingNotes = getCopy("pricingNotes", "");
-    if (pricingNotes) {
-      $("#pricingNotes").textContent = pricingNotes;
-      $("#pricingNotes").classList.remove("hidden");
-    }
-    $("#monedaOut").textContent = business.currencyLabel;
     $("#telText").textContent = formatPhone(business.phone);
     $("#lnkTel").href = "tel:+52" + business.phone;
     $("#lnkWa").href = "https://wa.me/" + business.whatsapp;
+
+    if (hasEnglishCopy()) {
+      $("#languageToggle").classList.remove("hidden");
+      $("#languageToggle").querySelectorAll("button").forEach(button => {
+        button.onclick = () => setLanguage(button.dataset.language);
+      });
+    }
 
     business.services.forEach(service => {
       const button = document.createElement("div");
@@ -230,10 +283,58 @@
     $("#btnCalcular").onclick = calculate;
     $("#leadName").addEventListener("input", buildWhatsAppUrl);
     $("#leadTel").addEventListener("input", buildWhatsAppUrl);
+    setLanguage("es");
+  }
+
+  function hasEnglishCopy() {
+    return business.english && Object.values(business.english).some(value =>
+      typeof value === "string" && value.trim()
+    );
+  }
+
+  function setLanguage(language) {
+    state.language = language === "en" && hasEnglishCopy() ? "en" : "es";
+    const labels = uiCopy[state.language];
+    document.documentElement.lang = state.language === "en" ? "en" : "es-MX";
+
+    document.querySelectorAll("[data-ui]").forEach(element => {
+      element.textContent = labels[element.dataset.ui];
+    });
+    document.querySelectorAll("[data-placeholder-ui]").forEach(element => {
+      element.placeholder = labels[element.dataset.placeholderUi];
+    });
+    document.querySelectorAll("#languageToggle button").forEach(button => {
+      button.setAttribute("aria-pressed", String(button.dataset.language === state.language));
+    });
+
+    $("#heroHeadline").textContent = getCopy("heroHeadline");
+    $("#heroSubheadline").textContent = getCopy("heroSubheadline");
+    $("#estimateIntro").textContent = getCopy("estimateIntro");
+    $("#priceDisclaimer").textContent = getCopy("priceDisclaimer");
+    $("#whatsappCtaLabel").textContent = getCopy("whatsappCtaLabel");
+    $("#whatsappHelperText").textContent = getCopy("whatsappHelperText");
+    $("#serviceAreaNote").textContent = getCopy(
+      "serviceAreaNote",
+      "Atendemos toda la zona de " + business.city
+    );
+
+    const pricingNotes = getCopy("pricingNotes", "");
+    $("#pricingNotes").textContent = pricingNotes;
+    $("#pricingNotes").classList.toggle("hidden", !pricingNotes);
+    $("#monedaOut").textContent = state.language === "en"
+      ? labels.mexicanPesos
+      : business.currencyLabel;
+
+    if (state.range) renderRequestSummary();
   }
 
   function getCopy(field, fallback = fallbackCopy[field]) {
-    const value = business[field];
+    const translatedValue = state.language === "en" && business.english
+      ? business.english[field]
+      : null;
+    const value = typeof translatedValue === "string" && translatedValue.trim()
+      ? translatedValue
+      : business[field];
     return typeof value === "string" && value.trim() ? value.trim() : fallback;
   }
 
@@ -291,7 +392,8 @@
     zoneWrapper.className = "q";
     const zoneLabel = document.createElement("div");
     zoneLabel.className = "q-label";
-    zoneLabel.textContent = "¿En qué zona estás?";
+    zoneLabel.dataset.ui = "zoneQuestion";
+    zoneLabel.textContent = uiCopy[state.language].zoneQuestion;
     const zoneOptions = document.createElement("div");
     zoneOptions.className = "opts";
 
@@ -360,24 +462,25 @@
 
   function renderRequestSummary() {
     const details = getHandoffDetails();
+    const labels = uiCopy[state.language];
     const rows = [
-      ["Servicio", details.service],
-      ["Zona", details.zone],
-      ["Detalles", details.answers],
-      ["Estimado", "$" + formatPrice(details.range[0]) + " – $" +
-        formatPrice(details.range[1]) + " " + details.currency]
+      [labels.service, details.service, "service"],
+      [labels.zone, details.zone, "zone"],
+      [labels.details, details.answers, "details"],
+      [labels.estimate, "$" + formatPrice(details.range[0]) + " – $" +
+        formatPrice(details.range[1]) + " " + details.currency, "estimate"]
     ];
     const summary = $("#requestSummary");
     summary.innerHTML = "";
 
-    rows.forEach(([label, value]) => {
+    rows.forEach(([label, value, type]) => {
       const row = document.createElement("div");
       row.className = "summary-row";
       const term = document.createElement("dt");
       term.textContent = label;
       const description = document.createElement("dd");
 
-      if (label === "Detalles") {
+      if (type === "details") {
         const list = document.createElement("ul");
         list.className = "summary-details";
         value.forEach(item => {
