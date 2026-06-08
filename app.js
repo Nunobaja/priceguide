@@ -374,6 +374,21 @@
     return business.services.find(service => service.id === serviceId) || null;
   }
 
+  function getSourceFromUrl() {
+    const source = new URL(window.location.href).searchParams.get("source");
+    if (typeof source !== "string") return "";
+
+    const trimmedSource = source.trim();
+    if (!trimmedSource || !/^[\p{L}\p{N} _-]+$/u.test(trimmedSource)) return "";
+
+    return trimmedSource
+      .replace(/[-_]+/g, " ")
+      .replace(/\s+/g, " ")
+      .trim()
+      .slice(0, 60)
+      .trim();
+  }
+
   function slugify(value) {
     return String(value || "")
       .normalize("NFD")
@@ -822,6 +837,9 @@
 
     lines.push(summaryLabels.service + ": " + details.service);
     lines.push(summaryLabels.zone + ": " + details.zone);
+    if (details.source) {
+      lines.push((state.language === "en" ? "Source" : "Origen") + ": " + details.source);
+    }
     lines.push(summaryLabels.details + ":");
     details.answers.forEach(item => {
       lines.push("- " + item.question + ": " + item.answer);
@@ -889,6 +907,7 @@
       zone: getLocalizedLabel(state.zone, "label", language),
       range: state.range,
       currency: business.currency,
+      source: getSourceFromUrl(),
       customerName: $("#leadName").value.trim(),
       customerPhone: $("#leadTel").value.trim()
     };
@@ -913,6 +932,7 @@
       "Ciudad: " + business.city
     ];
 
+    if (details.source) lines.push("Origen: " + details.source);
     details.answers.forEach(item => lines.push(item.question + " " + item.answer));
     lines.push("Zona: " + details.zone);
     lines.push(
@@ -928,10 +948,11 @@
     const lines = [
       "Hello, I'd like a quote.",
       "Service: " + details.service,
-      "City: " + business.city,
-      "Details:"
+      "City: " + business.city
     ];
 
+    if (details.source) lines.push("Source: " + details.source);
+    lines.push("Details:");
     details.answers.forEach(item => lines.push(item.question + " " + item.answer));
     lines.push("Zone: " + details.zone);
     lines.push(
