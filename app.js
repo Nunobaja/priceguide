@@ -251,48 +251,50 @@
   }
 
   function renderLanding(prefix) {
-    document.title = "Precios Locales — Demo";
+    document.title = "Vista interna de QA — Precios Locales";
+    updateMetaTag("name", "description", "Vista interna de QA para verificar páginas individuales de Precios Locales antes de compartir sus enlaces.");
     const links = businesses.map(item => `
       <a class="landing-link" href="${withPrefix(businessPath(item), prefix)}/">
         ${item.name}
-        <small>${item.city} · ${item.categoryLabel || item.category}</small>
-      </a>`).join("");
+        <small>${item.city} · ${item.categoryLabel || item.category} · Abrir página individual para revisión</small>
+      </a>`).join("") || '<p class="muted">No hay páginas individuales configuradas para revisión en esta vista interna de QA.</p>';
 
     $("#app").innerHTML = `
       <header>
         <div class="logo">P</div>
         <div class="biz">
           <h1>Precios Locales</h1>
-          <p>MVP demo · Guías de precios para servicios del hogar</p>
+          <p>Vista interna de QA · Demo de páginas individuales</p>
         </div>
       </header>
       <div class="hero">
-        <h2>Guías de precio simples para negocios locales.</h2>
-        <p>Esta landing existe solo para orientar el demo. Las páginas de negocio siguen siendo el producto principal.</p>
+        <h2>Verificación interna de páginas de precios guía.</h2>
+        <p>Precios Locales crea páginas individuales con rangos de precios para negocios locales de servicios para el hogar. Esta vista se usa únicamente para revisar rutas y páginas antes de compartir cada enlace individual.</p>
       </div>
       <div class="card">
-        <div class="step-label"><span class="num">1</span> Demos disponibles</div>
-        <p class="muted">Abre una guía para probar el estimador y el handoff por WhatsApp.</p>
+        <div class="step-label"><span class="num">1</span> Verificación de rutas publicadas</div>
+        <p class="muted">Cada elemento abre la página individual de un negocio para revisión. La página pública que se comparte debe ser la página individual del negocio.</p>
         <div class="landing-list">${links}</div>
       </div>
-      <p class="legal">Precios Locales · Demo estático sin búsqueda, reseñas, backend, login, CRM ni base de datos.</p>`;
+      <p class="legal">Los precios son rangos aproximados. El precio final depende de los detalles del servicio.</p>
+      <p class="legal">Esta vista interna no es un directorio público ni una herramienta para buscar, comparar, clasificar o elegir negocios.</p>`;
   }
 
   function renderNotFound(prefix) {
-    document.title = "Negocio no encontrado — Precios Locales";
+    document.title = "Ruta de página no disponible — Precios Locales";
     $("#app").innerHTML = `
       <header>
         <div class="logo">P</div>
         <div class="biz">
           <h1>Precios Locales</h1>
-          <p>Servicios para el hogar en México</p>
+          <p>Vista interna de QA · Revisión de páginas individuales</p>
         </div>
       </header>
       <div class="card">
-        <div class="step-label">Negocio no encontrado</div>
-        <h2 style="font-family:'Fraunces',serif;margin-bottom:8px">Esta guía de precios no está disponible.</h2>
-        <p style="color:var(--ink-soft);margin-bottom:14px">Revisa que la dirección esté escrita correctamente.</p>
-        <a class="btn btn-amber" style="display:block;text-align:center;text-decoration:none" href="${withPrefix("/", prefix)}">Ver demos disponibles</a>
+        <div class="step-label">Ruta no disponible</div>
+        <h2 style="font-family:'Fraunces',serif;margin-bottom:8px">Esta página individual no está disponible para revisión.</h2>
+        <p style="color:var(--ink-soft);margin-bottom:14px">Verifica la dirección publicada o vuelve a la vista interna de QA.</p>
+        <a class="btn btn-amber" style="display:block;text-align:center;text-decoration:none" href="${withPrefix("/", prefix)}">Volver a la vista interna de QA</a>
       </div>`;
   }
 
