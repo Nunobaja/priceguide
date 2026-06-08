@@ -119,17 +119,17 @@
       heroSubheadline: "Cuéntanos qué necesitas y te mostramos un rango aproximado, sin compromiso.",
       estimateIntro: "Elige el servicio y responde unas preguntas para conocer un precio aproximado.",
       priceDisclaimer: "Esta estimación es una guía. El precio final depende de los detalles del servicio, como materiales, condiciones del lugar y alcance real.",
-      initialEstimateNote: "Este rango aproximado es una estimación inicial. El negocio confirmará el precio final por WhatsApp según los detalles del servicio.",
+      initialEstimateNote: "Esta estimación muestra un precio aproximado como rango. El precio final depende de los detalles del servicio y el negocio lo confirma directamente con el cliente.",
       handoffExplanation: "Comparte tu solicitud con el negocio para que revise los detalles y confirme el precio final contigo.",
-      handoffTrust: "Este es un rango aproximado, no un precio final. El precio final depende de los detalles del servicio, como fotos, zona y materiales."
+      handoffTrust: "Este es un rango aproximado, no un precio final. El precio final depende de los detalles del servicio y el negocio lo confirma directamente con el cliente."
     },
     technical: {
       heroSubheadline: "Responde unas preguntas sobre el servicio para obtener un rango aproximado según las condiciones indicadas.",
       estimateIntro: "Selecciona el servicio y sus condiciones para calcular un precio aproximado.",
       priceDisclaimer: "Esta estimación usa la información seleccionada. El precio final depende de los detalles del servicio, la revisión técnica, los materiales y las condiciones del lugar.",
-      initialEstimateNote: "Este rango aproximado es una estimación inicial basada en los datos seleccionados. El negocio confirmará el precio final tras revisar los detalles del servicio.",
+      initialEstimateNote: "Esta estimación técnica muestra un precio aproximado como rango. El precio final depende de los detalles del servicio y el negocio lo confirma directamente con el cliente.",
       handoffExplanation: "El negocio recibirá las condiciones seleccionadas y podrá revisar los detalles antes de confirmar el precio final.",
-      handoffTrust: "Este es un rango aproximado, no un diagnóstico ni un precio final. El precio final depende de los detalles del servicio, la zona, los materiales y la revisión técnica."
+      handoffTrust: "Este es un rango aproximado, no un diagnóstico ni un precio final. El precio final depende de los detalles del servicio y el negocio lo confirma directamente con el cliente."
     }
   };
   const uiCopy = {
@@ -143,19 +143,23 @@
       guidanceZoneMissing: "Selecciona la zona de servicio para completar la estimación.",
       guidanceAnswersAndZoneMissing: "Responde las preguntas y selecciona la zona de servicio para calcular tu rango estimado.",
       linkedServiceNote: "Servicio seleccionado desde el enlace. El rango seguirá siendo aproximado.",
-      estimatedRange: "Tu rango estimado",
+      estimatedRange: "Resultado: rango aproximado",
       mexicanPesos: "pesos mexicanos",
-      initialEstimateNote: "Este rango es una estimación inicial. El negocio confirmará el precio final por WhatsApp según las condiciones reales del servicio.",
-      requestSummary: "Resumen de solicitud",
-      service: "Servicio",
-      zone: "Zona",
-      details: "Detalles",
-      estimate: "Estimado",
+      initialEstimateNote: "Esta estimación muestra un precio aproximado como rango. El precio final depende de los detalles del servicio y el negocio lo confirma directamente con el cliente.",
+      requestSummary: "Resumen de tu estimación",
+      service: "Servicio seleccionado",
+      zone: "Zona seleccionada",
+      details: "Respuestas seleccionadas",
+      estimate: "Rango aproximado",
       important: "Importante:",
       nextStep: "Siguiente paso",
       sendSummary: "Envía este resumen por WhatsApp",
-      handoffExplanation: "El negocio recibirá los datos de tu solicitud y podrá confirmar el precio final contigo.",
-      handoffTrust: "Este es un rango aproximado. El precio final depende de fotos, zona, materiales y detalles del servicio; el negocio puede confirmarlo.",
+      handoffExplanation: "El negocio recibirá el servicio, tus respuestas y el rango aproximado para revisar los detalles y confirmar el precio final contigo.",
+      callBusiness: "Llama al negocio para confirmar",
+      callExplanation: "Puedes copiar el resumen como referencia y llamar al teléfono público. El negocio confirma el precio final directamente contigo.",
+      saveSummary: "Guarda el resumen de tu estimación",
+      noContactExplanation: "No hay un canal de contacto público disponible. Puedes copiar el resumen o el enlace para conservar esta estimación.",
+      handoffTrust: "Este es un rango aproximado, no un precio final. El precio final depende de los detalles del servicio y el negocio lo confirma directamente con el cliente.",
       yourName: "Tu nombre",
       yourPhone: "Tu teléfono",
       optional: "opcional",
@@ -164,7 +168,8 @@
       businessDetails: "Datos del negocio",
       directWhatsApp: "WhatsApp directo",
       pendingWhatsApp: "WhatsApp por confirmar",
-      whatsappUnavailable: "WhatsApp no disponible. Llama al teléfono público del negocio para confirmar tu estimación.",
+      whatsappUnavailable: "WhatsApp no está disponible. Usa el teléfono público para confirmar el precio final directamente con el negocio.",
+      contactUnavailable: "Este negocio no tiene un canal de contacto público disponible en esta guía.",
       copyLink: "Copiar enlace",
       linkCopied: "Enlace copiado",
       copySummary: "Copiar resumen",
@@ -186,19 +191,23 @@
       guidanceZoneMissing: "Select the service area to complete the estimate.",
       guidanceAnswersAndZoneMissing: "Answer the questions and select the service area to calculate your estimated range.",
       linkedServiceNote: "Service selected from the link. The range will remain approximate.",
-      estimatedRange: "Your estimated range",
+      estimatedRange: "Estimate result: approximate range",
       mexicanPesos: "Mexican pesos",
-      initialEstimateNote: "This is an initial estimate. The business will confirm the final price via WhatsApp based on the actual service conditions.",
-      requestSummary: "Request summary",
-      service: "Service",
-      zone: "Area",
-      details: "Details",
-      estimate: "Estimate",
+      initialEstimateNote: "This is an initial estimate. The final price depends on the service details and the business confirms it directly with the customer.",
+      requestSummary: "Estimate summary",
+      service: "Selected service",
+      zone: "Selected area",
+      details: "Selected answers",
+      estimate: "Approximate range",
       important: "Important:",
       nextStep: "Next step",
       sendSummary: "Send this summary by WhatsApp",
-      handoffExplanation: "The business will receive your request details and can confirm the final price with you.",
-      handoffTrust: "This is an estimated range. The final price depends on photos, area, materials, and service details; the business can confirm it.",
+      handoffExplanation: "The business will receive the service, your answers, and the approximate range to review the details and confirm the final price with you.",
+      callBusiness: "Call the business to confirm",
+      callExplanation: "You can copy the summary for reference and call the public phone number. The business confirms the final price directly with you.",
+      saveSummary: "Save your estimate summary",
+      noContactExplanation: "No public contact channel is available. You can copy the summary or link to keep this estimate.",
+      handoffTrust: "This is an approximate range, not a final price. The final price depends on the service details and the business confirms it directly with the customer.",
       yourName: "Your name",
       yourPhone: "Your phone",
       optional: "optional",
@@ -207,7 +216,8 @@
       businessDetails: "Business details",
       directWhatsApp: "Direct WhatsApp",
       pendingWhatsApp: "WhatsApp to confirm",
-      whatsappUnavailable: "WhatsApp is not available. Call the business public phone to confirm your estimate.",
+      whatsappUnavailable: "WhatsApp is not available. Use the public phone number to confirm the final price directly with the business.",
+      contactUnavailable: "This business does not have a public contact channel available in this guide.",
       copyLink: "Copy link",
       linkCopied: "Link copied",
       copySummary: "Copy summary",
@@ -768,6 +778,8 @@
     const fallback = $("#whatsappFallback");
     const fallbackMessage = $("#whatsappFallbackMessage");
     const fallbackPhone = $("#whatsappFallbackPhone");
+    const handoffHeading = document.querySelector(".handoff-intro h3");
+    const handoffExplanation = document.querySelector(".handoff-intro p");
 
     if (contactLabel) {
       contactLabel.textContent = pending ? labels.pendingWhatsApp : labels.directWhatsApp;
@@ -789,12 +801,27 @@
       helperText.classList.toggle("hidden", !confirmedWhatsApp);
     }
 
+    if (handoffHeading && handoffExplanation) {
+      if (confirmedWhatsApp) {
+        handoffHeading.textContent = labels.sendSummary;
+        handoffExplanation.textContent = labels.handoffExplanation;
+      } else if (phone) {
+        handoffHeading.textContent = labels.callBusiness;
+        handoffExplanation.textContent = labels.callExplanation;
+      } else {
+        handoffHeading.textContent = labels.saveSummary;
+        handoffExplanation.textContent = labels.noContactExplanation;
+      }
+    }
+
     if (trustMessage) {
       trustMessage.classList.toggle("hidden", !confirmedWhatsApp && !phone);
     }
 
     if (fallback && fallbackMessage && fallbackPhone) {
-      fallbackMessage.textContent = labels.whatsappUnavailable;
+      fallbackMessage.textContent = phone
+        ? labels.whatsappUnavailable
+        : labels.contactUnavailable;
       fallbackPhone.textContent = phone ? formatPhone(phone) : "";
       fallbackPhone.href = phone ? getPhoneHref(phone) : "#";
       fallbackPhone.classList.toggle("hidden", !phone);
@@ -1030,8 +1057,8 @@
         details: "Selected options",
         estimate: "Estimated range",
         important: "Important reminder",
-        source: "Source",
-        campaign: "Campaign",
+        source: "Source context",
+        campaign: "Link context",
         link: "Link"
       }
       : {
@@ -1041,8 +1068,8 @@
         details: "Opciones seleccionadas",
         estimate: "Rango estimado",
         important: "Recordatorio importante",
-        source: "Origen",
-        campaign: "Campaña",
+        source: "Contexto de origen",
+        campaign: "Contexto del enlace",
         link: uiCopy.es.link
       };
     const lines = [summaryLabels.business + ": " + details.businessName];
@@ -1062,8 +1089,8 @@
     lines.push(
       summaryLabels.important + ": " +
       (isEnglish
-        ? "This is an initial estimate. The final price depends on the service details."
-        : "Esta es una estimación inicial. El precio final depende de los detalles del servicio.")
+        ? "This is an initial estimate. The final price depends on the service details, and the business confirms it directly with the customer."
+        : "Esta es una estimación inicial. El precio final depende de los detalles del servicio y el negocio lo confirma directamente con el cliente.")
     );
     if (details.source || details.campaign) {
       lines.push("");
@@ -1085,7 +1112,11 @@
         formatPrice(details.range[1]) + " " + details.currency, "estimate"]
     ];
     if (details.source) {
-      rows.push([state.language === "en" ? "Source" : "Origen", details.source, "source"]);
+      rows.push([
+        state.language === "en" ? "Source context" : "Contexto de origen",
+        details.source,
+        "source"
+      ]);
     }
     if (details.campaign) {
       rows.push([state.language === "en" ? "Link context" : "Contexto del enlace", details.campaign, "campaign"]);
@@ -1172,13 +1203,17 @@
       "Ciudad: " + business.city
     ];
 
-    if (details.source) lines.push("Origen: " + details.source);
-    if (details.campaign) lines.push("Campaña: " + details.campaign);
+    if (details.source) lines.push("Contexto de origen: " + details.source);
+    if (details.campaign) lines.push("Contexto del enlace: " + details.campaign);
     details.answers.forEach(item => lines.push(item.question + " " + item.answer));
     lines.push("Zona: " + details.zone);
     lines.push(
       "Rango estimado mostrado: $" + formatPrice(details.range[0]) +
       " – $" + formatPrice(details.range[1]) + " " + details.currency
+    );
+    lines.push(
+      "Es una estimación y un precio aproximado. El precio final depende de los detalles " +
+      "del servicio y el negocio lo confirma directamente con el cliente."
     );
     if (details.customerName) lines.push("Mi nombre es: " + details.customerName);
     if (details.customerPhone) lines.push("Mi teléfono: " + details.customerPhone);
@@ -1192,14 +1227,18 @@
       "City: " + business.city
     ];
 
-    if (details.source) lines.push("Source: " + details.source);
-    if (details.campaign) lines.push("Campaign: " + details.campaign);
+    if (details.source) lines.push("Source context: " + details.source);
+    if (details.campaign) lines.push("Link context: " + details.campaign);
     lines.push("Details:");
     details.answers.forEach(item => lines.push(item.question + " " + item.answer));
     lines.push("Zone: " + details.zone);
     lines.push(
       "Estimated range: $" + formatPrice(details.range[0]) +
       " – $" + formatPrice(details.range[1]) + " " + details.currency
+    );
+    lines.push(
+      "This is an approximate price estimate. The final price depends on the service " +
+      "details and the business confirms it directly with the customer."
     );
     if (details.customerName) lines.push("Name: " + details.customerName);
     if (details.customerPhone) lines.push("Phone: " + details.customerPhone);

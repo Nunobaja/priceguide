@@ -95,10 +95,12 @@ Para una corrida mínima, probar Carmona, Instal PV, el fixture interno de PR #6
 - [ ] Confirmar que el resultado aparece al completar las respuestas requeridas.
 - [ ] Confirmar que el rango es legible y que mínimo/máximo no se confunden.
 - [ ] Confirmar que servicio seleccionado y respuestas elegidas quedan claros.
-- [ ] Confirmar que existe un mensaje de confianza/seguridad que explica el carácter aproximado y la confirmación final.
-- [ ] Confirmar que el lenguaje del resultado continúa siendo estimado o aproximado.
+- [ ] Confirmar que existe un mensaje de confianza/seguridad que explica el carácter aproximado, que el precio final depende de los detalles del servicio y que el negocio lo confirma directamente con el cliente.
+- [ ] Confirmar que el lenguaje del resultado continúa siendo estimación, rango aproximado o precio aproximado.
 - [ ] Confirmar que el resultado no implica una cotización final, exacta o garantizada.
+- [ ] Confirmar que el siguiente paso corresponde al contacto disponible: enviar por WhatsApp confirmado, llamar al teléfono público o conservar el resumen/enlace cuando no hay contacto público.
 - [ ] Confirmar que el resultado no cambió por `source`, `campaign` o `lang` salvo presentación/contexto permitido.
+- [ ] Cuando existen `source` o `campaign`, confirmar que sus etiquetas se entienden como contexto manual del origen/enlace y no como atribución automática.
 
 ### F. Copiar resumen
 
