@@ -322,17 +322,35 @@ window.BUSINESSES = [
         // Rango demo editable en MXN; reemplazar con precios confirmados por el negocio.
         base: [2200, 4200],
         questions: [
-          { id: "capacidad", label: "¿Qué capacidad tiene el equipo?", labelEn: "What is the unit capacity?", options: [
+          {
+            id: "capacidad",
+            label: "¿Qué capacidad tiene el equipo?",
+            labelEn: "What is the unit capacity?",
+            helperText: "Si no sabes la capacidad exacta, elige la opción más cercana.",
+            helperTextEn: "If you don’t know the exact capacity, choose the closest option.",
+            options: [
             { label: "1 tonelada", labelEn: "1 ton", factor: 1.0 },
             { label: "1.5 toneladas", labelEn: "1.5 tons", factor: 1.15 },
             { label: "2 toneladas o más", labelEn: "2 tons or more", factor: 1.35 }
           ] },
-          { id: "preparacion", label: "¿El espacio ya tiene preparación para instalarlo?", labelEn: "Is the space already prepared for installation?", options: [
+          {
+            id: "preparacion",
+            label: "¿El espacio ya tiene preparación para instalarlo?",
+            labelEn: "Is the space already prepared for installation?",
+            helperText: "Esto ayuda a estimar dificultad, altura, materiales y tiempo de instalación.",
+            helperTextEn: "This helps estimate difficulty, height, materials, and installation time.",
+            options: [
             { label: "Sí, instalación directa", labelEn: "Yes, straightforward installation", factor: 1.0 },
             { label: "No estoy seguro", labelEn: "I’m not sure", factor: 1.2 },
             { label: "No, requiere preparación", labelEn: "No, preparation is needed", factor: 1.5 }
           ] },
-          { id: "acceso", label: "¿Dónde se instalará la unidad exterior?", labelEn: "Where will the outdoor unit be installed?", options: [
+          {
+            id: "acceso",
+            label: "¿Dónde se instalará la unidad exterior?",
+            labelEn: "Where will the outdoor unit be installed?",
+            helperText: "Esto ayuda a estimar dificultad, altura, materiales y tiempo de instalación.",
+            helperTextEn: "This helps estimate difficulty, height, materials, and installation time.",
+            options: [
             { label: "Planta baja y fácil acceso", labelEn: "Ground floor with easy access", factor: 1.0 },
             { label: "Segundo piso", labelEn: "Second floor", factor: 1.2 },
             { label: "Azotea o acceso especial", labelEn: "Rooftop or special access", factor: 1.4 }
@@ -348,7 +366,13 @@ window.BUSINESSES = [
         // Rango demo editable en MXN; reemplazar con precios confirmados por el negocio.
         base: [650, 1100],
         questions: [
-          { id: "equipos", label: "¿Cuántos equipos necesitan mantenimiento?", labelEn: "How many units need maintenance?", options: [
+          {
+            id: "equipos",
+            label: "¿Cuántos equipos necesitan mantenimiento?",
+            labelEn: "How many units need maintenance?",
+            helperText: "Selecciona cuántos equipos necesitan revisión o limpieza.",
+            helperTextEn: "Select how many units need inspection or cleaning.",
+            options: [
             { label: "1 equipo", labelEn: "1 unit", factor: 1.0 },
             { label: "2 equipos", labelEn: "2 units", factor: 1.75 },
             { label: "3 o más equipos", labelEn: "3 or more units", factor: 2.4 }
@@ -379,7 +403,13 @@ window.BUSINESSES = [
             { label: "Congelador o vitrina", labelEn: "Freezer or display case", factor: 1.25 },
             { label: "Equipo de refrigeración comercial", labelEn: "Commercial refrigeration equipment", factor: 1.6 }
           ] },
-          { id: "falla", label: "¿Qué falla presenta?", labelEn: "What problem is it having?", options: [
+          {
+            id: "falla",
+            label: "¿Qué falla presenta?",
+            labelEn: "What problem is it having?",
+            helperText: "Describe el síntoma principal para estimar el tipo de revisión necesaria.",
+            helperTextEn: "Choose the main symptom to estimate the type of inspection needed.",
+            options: [
             { label: "Enfría poco o de forma irregular", labelEn: "Cooling is weak or inconsistent", factor: 1.0 },
             { label: "Hace ruido, fuga agua o genera hielo", labelEn: "It is noisy, leaking water, or building up ice", factor: 1.15 },
             { label: "No enciende o no enfría", labelEn: "It won’t turn on or cool", factor: 1.4 }
