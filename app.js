@@ -579,7 +579,10 @@
       if (button) button.textContent = getLocalizedLabel(service, "name");
     });
     if (state.service) renderQuestions(state.service);
-    if (state.range) renderRequestSummary();
+    if (state.range) {
+      renderRequestSummary();
+      buildWhatsAppUrl();
+    }
   }
 
   function getLocalizedLabel(item, field = "label", language = state.language) {
@@ -893,7 +896,17 @@
 
   function buildWhatsAppUrl() {
     if (!state.range) return;
-    const details = getHandoffDetails("es");
+    const useEnglish = state.language === "en" && hasEnglishCopy();
+    const details = getHandoffDetails(useEnglish ? "en" : "es");
+    const lines = useEnglish
+      ? buildEnglishWhatsAppMessage(details)
+      : buildSpanishWhatsAppMessage(details);
+
+    $("#btnWa").href =
+      "https://wa.me/" + business.whatsapp + "?text=" + encodeURIComponent(lines.join("\n"));
+  }
+
+  function buildSpanishWhatsAppMessage(details) {
     const lines = [
       "Hola, quiero cotizar.",
       "Servicio: " + details.service,
@@ -908,8 +921,25 @@
     );
     if (details.customerName) lines.push("Mi nombre es: " + details.customerName);
     if (details.customerPhone) lines.push("Mi teléfono: " + details.customerPhone);
+    return lines;
+  }
 
-    $("#btnWa").href =
-      "https://wa.me/" + business.whatsapp + "?text=" + encodeURIComponent(lines.join("\n"));
+  function buildEnglishWhatsAppMessage(details) {
+    const lines = [
+      "Hello, I'd like a quote.",
+      "Service: " + details.service,
+      "City: " + business.city,
+      "Details:"
+    ];
+
+    details.answers.forEach(item => lines.push(item.question + " " + item.answer));
+    lines.push("Zone: " + details.zone);
+    lines.push(
+      "Estimated range: $" + formatPrice(details.range[0]) +
+      " – $" + formatPrice(details.range[1]) + " " + details.currency
+    );
+    if (details.customerName) lines.push("Name: " + details.customerName);
+    if (details.customerPhone) lines.push("Phone: " + details.customerPhone);
+    return lines;
   }
 })();
