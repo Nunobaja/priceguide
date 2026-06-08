@@ -41,6 +41,7 @@ const METADATA_LIMITS = {
   shareDescription: 200
 };
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const ALLOWED_TONES = new Set(["professional", "friendly", "technical"]);
 const SPANISH_FALLBACK_FIELDS = [
   "heroHeadline",
   "heroSubheadline",
@@ -136,6 +137,7 @@ function validateBusinesses(businesses, errors) {
     SLUG_FIELDS.forEach(field => validateSlug(business[field], field, businessLabel, errors));
     validatePhone(business, businessLabel, errors);
     validateWhatsApp(business, businessLabel, errors);
+    validateTone(business, businessLabel, errors);
     validateUniqueRoute(business, businessLabel, businessIndex, seenRoutes, errors);
     validateOptionalStrings(business, businessLabel, OPTIONAL_COPY_LIMITS, errors);
     validateOptionalStrings(business, businessLabel, METADATA_LIMITS, errors);
@@ -356,6 +358,14 @@ function normalizeZoneName(value) {
     .trim()
     .replace(/\s+/g, " ")
     .toLowerCase();
+}
+
+function validateTone(business, businessLabel, errors) {
+  if (!Object.prototype.hasOwnProperty.call(business, "tone")) return;
+
+  if (typeof business.tone !== "string" || !ALLOWED_TONES.has(business.tone)) {
+    errors.push(`${businessLabel} field "tone" is optional but must be one of "professional", "friendly", or "technical"; replace ${JSON.stringify(business.tone)} or remove the field to use the professional default.`);
+  }
 }
 
 function validatePhone(business, businessLabel, errors) {

@@ -31,6 +31,7 @@ Flujo recomendado:
 | Servicios | `services` | Crear un objeto por servicio aprobado con `id`, nombre, rango base, preguntas y opciones. |
 | Headline principal | `heroHeadline` | Copiar el encabezado principal en español. Debe describir la utilidad de la guía sin promesas exageradas. |
 | Subheadline | `heroSubheadline` | Copiar el texto secundario breve en español. |
+| Tono de copy | `tone` | String opcional para pequeñas variaciones seguras de copy. Valores permitidos: `professional`, `friendly`, `technical`. Si se omite, usa `professional`. No afecta precios, fórmulas, rutas, slugs, WhatsApp ni parámetros `source`. |
 | Texto introductorio | `estimateIntro` | Explicar qué debe seleccionar el usuario y qué variables pueden modificar el rango. |
 | Disclaimer | `priceDisclaimer` | Aclarar que el resultado es estimado y que el precio final depende de la revisión real. |
 | CTA WhatsApp | `whatsappCtaLabel` | Texto visible del botón, por ejemplo, `Enviar solicitud por WhatsApp`. |
@@ -50,6 +51,7 @@ Además de los campos del intake, una entrada normalmente conserva `currency: "M
   brandInitial: "N",
   brandAccentColor: "#A65A12",
   brandLogoText: "Nombre aprobado",
+  tone: "professional", // opcional; también admite "friendly" o "technical"
   city: "Ciudad, Estado",
   category: "Categoría aprobada",
   categoryLabel: "Subcategoría visible aprobada",
@@ -61,6 +63,16 @@ Además de los campos del intake, una entrada normalmente conserva `currency: "M
 ```
 
 Los números anteriores son marcadores estructurales, no datos para publicar.
+
+### Tono opcional de la página
+
+`tone` es un string opcional que solo ajusta pequeñas frases seguras en la página individual, como ayudas del estimador, mensajes de confianza y disclaimers. Los valores admitidos son `professional`, `friendly` y `technical`; cualquier negocio que omita el campo conserva el tono `professional` actual.
+
+- `professional`: claro, neutral y directo; es el valor predeterminado.
+- `friendly`: ligeramente más cálido, sin hype ni promesas comerciales.
+- `technical`: ligeramente más preciso, pero comprensible para consumidores.
+
+El tono nunca debe cambiar precios, rangos, fórmulas, servicios, preguntas, rutas, slugs, parámetros `source`, enlaces o mensajes de WhatsApp, ni la lógica de llamada. Tampoco sustituye los disclaimers: todas las variantes deben comunicar que se trata de una estimación o rango aproximado y que el precio final depende de los detalles del servicio.
 
 ## 3. Reglas para slugs e identificadores
 
