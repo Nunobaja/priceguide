@@ -113,6 +113,24 @@
     whatsappCtaLabel: "Cotizar por WhatsApp",
     whatsappHelperText: "Te abrimos WhatsApp con tu cotización ya escrita. Solo das enviar."
   };
+  const toneCopy = {
+    friendly: {
+      heroSubheadline: "Cuéntanos qué necesitas y te mostramos un rango aproximado, sin compromiso.",
+      estimateIntro: "Elige el servicio y responde unas preguntas para conocer un precio aproximado.",
+      priceDisclaimer: "Esta estimación es una guía. El precio final depende de los detalles del servicio, como materiales, condiciones del lugar y alcance real.",
+      initialEstimateNote: "Este rango aproximado es una estimación inicial. El negocio confirmará el precio final por WhatsApp según los detalles del servicio.",
+      handoffExplanation: "Comparte tu solicitud con el negocio para que revise los detalles y confirme el precio final contigo.",
+      handoffTrust: "Este es un rango aproximado, no un precio final. El precio final depende de los detalles del servicio, como fotos, zona y materiales."
+    },
+    technical: {
+      heroSubheadline: "Responde unas preguntas sobre el servicio para obtener un rango aproximado según las condiciones indicadas.",
+      estimateIntro: "Selecciona el servicio y sus condiciones para calcular un precio aproximado.",
+      priceDisclaimer: "Esta estimación usa la información seleccionada. El precio final depende de los detalles del servicio, la revisión técnica, los materiales y las condiciones del lugar.",
+      initialEstimateNote: "Este rango aproximado es una estimación inicial basada en los datos seleccionados. El negocio confirmará el precio final tras revisar los detalles del servicio.",
+      handoffExplanation: "El negocio recibirá las condiciones seleccionadas y podrá revisar los detalles antes de confirmar el precio final.",
+      handoffTrust: "Este es un rango aproximado, no un diagnóstico ni un precio final. El precio final depende de los detalles del servicio, la zona, los materiales y la revisión técnica."
+    }
+  };
   const uiCopy = {
     es: {
       servicePrompt: "¿Qué servicio necesitas?",
@@ -585,7 +603,7 @@
     document.documentElement.lang = state.language === "en" ? "en" : "es-MX";
 
     document.querySelectorAll("[data-ui]").forEach(element => {
-      element.textContent = labels[element.dataset.ui];
+      element.textContent = getUiCopy(element.dataset.ui, labels);
     });
     document.querySelectorAll("[data-placeholder-ui]").forEach(element => {
       element.placeholder = labels[element.dataset.placeholderUi];
@@ -634,6 +652,22 @@
       : item[field];
   }
 
+  function getBusinessTone() {
+    return ["professional", "friendly", "technical"].includes(business.tone)
+      ? business.tone
+      : "professional";
+  }
+
+  function getToneCopy(field, fallback) {
+    if (state.language !== "es") return fallback;
+    const copy = toneCopy[getBusinessTone()];
+    return copy && copy[field] ? copy[field] : fallback;
+  }
+
+  function getUiCopy(field, labels = uiCopy[state.language]) {
+    return getToneCopy(field, labels[field]);
+  }
+
   function getCopy(field, fallback = fallbackCopy[field]) {
     const translatedValue = state.language === "en" && business.english
       ? business.english[field]
@@ -641,7 +675,9 @@
     const value = typeof translatedValue === "string" && translatedValue.trim()
       ? translatedValue
       : business[field];
-    return typeof value === "string" && value.trim() ? value.trim() : fallback;
+    return typeof value === "string" && value.trim()
+      ? value.trim()
+      : getToneCopy(field, fallback);
   }
 
   function getCategoryDisclaimer() {
