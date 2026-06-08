@@ -52,20 +52,43 @@ Usa estos valores sin modificarlos:
 {baseUrl}?source=direct
 ```
 
-## 5. Enlaces combinados
+## 5. Abrir un servicio desde el enlace
 
-`source` se puede combinar con `lang`, `service` y `zone`. Separa cada parámetro con `&`:
+En una página individual de negocio, agrega `service` para abrir el estimador con un servicio ya seleccionado:
 
 ```text
-{baseUrl}?lang=en&source=google-business-profile
-{baseUrl}?service={serviceId}&source=facebook
-{baseUrl}?service={serviceId}&zone={zoneSlug}&source=qr
-{baseUrl}?lang=en&service={serviceId}&zone={zoneSlug}&source=google-business-profile
+{baseUrl}?service=instalacion-de-minisplit
+{baseUrl}?service=destape-de-drenaje
 ```
 
-Usa únicamente identificadores y slugs existentes del negocio. No cambies servicios, zonas, rutas ni datos para crear estos enlaces.
+El valor es el nombre visible del servicio convertido a slug:
 
-## 6. Reglas para nombrar fuentes
+- Usa minúsculas.
+- Quita acentos.
+- Sustituye espacios por guiones.
+- Reduce espacios o guiones repetidos a un solo guion.
+- No cambies el nombre visible ni los datos del servicio.
+
+Por ejemplo, `Instalación de minisplit` se convierte en `instalacion-de-minisplit`. Los identificadores estables que ya imprime el generador interno continúan siendo compatibles.
+
+Si `service` está vacío, mal formado o no corresponde a un servicio del negocio, la página lo ignora sin mostrar un error ni crear un servicio nuevo. Este parámetro funciona únicamente en páginas individuales; no cambia la vista madre de QA ni crea rutas, búsqueda o directorio.
+
+## 6. Combinar `service` y `source`
+
+`service` no reemplaza ni modifica `source`. Los parámetros pueden aparecer en cualquier orden y se separan con `&`:
+
+```text
+{baseUrl}?source=google-business-profile&service=instalacion-de-minisplit
+{baseUrl}?service=destape-de-drenaje&source=whatsapp-business
+{baseUrl}?service=instalacion-de-minisplit&zone={zoneSlug}&source=qr
+{baseUrl}?lang=en&service=instalacion-de-minisplit&source=google-business-profile
+```
+
+El servicio se selecciona dentro del mismo estimador y los rangos siguen siendo aproximados. Usa únicamente servicios y zonas existentes del negocio. No cambies servicios, precios, zonas, rutas ni datos para crear estos enlaces.
+
+`service` no es tracking, analítica, ranking, recomendación, búsqueda ni una función de directorio público.
+
+## 7. Reglas para nombrar fuentes
 
 - Usa minúsculas.
 - Separa palabras con guiones.
@@ -74,7 +97,7 @@ Usa únicamente identificadores y slugs existentes del negocio. No cambies servi
 - Mantén estables los nombres de las fuentes.
 - Usa etiquetas cortas y legibles.
 
-## 7. Qué hace y qué no hace `source`
+## 8. Qué hace y qué no hace `source`
 
 `source`:
 
@@ -89,7 +112,7 @@ Usa únicamente identificadores y slugs existentes del negocio. No cambies servi
 - Es un dashboard.
 - Cuenta visitas.
 
-## 8. Checklist de entrega
+## 9. Checklist de entrega
 
 Para cada negocio, crea y guarda:
 
@@ -101,11 +124,11 @@ Para cada negocio, crea y guarda:
 - [ ] URL de QR.
 - [ ] URL directa (`source=direct`).
 
-## 9. Explicación para el dueño
+## 10. Explicación para el dueño
 
 > “Cada enlace lleva el mismo estimador, pero marca el origen para que cuando alguien te escriba por WhatsApp puedas ver si vino de Google, Facebook, Instagram, WhatsApp Business o QR.”
 
-## 10. Documentos relacionados
+## 11. Documentos relacionados
 
 - [`docs/publish-business-in-10-minutes.md`](publish-business-in-10-minutes.md)
 - [`docs/pre-publish-checklist.md`](pre-publish-checklist.md)
