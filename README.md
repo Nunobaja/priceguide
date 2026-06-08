@@ -1,10 +1,14 @@
 # Precios Locales
 
-Hosted price guide directory for Home Services businesses in Mexico without a website.
+A static engine for publishing individual approximate price-guide pages for local Home Services businesses in Mexico.
 
-Each business gets a public URL with an interactive price estimator and WhatsApp handoff for Google Business Profile traffic. Lead capture is intentionally reserved for a later phase.
+Each business gets its own individual URL using the route pattern `/priceguide/{citySlug}/{categorySlug}/{businessSlug}/`. Prices are approximate ranges, and the final price is confirmed directly by the business.
 
-## Demo businesses
+`/priceguide/` is an internal QA/demo view and route review utility, not a public directory and not intended for client sharing. Only individual business URLs should be shared.
+
+The product is a static GitHub Pages app with no backend, database, CRM, login, payments, analytics, tracking, cookies, reviews, ratings, search, rankings, filters, marketplace, directory behavior, or lead capture.
+
+## Internal demo business routes
 
 - `/los-cabos/plomeros/plomeria-mario` or `/priceguide/los-cabos/plomeros/plomeria-mario`
 - `/mazatlan/aire-acondicionado/frio-express` or `/priceguide/mazatlan/aire-acondicionado/frio-express`
@@ -15,7 +19,7 @@ Each business gets a public URL with an interactive price estimator and WhatsApp
 - `/puerto-vallarta/electricista/servicios-profesionales-electricidad-plomeria-martinez` or `/priceguide/puerto-vallarta/electricista/servicios-profesionales-electricidad-plomeria-martinez`
 - `/puerto-vallarta/electricista/solara-proyectos-electricos-paneles-solares` or `/priceguide/puerto-vallarta/electricista/solara-proyectos-electricos-paneles-solares`
 
-Business identity, service areas, pricing, and estimator questions live in `businesses.js`. The shared renderer in `app.js` reads `window.location.pathname`, supports the optional `/priceguide` GitHub Pages prefix, renders `/` and `/priceguide/` as a small demo landing page, and renders matching business pages as the primary product.
+Business identity, service areas, pricing, and estimator questions live in `businesses.js`. The shared renderer in `app.js` reads `window.location.pathname`, supports the optional `/priceguide` GitHub Pages prefix, renders `/` and `/priceguide/` as internal QA/demo route review views, and renders matching individual business pages as the primary product.
 
 ## Static hosting
 
