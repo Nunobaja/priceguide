@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guía de precios aproximados — {businessName}</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f3f4f6; color: #1f2937; font-family: Arial, Helvetica, sans-serif; line-height: 1.4; }
+    .hoja { width: min(100%, 8.5in); min-height: 11in; margin: 0 auto; padding: 0.55in; background: #fff; }
+    header { padding-bottom: 16px; border-bottom: 3px solid #1f6f5f; }
+    h1 { margin: 0 0 6px; color: #174f45; font-size: 28px; }
+    h2 { margin: 0; font-size: 22px; }
+    h3 { margin: 0 0 7px; color: #174f45; font-size: 16px; }
+    p { margin: 7px 0; }
+    .explicacion { margin: 16px 0; font-size: 15px; }
+    .entrega { display: grid; grid-template-columns: 2fr 3fr; gap: 18px; align-items: stretch; }
+    .panel { padding: 14px; border: 1px solid #a7b8b3; border-radius: 8px; }
+    .qr { min-height: 190px; display: flex; align-items: center; justify-content: center; margin: 10px 0; padding: 12px; border: 2px dashed #607d75; background: #fafcfb; text-align: center; font-weight: 700; overflow-wrap: anywhere; }
+    .enlace { margin-top: 10px; padding: 11px; border: 1px solid #b8c8c4; border-radius: 6px; background: #f4f8f7; font-size: 13px; font-weight: 700; overflow-wrap: anywhere; }
+    .url-qr { font-size: 11px; overflow-wrap: anywhere; }
+    section { margin-top: 16px; }
+    ul { margin: 6px 0 0; padding-left: 20px; }
+    li { margin: 4px 0; }
+    .recordatorio { padding: 12px 14px; border-left: 5px solid #c58a24; background: #fff8e8; }
+    footer { display: flex; justify-content: space-between; gap: 20px; margin-top: 18px; padding-top: 10px; border-top: 1px solid #a7b8b3; font-size: 12px; }
+    @media print {
+      @page { size: letter; margin: 0; }
+      body { background: #fff; }
+      .hoja { width: 8.5in; min-height: 11in; margin: 0; }
+    }
+    @media (max-width: 620px) {
+      .hoja { padding: 24px; }
+      .entrega { grid-template-columns: 1fr; }
+      footer { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <main class="hoja">
+    <header>
+      <h1>Guía de precios aproximados</h1>
+      <h2>{businessName}</h2>
+    </header>
+
+    <p class="explicacion">Consulta esta guía para obtener una estimación inicial o un rango aproximado según el servicio, la zona y los detalles seleccionados. Es una referencia práctica de la página individual de {businessName}; el precio final depende de los detalles del servicio.</p>
+
+    <div class="entrega">
+      <section class="panel">
+        <h3>Escanea para abrir la guía</h3>
+        <div class="qr">{generatedQrImage}</div>
+        <p class="url-qr"><strong>URL del código QR:</strong><br>{qrPhysicalUrl}</p>
+      </section>
+
+      <section class="panel">
+        <h3>Enlace directo</h3>
+        <p>Abre, guarda o comparte la página individual del negocio:</p>
+        <div class="enlace">{directLinkUrl}</div>
+        <p>Úsalo para orientar al cliente con un precio aproximado antes de revisar los detalles del trabajo.</p>
+      </section>
+    </div>
+
+    <section>
+      <h3>Cómo usar este enlace</h3>
+      <ul>
+        <li>Coloca el código QR cerca del mostrador o la recepción, si aplica.</li>
+        <li>Agrega el enlace a WhatsApp Business únicamente cuando el canal y el número estén confirmados.</li>
+        <li>Comparte el enlace en respuestas a clientes que soliciten una estimación.</li>
+        <li>Incluye el código QR en materiales impresos aprobados.</li>
+        <li>Pide los detalles del servicio antes de confirmar el precio final.</li>
+      </ul>
+    </section>
+
+    <section class="recordatorio">
+      <h3>Recordatorio importante</h3>
+      <p>Esta página es una guía y muestra una estimación o un rango aproximado. El precio final depende de los detalles del servicio, la zona, los materiales, la inspección y las condiciones reales del trabajo. No confirmes un precio exacto basándote solamente en la guía.</p>
+    </section>
+
+    <footer>
+      <span>Preparado por: {publisherName}</span>
+      <span>Fecha de entrega: {deliveryDate}</span>
+    </footer>
+  </main>
+</body>
+</html>
