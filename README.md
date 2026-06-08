@@ -27,11 +27,10 @@ Usa [`docs/business-intake-template.md`](docs/business-intake-template.md) para 
 
 ## Publishing
 
-Static business route shells are generated from the existing `index.html` app shell and the business metadata in `businesses.js`. When publishing a business:
+Static business route shells are generated from the existing `index.html` app shell and the business metadata in `businesses.js`. Before committing changes for publication, run:
 
-1. Edit `businesses.js`.
-2. Run `node scripts/generate-route-shells.js`.
-3. Run `node scripts/validate-site.js`.
-4. Commit the changes.
+```sh
+node scripts/publish-preflight.js
+```
 
-The generator writes both supported GitHub Pages route forms for every business and does not overwrite `index.html`, `priceguide/index.html`, or `404.html`.
+This regenerates both supported GitHub Pages route shells for every business and validates the site before committing. The generator does not overwrite `index.html`, `priceguide/index.html`, or `404.html`.
