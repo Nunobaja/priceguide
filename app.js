@@ -48,13 +48,11 @@
       <div class="range" id="rangeOut"></div>
       <div class="moneda" id="monedaOut"></div>
       <p class="range-note" data-ui="initialEstimateNote"></p>
-      <button class="btn btn-secondary" id="btnReset" type="button" data-ui="resetEstimate"></button>
     </div>
 
     <section class="request-summary" aria-labelledby="summaryTitle">
       <h3 id="summaryTitle" data-ui="requestSummary"></h3>
       <dl class="summary-list" id="requestSummary"></dl>
-      <button class="copy-link copy-summary" id="copySummary" type="button" data-ui="copySummary" aria-live="polite"></button>
     </section>
 
     <div class="aviso">
@@ -86,6 +84,8 @@
       <span id="whatsappFallbackMessage"></span>
       <a class="hidden" id="whatsappFallbackPhone" href="#"></a>
     </p>
+    <button class="copy-link copy-summary" id="copySummary" type="button" data-ui="copySummary" aria-live="polite"></button>
+    <button class="btn btn-secondary" id="btnReset" type="button" data-ui="resetEstimate"></button>
   </div>
 
   <!-- datos del negocio -->
@@ -670,6 +670,10 @@
     return business.whatsappConfirmed === false;
   }
 
+  function getConfirmedWhatsAppValue() {
+    return isWhatsAppPending() ? "" : getWhatsAppValue();
+  }
+
   function getWhatsAppPendingNote() {
     const spanishNote = getOptionalBusinessText("whatsappPendingNote");
     const englishNote = getOptionalBusinessText("whatsappPendingNoteEn");
@@ -679,6 +683,7 @@
   function updateWhatsAppContactDetails() {
     const labels = uiCopy[state.language];
     const whatsapp = getWhatsAppValue();
+    const confirmedWhatsApp = getConfirmedWhatsAppValue();
     const phone = getPhoneValue();
     const pending = Boolean(whatsapp) && isWhatsAppPending();
     const contactLink = $("#lnkWa");
@@ -694,8 +699,8 @@
     }
 
     if (contactLink) {
-      contactLink.href = whatsapp ? "https://wa.me/" + whatsapp : "#";
-      contactLink.classList.toggle("hidden", !whatsapp);
+      contactLink.href = confirmedWhatsApp ? "https://wa.me/" + confirmedWhatsApp : "#";
+      contactLink.classList.toggle("hidden", !confirmedWhatsApp);
     }
 
     if (pendingNote) {
@@ -705,8 +710,8 @@
     }
 
     if (helperText) {
-      helperText.textContent = whatsapp ? getCopy("whatsappHelperText") : "";
-      helperText.classList.toggle("hidden", !whatsapp);
+      helperText.textContent = confirmedWhatsApp ? getCopy("whatsappHelperText") : "";
+      helperText.classList.toggle("hidden", !confirmedWhatsApp);
     }
 
     if (fallback && fallbackMessage && fallbackPhone) {
@@ -714,7 +719,7 @@
       fallbackPhone.textContent = phone ? formatPhone(phone) : "";
       fallbackPhone.href = phone ? getPhoneHref(phone) : "#";
       fallbackPhone.classList.toggle("hidden", !phone);
-      fallback.classList.toggle("hidden", Boolean(whatsapp));
+      fallback.classList.toggle("hidden", Boolean(confirmedWhatsApp));
     }
   }
 
@@ -1049,7 +1054,7 @@
 
   function buildWhatsAppUrl() {
     if (!state.range) return;
-    const whatsapp = getWhatsAppValue();
+    const whatsapp = getConfirmedWhatsAppValue();
     const button = $("#btnWa");
 
     updateWhatsAppContactDetails();
