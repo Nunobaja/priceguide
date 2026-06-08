@@ -531,6 +531,9 @@ window.BUSINESSES = [
     phone: "3221752229",
     // Mismo número que el teléfono por ahora. WhatsApp sin confirmar y editable aquí.
     whatsapp: "523221752229",
+    whatsappConfirmed: false,
+    whatsappPendingNote: "Este número debe confirmarse con el dueño antes de usarlo como WhatsApp público.",
+    whatsappPendingNoteEn: "This number should be confirmed with the owner before using it as the public WhatsApp.",
     currency: "MXN",
     currencyLabel: "pesos mexicanos",
     // Rangos base, factores y add-ons son valores demo configurables en este archivo.
@@ -623,6 +626,9 @@ window.BUSINESSES = [
     phone: "3221830299",
     // Mismo número que el teléfono por ahora. WhatsApp sin confirmar y editable aquí.
     whatsapp: "523221830299",
+    whatsappConfirmed: false,
+    whatsappPendingNote: "Este número debe confirmarse con el dueño antes de usarlo como WhatsApp público.",
+    whatsappPendingNoteEn: "This number should be confirmed with the owner before using it as the public WhatsApp.",
     currency: "MXN",
     currencyLabel: "pesos mexicanos",
     // Rangos base, factores y add-ons son valores demo configurables en este archivo.
@@ -716,6 +722,9 @@ window.BUSINESSES = [
     phone: "3221818350",
     // Mismo número que el teléfono por ahora. WhatsApp sin confirmar y editable aquí.
     whatsapp: "523221818350",
+    whatsappConfirmed: false,
+    whatsappPendingNote: "Este número debe confirmarse con el dueño antes de usarlo como WhatsApp público.",
+    whatsappPendingNoteEn: "This number should be confirmed with the owner before using it as the public WhatsApp.",
     currency: "MXN",
     currencyLabel: "pesos mexicanos",
     // Rangos base, factores y add-ons son valores demo configurables en este archivo.
