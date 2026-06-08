@@ -23,7 +23,7 @@ Configure the static host to serve `index.html` as the fallback for nested URLs.
 
 ## Alta de nuevos negocios
 
-Antes de agregar un negocio real, completa [`docs/client-intake-template.md`](docs/client-intake-template.md) con el dueño. Después usa [`docs/business-intake-template.md`](docs/business-intake-template.md) para validar la información aprobada y la [`guía interna de mapeo a businesses.js`](docs/intake-to-businesses-js-guide.md) para convertirla al formato de configuración.
+Antes de agregar un negocio real, usa la [`guía interna de incorporación manual`](docs/onboarding-template.md) y copia la [`plantilla reutilizable de incorporación`](docs/templates/client-onboarding-intake.md) para reunir la información mínima de una sola página individual. Si se necesita el formulario ampliado, completa [`docs/client-intake-template.md`](docs/client-intake-template.md) con el dueño. Después usa [`docs/business-intake-template.md`](docs/business-intake-template.md) para validar la información aprobada y la [`guía interna de mapeo a businesses.js`](docs/intake-to-businesses-js-guide.md) para convertirla al formato de configuración.
 
 ## Publishing
 
