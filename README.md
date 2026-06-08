@@ -25,10 +25,13 @@ Configure the static host to serve `index.html` as the fallback for nested URLs.
 
 Usa [`docs/business-intake-template.md`](docs/business-intake-template.md) para recopilar, validar y convertir la información de un negocio de Servicios para el Hogar al formato de `businesses.js`. La plantilla incluye el cuestionario para el propietario, criterios para normalizar precios y zonas, un bloque técnico listo para copiar y una lista de control de publicación.
 
-## Validation
+## Publishing
 
-Before publishing, run the internal consistency check for business configuration and static route shells:
+Static business route shells are generated from the existing `index.html` app shell and the business metadata in `businesses.js`. When publishing a business:
 
-```sh
-node scripts/validate-site.js
-```
+1. Edit `businesses.js`.
+2. Run `node scripts/generate-route-shells.js`.
+3. Run `node scripts/validate-site.js`.
+4. Commit the changes.
+
+The generator writes both supported GitHub Pages route forms for every business and does not overwrite `index.html`, `priceguide/index.html`, or `404.html`.
