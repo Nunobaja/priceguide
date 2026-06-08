@@ -420,6 +420,8 @@ La explicación comercial es: “Te entregamos enlaces rotulados para que sepas 
 
 Usar estos documentos durante la venta y entrega:
 
+- [Guía interna para preparar propuestas comerciales](client-proposal-template.md) y [plantilla reutilizable de propuesta](templates/client-proposal.md).
+
 - [Procedimiento interno para vender Precios Locales a 5 negocios reales](sell-to-5-businesses-sop.md).
 - [Plantilla manual de seguimiento para vender a 5 negocios](templates/sell-to-5-businesses-tracker.md).
 - [Guía interna de incorporación manual](onboarding-template.md).

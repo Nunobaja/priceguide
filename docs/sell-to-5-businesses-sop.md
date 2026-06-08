@@ -396,6 +396,7 @@ Tampoco usar variantes que prometan resultados, posiciones, exactitud final o fu
 
 ## 18. Documentos relacionados
 
+- [Guía interna para preparar propuestas comerciales](client-proposal-template.md) y [plantilla reutilizable de propuesta](templates/client-proposal.md).
 - [Paquete comercial interno](commercial-package.md).
 - [Guía interna de incorporación manual](onboarding-template.md).
 - [Plantilla reutilizable de incorporación](templates/client-onboarding-intake.md).
