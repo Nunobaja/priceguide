@@ -6,6 +6,20 @@
 
 Cada guía de negocio debe entregarse con varias URLs específicas por fuente. Así, cuando una persona termine una estimación y envíe la solicitud por WhatsApp, el negocio puede saber si llegó desde Google, Facebook, Instagram, WhatsApp Business, un código QR o un enlace directo.
 
+## Generar enlaces automáticamente
+
+Ejecuta el generador interno desde la raíz del proyecto para imprimir los enlaces de todos los negocios sin crear ni modificar archivos:
+
+```sh
+node scripts/generate-source-links.js
+```
+
+Para imprimir solamente un negocio, agrega su `businessSlug`:
+
+```sh
+node scripts/generate-source-links.js carmona-hnos-climas-refrigeracion
+```
+
 ## 2. Formato de la URL base
 
 Usa la URL pública final del negocio:
