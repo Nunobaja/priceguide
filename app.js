@@ -319,7 +319,12 @@
       button.className = "opt";
       button.textContent = getLocalizedLabel(service, "name");
       button.dataset.id = service.id;
-      button.onclick = () => selectService(service, button);
+      button.onclick = () => selectService(
+        service,
+        button,
+        true,
+        state.service ? null : state.zone
+      );
       $("#servicios").appendChild(button);
     });
 
@@ -331,9 +336,11 @@
     setLanguage(getLanguageFromUrl());
 
     const initialService = getServiceFromUrl();
+    const initialZone = getZoneFromUrl();
+    state.zone = initialZone;
     if (initialService) {
       const button = document.querySelector(`#servicios [data-id="${initialService.id}"]`);
-      selectService(initialService, button, false);
+      selectService(initialService, button, false, initialZone);
     }
   }
 
@@ -344,6 +351,29 @@
   function getServiceFromUrl() {
     const serviceId = new URL(window.location.href).searchParams.get("service");
     return business.services.find(service => service.id === serviceId) || null;
+  }
+
+  function slugify(value) {
+    return String(value || "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, "")
+      .trim()
+      .replace(/[\s-]+/g, "-");
+  }
+
+  function getZoneSlug(zone) {
+    return slugify(zone.label);
+  }
+
+  function getZoneFromUrl() {
+    const requestedZone = slugify(new URL(window.location.href).searchParams.get("zone"));
+    if (!requestedZone) return null;
+
+    return business.zones.find(zone =>
+      getZoneSlug(zone) === requestedZone || slugify(zone.labelEn) === requestedZone
+    ) || null;
   }
 
   async function copyCurrentPageLink() {
@@ -403,17 +433,30 @@
     updateQueryParameter("lang", language);
   }
 
-  function updateServiceInUrl(serviceId) {
-    updateQueryParameter("service", serviceId);
+  function updateZoneInUrl(zone) {
+    updateQueryParameter("zone", zone ? getZoneSlug(zone) : null);
+  }
+
+  function updateSelectionInUrl(serviceId, zone) {
+    updateQueryParameters({
+      service: serviceId,
+      zone: zone ? getZoneSlug(zone) : null
+    });
   }
 
   function updateQueryParameter(name, value) {
+    updateQueryParameters({ [name]: value });
+  }
+
+  function updateQueryParameters(parameters) {
     const url = new URL(window.location.href);
-    if (value) {
-      url.searchParams.set(name, value);
-    } else {
-      url.searchParams.delete(name);
-    }
+    Object.entries(parameters).forEach(([name, value]) => {
+      if (value) {
+        url.searchParams.set(name, value);
+      } else {
+        url.searchParams.delete(name);
+      }
+    });
     window.history.replaceState(window.history.state, "", url.href);
     updateMetaTag("property", "og:url", url.href);
   }
@@ -509,12 +552,12 @@
     return phone.replace(/(\d{3})(\d{3})(\d{4})/, "$1 $2 $3");
   }
 
-  function selectService(service, button, updateUrl = true) {
+  function selectService(service, button, updateUrl = true, selectedZone = null) {
     state.service = service;
     state.answers = {};
-    state.zone = null;
+    state.zone = selectedZone;
     state.range = null;
-    if (updateUrl) updateServiceInUrl(service.id);
+    if (updateUrl) updateSelectionInUrl(service.id, selectedZone);
     document.querySelectorAll("#servicios .opt").forEach(option => option.classList.remove("sel"));
     button.classList.add("sel");
     renderQuestions(service);
@@ -566,9 +609,11 @@
       const choice = document.createElement("div");
       choice.className = "opt";
       choice.textContent = getLocalizedLabel(zone);
+      choice.dataset.zone = getZoneSlug(zone);
       choice.classList.toggle("sel", state.zone === zone);
       choice.onclick = () => {
         state.zone = zone;
+        updateZoneInUrl(zone);
         zoneOptions.querySelectorAll(".opt").forEach(item => item.classList.remove("sel"));
         choice.classList.add("sel");
         checkComplete(service);
@@ -586,9 +631,16 @@
     checkComplete(service);
   }
 
+  function isEstimateComplete(service = state.service) {
+    return Boolean(
+      service &&
+      state.zone &&
+      service.questions.every(question => state.answers[question.id])
+    );
+  }
+
   function checkComplete(service) {
-    const allQuestionsAnswered = service.questions.every(question => state.answers[question.id]);
-    $("#btnCalcular").disabled = !(allQuestionsAnswered && state.zone);
+    $("#btnCalcular").disabled = !isEstimateComplete(service);
   }
 
   function resetEstimate() {
@@ -596,7 +648,7 @@
     state.answers = {};
     state.zone = null;
     state.range = null;
-    updateServiceInUrl(null);
+    updateSelectionInUrl(null, null);
 
     document.querySelectorAll("#servicios .opt").forEach(option => option.classList.remove("sel"));
     $("#preguntas").innerHTML = "";
@@ -611,6 +663,8 @@
 
   function calculate() {
     const service = state.service;
+    if (!isEstimateComplete(service)) return;
+
     let [min, max] = service.base;
     let multiplier = 1;
     let addition = 0;
