@@ -155,7 +155,7 @@ Registrar negocio, URL, dispositivo/viewport e idioma antes de comenzar.
 
 ## 7. Cobertura actual de demos/datos
 
-Esta evaluación describe los datos existentes al crear la matriz. Es una foto de cobertura, no una solicitud para modificar `businesses.js`. `Partial` significa que existe una aproximación útil, pero no un caso de contraste suficientemente claro.
+Esta evaluación describe los datos existentes después del fixture interno de cobertura. Es una foto de cobertura; `partial` significa que existe una aproximación útil, pero no un caso de contraste suficientemente claro.
 
 | Área de cobertura | ¿Cubierto actualmente? yes/no/partial/unknown | Negocio de ejemplo, si existe | Riesgo si falta | Seguimiento recomendado |
 |---|---|---|---|---|
@@ -163,19 +163,19 @@ Esta evaluación describe los datos existentes al crear la matriz. Es una foto d
 | Al menos 4 categorías | yes | Plomería, aire acondicionado, fumigación y electricista | Supuestos ligados a una categoría | Probar una página por categoría en cada ciclo mayor. |
 | WhatsApp confirmado | yes | Carmona Hnos Climas y Refrigeración; también los demos sin `whatsappConfirmed: false` | Handoff principal sin cobertura | Validar número y mensaje preparado. |
 | WhatsApp pendiente/no confirmado | yes | Instal PV; Servicios Profesionales de Electricidad y Plomería Martínez; Solara | CTA de WhatsApp engañoso | Confirmar nota pendiente y fallback de llamada. |
-| Sin WhatsApp | no | — | Dependencia no detectada del campo `whatsapp` | Crear después un fixture de QA mínimo solo si un gap real exige cobertura; no agregarlo en este PR. |
-| Fallback con teléfono público | yes | Instal PV | Usuarios sin siguiente paso cuando WhatsApp está pendiente | Repetir prueba de enlace `tel:`. |
+| Sin WhatsApp | yes | Fixture interno de control preventivo | Dependencia no detectada del campo `whatsapp` | Validar que el teléfono público sea el único handoff y que no exista enlace `wa.me`. |
+| Fallback con teléfono público | yes | Instal PV y fixture interno de control preventivo | Usuarios sin siguiente paso cuando WhatsApp está pendiente o ausente | Probar tanto número pendiente como campo ausente. |
 | Fallback sin teléfono público | no | — | Enlace vacío o CTA roto ante contacto ausente | Diseñar primero una prueba/fixture interno; cambiar comportamiento solo si falla. |
-| Negocio multi-servicio | yes | Plomería Mario (4 servicios); los demás tienen 3 | Estado compartido incorrecto entre servicios | Probar cambio y reinicio entre servicios. |
-| Negocio de un servicio | no | — | UI mínima no validada | Evaluar fixture de QA futuro sin publicar una ruta nueva. |
-| Lista larga de zonas | partial | Plomería Mario, Frío Express, Control Total y Carmona tienen 4 zonas | Overflow o wrapping no observado con listas realmente largas | Probar etiquetas actuales en móvil; considerar fixture solo si falta estrés suficiente. |
+| Negocio multi-servicio | yes | Plomería Mario (4 servicios); la mayoría tiene 3 | Estado compartido incorrecto entre servicios | Probar cambio y reinicio entre servicios. |
+| Negocio de un servicio | yes | Fixture interno de control preventivo | UI mínima no validada | Probar flujo completo y `service=inspeccion-preventiva`. |
+| Lista larga de zonas | yes | Fixture interno de control preventivo (8 zonas) | Overflow o wrapping no observado con listas realmente largas | Probar móvil y `zone=san-juan-de-ocotan`. |
 | Lista corta de zonas | partial | De la Hoz, Instal PV y Solara tienen 3 zonas | Estructura mínima no totalmente representada | Validar 3 zonas; no inventar un negocio para reducir la lista. |
-| Rangos bajos | yes | Plomería Mario parte de $400 MXN; Instal PV parte de $450 MXN | Formato confuso en cifras pequeñas | Probar mínimo y factores más bajos. |
+| Rangos bajos | yes | Fixture interno parte de $350 MXN; Plomería Mario parte de $400 MXN | Formato confuso en cifras pequeñas | Probar mínimo y factores más bajos. |
 | Rangos altos | yes | Solara llega a $7,500 MXN base; Carmona e Instal PV llegan a $4,200 MXN | Wrapping o lectura ambigua en cifras altas | Probar máximo con factores altos y viewport móvil. |
 | Solo español | yes | Plomería Mario, Frío Express, Control Total y otros | Fallback de idioma no validado | Abrir con y sin `lang=en`. |
 | Español + inglés | yes | Carmona Hnos Climas y Refrigeración | Traducción parcial o cambio de cálculo | Ejecutar el flujo completo en ambos idiomas. |
 | Tono amigable | yes | Plomería Mario (`friendly`) | Motor demasiado rígido en voz | Revisar copy sin convertirlo en material comercial. |
-| Tono profesional | partial | La mayoría usa el tono/default general; no hay un campo `tone: "professional"` explícito | Cobertura difícil de demostrar | Validar el copy default y documentar si hace falta un fixture, sin cambiar datos aquí. |
+| Tono profesional | yes | Fixture interno de control preventivo (`professional`) | Cobertura difícil de demostrar | Validar el branch explícito y conservar también regresión del fallback sin `tone`. |
 | Tono técnico | yes | Frío Express (`technical`) | Preguntas o ayudas técnicas poco claras | Probar comprensión y legibilidad móvil. |
 | Enlaces con fuente | yes | Todas las páginas individuales aceptan `source`; usar Carmona como caso bilingüe | Pérdida de contexto manual | Probar fuente en resumen, enlace y handoff. |
 | Preselección de servicio | yes | Cualquier demo con un `services[].id` válido | Fricción desde enlaces específicos | Probar slug válido, desconocido y combinado. |
@@ -183,7 +183,7 @@ Esta evaluación describe los datos existentes al crear la matriz. Es una foto d
 
 ### Gaps de cobertura conocidos
 
-La cobertura actual no demuestra de forma directa un negocio sin WhatsApp, un negocio sin teléfono, un negocio con exactamente un servicio ni listas de zonas verdaderamente extensas. Estos son gaps de **cobertura de validación**, no defectos confirmados del producto. No se deben agregar negocios demo ni rutas públicas en este PR para llenarlos.
+La cobertura actual ya demuestra WhatsApp ausente con teléfono, un negocio con exactamente un servicio, una pregunta con dos opciones, una lista de ocho zonas y tono profesional explícito. Siguen faltando WhatsApp confirmado sin teléfono y ausencia total de contacto. No debe agregarse un fixture sin contacto hasta que exista un fallback seguro que no presuponga un teléfono; cualquier cambio de comportamiento pertenece a otro PR.
 
 ## 8. Reglas de pass/fail
 
