@@ -280,7 +280,7 @@ window.BUSINESSES = [
     brandLogoText: "Carmona Hnos Climas y Refrigeración",
     city: "Cabo San Lucas, B.C.S.",
     category: "Aire acondicionado y refrigeración",
-    metaTitle: "Carmona Hnos Climas y Refrigeración · Guía de precios en Cabo San Lucas",
+    metaTitle: "Carmona Hnos Climas y Refrigeración · Precios en Cabo San Lucas",
     metaDescription: "Calcula un rango estimado para instalación, mantenimiento o reparación de aire acondicionado antes de contactar por WhatsApp.",
     shareTitle: "Guía de precios · Carmona Hnos Climas y Refrigeración",
     shareDescription: "Responde unas preguntas rápidas y obtén un rango inicial para servicio de aire acondicionado en Cabo San Lucas.",

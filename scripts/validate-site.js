@@ -13,7 +13,6 @@ const REQUIRED_BUSINESS_FIELDS = [
   "city",
   "category",
   "phone",
-  "whatsapp",
   "citySlug",
   "categorySlug",
   "businessSlug",
@@ -24,6 +23,24 @@ const REQUIRED_BUSINESS_FIELDS = [
 const REQUIRED_SERVICE_FIELDS = ["id", "name", "questions"];
 const REQUIRED_QUESTION_FIELDS = ["id", "label", "options"];
 const REQUIRED_OPTION_FIELDS = ["label", "factor"];
+const SLUG_FIELDS = ["citySlug", "categorySlug", "businessSlug"];
+const OPTIONAL_COPY_LIMITS = {
+  helperText: 240,
+  helperTextEn: 240,
+  salesCopy: 240,
+  salesCopyEn: 240,
+  categoryDisclaimer: 240,
+  categoryDisclaimerEn: 240,
+  whatsappPendingNote: 240,
+  whatsappPendingNoteEn: 240
+};
+const METADATA_LIMITS = {
+  metaTitle: 70,
+  metaDescription: 160,
+  shareTitle: 90,
+  shareDescription: 200
+};
+const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const SPANISH_FALLBACK_FIELDS = [
   "heroHeadline",
   "heroSubheadline",
@@ -105,106 +122,240 @@ function validateBusinesses(businesses, errors) {
   businesses.forEach((business, businessIndex) => {
     const businessLabel = getBusinessLabel(business, businessIndex);
 
+    if (!business || typeof business !== "object" || Array.isArray(business)) {
+      errors.push(`${businessLabel} must be a business object; replace the current value with a valid business configuration.`);
+      return;
+    }
+
     REQUIRED_BUSINESS_FIELDS.forEach(field => {
       if (isMissing(business[field])) {
-        errors.push(`${businessLabel} is missing required business field \"${field}\".`);
+        errors.push(`${businessLabel} field "${field}" is required; add a non-empty value.`);
       }
     });
 
+    SLUG_FIELDS.forEach(field => validateSlug(business[field], field, businessLabel, errors));
     validatePhone(business, businessLabel, errors);
     validateWhatsApp(business, businessLabel, errors);
     validateUniqueRoute(business, businessLabel, businessIndex, seenRoutes, errors);
+    validateOptionalStrings(business, businessLabel, OPTIONAL_COPY_LIMITS, errors);
+    validateOptionalStrings(business, businessLabel, METADATA_LIMITS, errors);
     validateBilingualFallbacks(business, businessLabel, errors);
-
-    if (!Array.isArray(business.zones)) {
-      errors.push(`${businessLabel} must define zones as an array.`);
-    }
+    validateZones(business, businessLabel, errors);
 
     if (!Array.isArray(business.services)) {
-      errors.push(`${businessLabel} must define services as an array.`);
+      errors.push(`${businessLabel} field "services" must be an array; add at least one valid service.`);
       return;
     }
 
     if (business.services.length === 0) {
-      errors.push(`${businessLabel} must have at least one service.`);
+      errors.push(`${businessLabel} field "services" must contain at least one service.`);
     }
 
+    const seenServiceIds = new Map();
     business.services.forEach((service, serviceIndex) => {
-      const serviceLabel = `${businessLabel} service[${serviceIndex}]${service && service.id ? ` (${service.id})` : ""}`;
-      validateService(service, serviceLabel, errors);
+      const serviceLabel = getServiceLabel(businessLabel, service, serviceIndex);
+      validateService(service, serviceLabel, serviceIndex, seenServiceIds, errors);
     });
   });
 }
 
-function validateService(service, serviceLabel, errors) {
-  REQUIRED_SERVICE_FIELDS.forEach(field => {
-    if (isMissing(service[field])) {
-      errors.push(`${serviceLabel} is missing required service field \"${field}\".`);
-    }
-  });
-
-  validateBaseRange(service, serviceLabel, errors);
-
-  if (!Array.isArray(service.questions)) {
-    errors.push(`${serviceLabel} must define questions as an array.`);
+function validateService(service, serviceLabel, serviceIndex, seenServiceIds, errors) {
+  if (!service || typeof service !== "object" || Array.isArray(service)) {
+    errors.push(`${serviceLabel} must be a service object; replace the current value with a valid service configuration.`);
     return;
   }
 
+  REQUIRED_SERVICE_FIELDS.forEach(field => {
+    if (isMissing(service[field])) {
+      errors.push(`${serviceLabel} field "${field}" is required; add a non-empty value.`);
+    }
+  });
+
+  validateSlug(service.id, "service.id", serviceLabel, errors);
+  validateUniqueId(service.id, "service.id", serviceLabel, serviceIndex, seenServiceIds, errors);
+  validateOptionalStrings(service, serviceLabel, OPTIONAL_COPY_LIMITS, errors);
+  validateBaseRange(service, serviceLabel, errors);
+
+  if (!Array.isArray(service.questions)) {
+    errors.push(`${serviceLabel} field "questions" must be an array; add the service's question configurations.`);
+    return;
+  }
+
+  const seenQuestionIds = new Map();
   service.questions.forEach((question, questionIndex) => {
-    const questionLabel = `${serviceLabel} question[${questionIndex}]${question && question.id ? ` (${question.id})` : ""}`;
-    validateQuestion(question, questionLabel, errors);
+    const questionLabel = getQuestionLabel(serviceLabel, question, questionIndex);
+    validateQuestion(question, questionLabel, questionIndex, seenQuestionIds, errors);
   });
 }
 
 function validateBaseRange(service, serviceLabel, errors) {
+  let min;
+  let max;
+
   if (service.base && typeof service.base === "object" && !Array.isArray(service.base)) {
-    if (!isFiniteNumber(service.base.min)) {
-      errors.push(`${serviceLabel} must define numeric base.min.`);
-    }
-    if (!isFiniteNumber(service.base.max)) {
-      errors.push(`${serviceLabel} must define numeric base.max.`);
-    }
-    if (isFiniteNumber(service.base.min) && isFiniteNumber(service.base.max) && service.base.min > service.base.max) {
-      errors.push(`${serviceLabel} must have base.min less than or equal to base.max.`);
-    }
+    min = service.base.min;
+    max = service.base.max;
+  } else if (Array.isArray(service.base) && service.base.length === 2) {
+    // The static app stores the same min/max pair as [min, max].
+    [min, max] = service.base;
+  } else {
+    errors.push(`${serviceLabel} field "base" must define base.min and base.max (or the existing [min, max] format); add a complete price range.`);
     return;
   }
 
-  // Current static app data stores the same min/max pair as [min, max].
-  // Validate it as the required base range without changing app behavior.
-  if (Array.isArray(service.base) && service.base.length === 2) {
-    const [min, max] = service.base;
-    if (!isFiniteNumber(min) || !isFiniteNumber(max)) {
-      errors.push(`${serviceLabel} must define numeric base.min and base.max values.`);
-    } else if (min > max) {
-      errors.push(`${serviceLabel} must have base.min less than or equal to base.max.`);
-    }
-    return;
+  if (!isFiniteNumber(min)) {
+    errors.push(`${serviceLabel} field "base.min" must be a finite number; replace ${JSON.stringify(min)} with a numeric minimum greater than 0.`);
+  } else if (min <= 0) {
+    errors.push(`${serviceLabel} field "base.min" must be greater than 0; increase the current value ${min}.`);
   }
 
-  errors.push(`${serviceLabel} must define base.min and base.max.`);
+  if (!isFiniteNumber(max)) {
+    errors.push(`${serviceLabel} field "base.max" must be a finite number; replace ${JSON.stringify(max)} with a numeric maximum.`);
+  }
+
+  if (isFiniteNumber(min) && isFiniteNumber(max) && max < min) {
+    errors.push(`${serviceLabel} field "base.max" must be greater than or equal to base.min; increase ${max} to at least ${min}.`);
+  }
 }
 
-function validateQuestion(question, questionLabel, errors) {
+function validateQuestion(question, questionLabel, questionIndex, seenQuestionIds, errors) {
+  if (!question || typeof question !== "object" || Array.isArray(question)) {
+    errors.push(`${questionLabel} must be a question object; replace the current value with a valid question configuration.`);
+    return;
+  }
+
   REQUIRED_QUESTION_FIELDS.forEach(field => {
     if (isMissing(question[field])) {
-      errors.push(`${questionLabel} is missing required question field \"${field}\".`);
+      errors.push(`${questionLabel} field "${field}" is required; add a non-empty value.`);
     }
   });
 
+  validateSlug(question.id, "question.id", questionLabel, errors);
+  validateUniqueId(question.id, "question.id", questionLabel, questionIndex, seenQuestionIds, errors);
+  validateOptionalStrings(question, questionLabel, OPTIONAL_COPY_LIMITS, errors);
+
   if (!Array.isArray(question.options)) {
-    errors.push(`${questionLabel} must define options as an array.`);
+    errors.push(`${questionLabel} field "options" must be an array; add the question's answer options.`);
     return;
   }
 
   question.options.forEach((option, optionIndex) => {
     const optionLabel = `${questionLabel} option[${optionIndex}]`;
-    REQUIRED_OPTION_FIELDS.forEach(field => {
-      if (isMissing(option[field])) {
-        errors.push(`${optionLabel} is missing required option field \"${field}\".`);
-      }
-    });
+    validateOption(option, optionLabel, errors);
   });
+}
+
+function validateOption(option, optionLabel, errors) {
+  if (!option || typeof option !== "object" || Array.isArray(option)) {
+    errors.push(`${optionLabel} must be an option object; replace the current value with a valid option configuration.`);
+    return;
+  }
+
+  REQUIRED_OPTION_FIELDS.forEach(field => {
+    if (isMissing(option[field])) {
+      errors.push(`${optionLabel} field "${field}" is required; add a non-empty value.`);
+    }
+  });
+
+  validateOptionalStrings(option, optionLabel, OPTIONAL_COPY_LIMITS, errors);
+
+  if (!isFiniteNumber(option.factor)) {
+    errors.push(`${optionLabel} field "factor" must be a finite number; replace ${JSON.stringify(option.factor)} with a numeric factor greater than 0.`);
+    return;
+  }
+
+  if (option.factor <= 0) {
+    errors.push(`${optionLabel} field "factor" must be greater than 0; increase the current value ${option.factor}.`);
+    return;
+  }
+
+  if ((option.factor < 0.3 || option.factor > 3) && !hasFactorExplanation(option)) {
+    errors.push(`${optionLabel} field "factor" is ${option.factor}, outside the expected 0.3–3 range; adjust it or add a non-empty "note" or "comment" field explaining the exception.`);
+  }
+}
+
+function validateSlug(value, field, contextLabel, errors) {
+  if (isMissing(value)) return;
+
+  if (typeof value !== "string" || !SLUG_PATTERN.test(value)) {
+    errors.push(`${contextLabel} field "${field}" must use lowercase letters, numbers, and single hyphens only, with no spaces, underscores, accents, or leading/trailing hyphens; replace ${JSON.stringify(value)} with a valid slug.`);
+  }
+}
+
+function validateUniqueId(value, field, contextLabel, index, seenIds, errors) {
+  if (isMissing(value)) return;
+  const key = String(value);
+
+  if (seenIds.has(key)) {
+    errors.push(`${contextLabel} field "${field}" duplicates ${JSON.stringify(key)} from item[${seenIds.get(key)}]; choose a unique id within this ${field === "service.id" ? "business" : "service"}.`);
+    return;
+  }
+
+  seenIds.set(key, index);
+}
+
+function validateZones(business, businessLabel, errors) {
+  if (!Array.isArray(business.zones)) {
+    errors.push(`${businessLabel} field "zones" must be a non-empty array of zone names.`);
+    return;
+  }
+
+  if (business.zones.length === 0) {
+    errors.push(`${businessLabel} field "zones" must contain at least one zone name.`);
+    return;
+  }
+
+  const seenZones = new Map();
+  business.zones.forEach((zone, zoneIndex) => {
+    const field = typeof zone === "string" ? `zones[${zoneIndex}]` : `zones[${zoneIndex}].label`;
+    const zoneName = typeof zone === "string" ? zone : zone && !Array.isArray(zone) ? zone.label : undefined;
+
+    if (typeof zoneName !== "string" || zoneName.trim() === "") {
+      errors.push(`${businessLabel} field "${field}" must be a non-empty string; add a readable zone name.`);
+      return;
+    }
+
+    if (zoneName.length > 80) {
+      errors.push(`${businessLabel} field "${field}" is ${zoneName.length} characters; shorten the zone name to 80 characters or fewer.`);
+    }
+
+    const normalizedZone = normalizeZoneName(zoneName);
+    if (seenZones.has(normalizedZone)) {
+      errors.push(`${businessLabel} field "${field}" duplicates the normalized zone name from zones[${seenZones.get(normalizedZone)}]; remove or rename ${JSON.stringify(zoneName)}.`);
+      return;
+    }
+
+    seenZones.set(normalizedZone, zoneIndex);
+  });
+}
+
+function validateOptionalStrings(target, contextLabel, limits, errors) {
+  Object.entries(limits).forEach(([field, maxLength]) => {
+    if (!Object.prototype.hasOwnProperty.call(target, field)) return;
+    const value = target[field];
+
+    if (typeof value !== "string") {
+      errors.push(`${contextLabel} field "${field}" is optional but must be a string when present; replace ${JSON.stringify(value)} with text or remove the field.`);
+      return;
+    }
+
+    if (value.length > maxLength) {
+      errors.push(`${contextLabel} field "${field}" is ${value.length} characters; shorten it to ${maxLength} characters or fewer.`);
+    }
+  });
+}
+
+function hasFactorExplanation(option) {
+  return [option.note, option.comment].some(value => typeof value === "string" && value.trim() !== "");
+}
+
+function normalizeZoneName(value) {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim()
+    .replace(/\s+/g, " ")
+    .toLowerCase();
 }
 
 function validatePhone(business, businessLabel, errors) {
@@ -216,9 +367,16 @@ function validatePhone(business, businessLabel, errors) {
 }
 
 function validateWhatsApp(business, businessLabel, errors) {
-  const whatsapp = String(business.whatsapp || "");
+  if (isMissing(business.whatsapp)) {
+    if (business.whatsappConfirmed !== false) {
+      errors.push(`${businessLabel} field "whatsapp" is required unless whatsappConfirmed is exactly false; add a Mexico-format number or set whatsappConfirmed: false while confirmation is pending.`);
+    }
+    return;
+  }
+
+  const whatsapp = String(business.whatsapp);
   if (!/^52\d{10}$/.test(whatsapp)) {
-    errors.push(`${businessLabel} whatsapp must use Mexico format: 52 plus 10 digits, digits only, total length 12. Current value: ${JSON.stringify(business.whatsapp)}.`);
+    errors.push(`${businessLabel} field "whatsapp" must use Mexico format (52 plus 10 digits, digits only, 12 digits total); replace ${JSON.stringify(business.whatsapp)} with a valid number.`);
   }
 }
 
@@ -227,11 +385,12 @@ function validateUniqueRoute(business, businessLabel, businessIndex, seenRoutes,
   if (!route) return;
 
   if (seenRoutes.has(route)) {
-    errors.push(`${businessLabel} duplicates route ${route} already used by business[${seenRoutes.get(route)}].`);
+    const original = seenRoutes.get(route);
+    errors.push(`${businessLabel} fields "citySlug/categorySlug/businessSlug" produce duplicate route key ${JSON.stringify(route.slice(1))}, already used by ${original.businessLabel}; change at least one slug so every business route is unique.`);
     return;
   }
 
-  seenRoutes.set(route, businessIndex);
+  seenRoutes.set(route, { businessIndex, businessLabel });
 }
 
 function validateBilingualFallbacks(business, businessLabel, errors) {
@@ -252,12 +411,16 @@ function validateBilingualFallbacks(business, businessLabel, errors) {
   });
 
   (business.services || []).forEach((service, serviceIndex) => {
-    if (service && !isMissing(service.nameEn) && isMissing(service.name)) {
+    if (!service || typeof service !== "object") return;
+
+    if (!isMissing(service.nameEn) && isMissing(service.name)) {
       errors.push(`${businessLabel} service[${serviceIndex}] has nameEn but is missing Spanish name.`);
     }
 
     (service.questions || []).forEach((question, questionIndex) => {
-      if (question && !isMissing(question.labelEn) && isMissing(question.label)) {
+      if (!question || typeof question !== "object") return;
+
+      if (!isMissing(question.labelEn) && isMissing(question.label)) {
         errors.push(`${businessLabel} service[${serviceIndex}] question[${questionIndex}] has labelEn but is missing Spanish label.`);
       }
 
@@ -315,6 +478,16 @@ function getBusinessRoute(business) {
 function getBusinessLabel(business, index) {
   if (business && business.name) return `business[${index}] (${business.name})`;
   return `business[${index}]`;
+}
+
+function getServiceLabel(businessLabel, service, index) {
+  const id = service && !isMissing(service.id) ? ` (${service.id})` : "";
+  return `${businessLabel} service[${index}]${id}`;
+}
+
+function getQuestionLabel(serviceLabel, question, index) {
+  const id = question && !isMissing(question.id) ? ` (${question.id})` : "";
+  return `${serviceLabel} question[${index}]${id}`;
 }
 
 function isMissing(value) {
