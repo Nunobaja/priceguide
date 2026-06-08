@@ -88,6 +88,8 @@ No se deben agregar reseñas, ratings, filtros, pagos, login, cookies, base de d
 
 Usar una página individual existente. Sustituir `{validServiceSlug}` y `{validZoneSlug}` por valores que pertenezcan al negocio elegido. Registrar la URL final y el resultado observado. El orden de los parámetros no debe cambiar su significado.
 
+Antes de la validación manual, ejecutar el [harness interno de QA para parámetros URL](url-parameter-qa-harness.md) para cubrir parsing, fixtures y combinaciones deterministas sin navegador. Sus resultados no sustituyen las comprobaciones visuales o E2E de esta matriz.
+
 | Caso | URL de prueba | Validación esperada | Resultado | Notas / gap |
 |---|---|---|---|---|
 | Sin parámetros | `{businessPageUrl}` | Carga en español, sin fuente/campaña y sin preselección proveniente de URL; el flujo manual funciona. | ☐ PASS ☐ FAIL | — |
@@ -251,6 +253,7 @@ Esta matriz es exclusivamente para QA y validación interna de producto. No es c
 ## 11. Documentos internos relacionados
 
 - [Checklist interno E2E del flujo de una guía individual](e2e-guide-user-flow-checklist.md): recorrido ejecutable desde la entrada hasta el resultado, copias, handoff y regresión móvil.
+- [Harness interno de QA para parámetros URL](url-parameter-qa-harness.md): comprobación determinista con Node de `source`, `service`, `campaign`, `lang`, `zone` y valores hostiles.
 - [Auditoría interna de cobertura de negocios demo](demo-business-coverage-audit.md): inventario actual de `businesses.js`, cobertura de rutas/contacto/estimador y gaps recomendados para fixtures futuros.
 - [Guía interna de enlaces por fuente](source-links-guide.md): comportamiento esperado de `source`, `service`, `zone`, `lang` y `campaign`.
 - [Checklist interno de prepublicación](pre-publish-checklist.md): controles técnicos y visuales antes de publicar una guía.
