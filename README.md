@@ -27,7 +27,7 @@ Antes de agregar un negocio real, completa [`docs/client-intake-template.md`](do
 
 ## Publishing
 
-Para el flujo completo de publicación, usa el [`SOP interno para publicar un negocio en 10 minutos`](docs/publish-business-in-10-minutes.md). Antes de publicar cualquier negocio real, completa el [`checklist interno de prepublicación`](docs/pre-publish-checklist.md). Para preparar los enlaces finales por canal, consulta la [`guía interna de enlaces por fuente`](docs/source-links-guide.md).
+Para el flujo completo de publicación, usa el [`SOP interno para publicar un negocio en 10 minutos`](docs/publish-business-in-10-minutes.md). Antes de publicar cualquier negocio real, completa el [`checklist interno de prepublicación`](docs/pre-publish-checklist.md). Para preparar los enlaces finales por canal, consulta la [`guía interna de enlaces por fuente`](docs/source-links-guide.md). Para entregar textos de Google Business Profile, usa las [`plantillas internas de copia para GBP`](docs/google-business-profile-copy.md).
 
 Static business route shells are generated from the existing `index.html` app shell and the business metadata in `businesses.js`. Before committing changes for publication, run:
 
