@@ -317,6 +317,8 @@ window.BUSINESSES = [
         id: "instalacion-climas",
         name: "Instalación de climas",
         nameEn: "AC installation",
+        helperText: "Ideal si necesitas instalar un equipo nuevo o mover una unidad existente. El rango puede cambiar según capacidad, ubicación, altura y materiales.",
+        helperTextEn: "Useful if you need to install a new AC unit or relocate an existing one. The range may change depending on capacity, location, height, and materials.",
         // Rango demo editable en MXN; reemplazar con precios confirmados por el negocio.
         base: [2200, 4200],
         questions: [
@@ -341,6 +343,8 @@ window.BUSINESSES = [
         id: "mantenimiento-aire-acondicionado",
         name: "Mantenimiento de aire acondicionado",
         nameEn: "AC maintenance",
+        helperText: "Para limpieza, revisión preventiva o mantenimiento de uno o varios equipos. El rango depende del número de unidades y acceso.",
+        helperTextEn: "For cleaning, preventive checkups, or maintenance of one or more AC units. The range depends on the number of units and access.",
         // Rango demo editable en MXN; reemplazar con precios confirmados por el negocio.
         base: [650, 1100],
         questions: [
@@ -365,6 +369,8 @@ window.BUSINESSES = [
         id: "reparacion-refrigeracion",
         name: "Reparación de refrigeración",
         nameEn: "Refrigeration repair",
+        helperText: "Para fallas en equipos de refrigeración, enfriamiento irregular o diagnóstico de funcionamiento. El precio final depende de la revisión.",
+        helperTextEn: "For refrigeration issues, uneven cooling, or equipment diagnostics. The final price depends on the inspection.",
         // Rango demo editable en MXN; reemplazar con precios confirmados por el negocio.
         base: [850, 1900],
         questions: [
