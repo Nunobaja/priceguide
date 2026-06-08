@@ -7,30 +7,32 @@ const ROOT_DIR = path.resolve(__dirname, "..");
 
 const steps = [
   {
-    label: "Syntax check app.js",
+    label: "Checking app.js syntax",
     args: ["--check", path.join(ROOT_DIR, "app.js")]
   },
   {
-    label: "Syntax check businesses.js",
+    label: "Checking businesses.js syntax",
     args: ["--check", path.join(ROOT_DIR, "businesses.js")]
   },
   {
-    label: "Syntax check scripts/generate-route-shells.js",
+    label: "Checking route shell generator syntax",
     args: ["--check", path.join(__dirname, "generate-route-shells.js")]
   },
   {
-    label: "Syntax check scripts/validate-site.js",
+    label: "Checking site validator syntax",
     args: ["--check", path.join(__dirname, "validate-site.js")]
   },
   {
-    label: "Generate route shells",
+    label: "Generating route shells",
     args: [path.join(__dirname, "generate-route-shells.js")]
   },
   {
-    label: "Validate site",
+    label: "Validating site configuration",
     args: [path.join(__dirname, "validate-site.js")]
   }
 ];
+
+console.log("Precios Locales publish preflight");
 
 for (const [index, step] of steps.entries()) {
   console.log(`\n[${index + 1}/${steps.length}] ${step.label}`);
@@ -41,15 +43,18 @@ for (const [index, step] of steps.entries()) {
   });
 
   if (result.error) {
-    console.error(`\nPublish preflight failed during: ${step.label}`);
+    console.error(`FAILED: ${step.label}`);
     console.error(result.error.message);
     process.exit(1);
   }
 
   if (result.status !== 0) {
-    console.error(`\nPublish preflight failed during: ${step.label}`);
+    console.error(`FAILED: ${step.label}`);
     process.exit(result.status || 1);
   }
+
+  console.log(`OK: ${step.label}`);
 }
 
-console.log("\nPublish preflight passed: route shells regenerated and site validation completed successfully.");
+console.log("\nPreflight passed.");
+console.log("Business guides are ready to commit/publish.");
