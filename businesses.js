@@ -714,6 +714,43 @@ window.BUSINESSES = [
     ]
   },
   {
+    citySlug: "guadalajara",
+    categorySlug: "fumigacion",
+    businessSlug: "fixture-interno-control-preventivo",
+    name: "Fixture interno de control preventivo",
+    tone: "professional",
+    city: "Guadalajara",
+    category: "Control preventivo de plagas",
+    metaDescription: "Calcula un rango aproximado para una inspección preventiva de plagas en Guadalajara con este fixture interno de QA.",
+    phone: "3310000042",
+    whatsappConfirmed: false,
+    currency: "MXN",
+    currencyLabel: "pesos mexicanos",
+    zones: [
+      { label: "Centro", factor: 1.0 },
+      { label: "Colonia Americana", factor: 1.0 },
+      { label: "Jardines del Bosque", factor: 1.05 },
+      { label: "Santa Tere", factor: 1.05 },
+      { label: "Providencia", factor: 1.1 },
+      { label: "Chapalita", factor: 1.1 },
+      { label: "San Juan de Ocotán", factor: 1.15 },
+      { label: "Zona Industrial", factor: 1.15 }
+    ],
+    services: [
+      {
+        id: "inspeccion-preventiva",
+        name: "Inspección preventiva",
+        base: [350, 700],
+        questions: [
+          { id: "espacio", label: "¿Qué espacio se revisará?", options: [
+            { label: "Casa o departamento", factor: 1.0 },
+            { label: "Local u oficina", factor: 1.2 }
+          ] }
+        ]
+      }
+    ]
+  },
+  {
     citySlug: "puerto-vallarta",
     categorySlug: "electricista",
     businessSlug: "solara-proyectos-electricos-paneles-solares",
