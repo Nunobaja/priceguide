@@ -27,6 +27,8 @@ Antes de agregar un negocio real, completa [`docs/client-intake-template.md`](do
 
 ## Publishing
 
+Antes de publicar cualquier negocio real, completa el [`checklist interno de prepublicación`](docs/pre-publish-checklist.md).
+
 Static business route shells are generated from the existing `index.html` app shell and the business metadata in `businesses.js`. Before committing changes for publication, run:
 
 ```sh
