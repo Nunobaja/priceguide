@@ -449,6 +449,22 @@
       .trim();
   }
 
+  function getCampaignFromUrl() {
+    const campaign = new URL(window.location.href).searchParams.get("campaign");
+    if (typeof campaign !== "string") return "";
+
+    const trimmedCampaign = campaign.trim().toLowerCase();
+    if (
+      !trimmedCampaign ||
+      trimmedCampaign.length > 60 ||
+      !/^[a-z0-9_-]+$/.test(trimmedCampaign)
+    ) {
+      return "";
+    }
+
+    return trimmedCampaign;
+  }
+
   function slugify(value) {
     return String(value || "")
       .normalize("NFD")
@@ -1015,6 +1031,7 @@
         estimate: "Estimated range",
         important: "Important reminder",
         source: "Source",
+        campaign: "Campaign",
         link: "Link"
       }
       : {
@@ -1025,6 +1042,7 @@
         estimate: "Rango estimado",
         important: "Recordatorio importante",
         source: "Origen",
+        campaign: "Campaña",
         link: uiCopy.es.link
       };
     const lines = [summaryLabels.business + ": " + details.businessName];
@@ -1047,9 +1065,10 @@
         ? "This is an initial estimate. The final price depends on the service details."
         : "Esta es una estimación inicial. El precio final depende de los detalles del servicio.")
     );
-    if (details.source) {
+    if (details.source || details.campaign) {
       lines.push("");
-      lines.push(summaryLabels.source + ": " + details.source);
+      if (details.source) lines.push(summaryLabels.source + ": " + details.source);
+      if (details.campaign) lines.push(summaryLabels.campaign + ": " + details.campaign);
     }
     lines.push(summaryLabels.link + ": " + window.location.href);
     return lines.join("\n");
@@ -1067,6 +1086,9 @@
     ];
     if (details.source) {
       rows.push([state.language === "en" ? "Source" : "Origen", details.source, "source"]);
+    }
+    if (details.campaign) {
+      rows.push([state.language === "en" ? "Link context" : "Contexto del enlace", details.campaign, "campaign"]);
     }
     const summary = $("#requestSummary");
     summary.innerHTML = "";
@@ -1114,6 +1136,7 @@
       range: state.range,
       currency: business.currency,
       source: getSourceFromUrl(),
+      campaign: getCampaignFromUrl(),
       customerName: $("#leadName").value.trim(),
       customerPhone: $("#leadTel").value.trim()
     };
@@ -1150,6 +1173,7 @@
     ];
 
     if (details.source) lines.push("Origen: " + details.source);
+    if (details.campaign) lines.push("Campaña: " + details.campaign);
     details.answers.forEach(item => lines.push(item.question + " " + item.answer));
     lines.push("Zona: " + details.zone);
     lines.push(
@@ -1169,6 +1193,7 @@
     ];
 
     if (details.source) lines.push("Source: " + details.source);
+    if (details.campaign) lines.push("Campaign: " + details.campaign);
     lines.push("Details:");
     details.answers.forEach(item => lines.push(item.question + " " + item.answer));
     lines.push("Zone: " + details.zone);

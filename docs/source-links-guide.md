@@ -20,6 +20,14 @@ Para imprimir solamente un negocio, agrega su `businessSlug`:
 node scripts/generate-source-links.js carmona-hnos-climas-refrigeracion
 ```
 
+Para incluir ejemplos opcionales con un contexto de campaña, agrega `--campaign=`. Sin esta opción, la salida existente no cambia:
+
+```sh
+node scripts/generate-source-links.js carmona-hnos-climas-refrigeracion --campaign=promo-verano
+```
+
+El generador muestra ejemplos de fuente sola, fuente con servicio, fuente con campaña y fuente con servicio y campaña. La campaña no es obligatoria.
+
 ## 2. Formato de la URL base
 
 Usa la URL pública final del negocio:
@@ -88,7 +96,35 @@ El servicio se selecciona dentro del mismo estimador y los rangos siguen siendo 
 
 `service` no es tracking, analítica, ranking, recomendación, búsqueda ni una función de directorio público.
 
-## 7. Reglas para nombrar fuentes
+
+## 7. Contexto manual con `campaign`
+
+En una página individual, `campaign` agrega una etiqueta corta al resumen copiado y al mensaje de WhatsApp:
+
+```text
+{baseUrl}?campaign=promo-verano
+{baseUrl}?source=google-business-profile&campaign=promo-verano
+{baseUrl}?campaign=promo-verano&source=whatsapp-business
+{baseUrl}?source=qr-physical&service=limpieza-de-minisplit&campaign=volante-junio
+{baseUrl}?service=limpieza-de-minisplit&campaign=volante-junio&source=direct-link
+```
+
+Cuando el valor es válido, el texto de entrega incluye una línea como `Campaña: promo-verano`. Es únicamente contexto manual dentro del mensaje o resumen. No se almacena, no cuenta visitas y no cambia servicios, preguntas, precios, rangos ni fórmulas. Tampoco crea analítica, tracking, reporting, dashboard, CRM, base de datos, lead capture ni atribución.
+
+Formato recomendado:
+
+- Usa minúsculas.
+- Separa palabras con guiones.
+- Mantén la etiqueta corta y descriptiva.
+- No uses acentos ni espacios.
+- Solo usa letras `a-z`, números, guiones y guiones bajos.
+- No excedas 60 caracteres.
+
+Si `campaign` está vacío, excede 60 caracteres o contiene otro tipo de carácter, la página lo ignora sin mostrar errores. Un valor desconocido no crea ni modifica datos del negocio. El parámetro solo se lee en páginas individuales; la vista madre de QA conserva su función interna.
+
+`campaign` funciona junto con `source` y `service` en cualquier orden. Un valor de campaña inválido no impide que la fuente se incluya ni que un servicio válido se seleccione. **Copiar enlace** conserva los parámetros válidos que ya estén en la URL.
+
+## 8. Reglas para nombrar fuentes
 
 - Usa minúsculas.
 - Separa palabras con guiones.
@@ -97,7 +133,7 @@ El servicio se selecciona dentro del mismo estimador y los rangos siguen siendo 
 - Mantén estables los nombres de las fuentes.
 - Usa etiquetas cortas y legibles.
 
-## 8. Qué hace y qué no hace `source`
+## 9. Qué hace y qué no hace `source`
 
 `source`:
 
@@ -112,7 +148,7 @@ El servicio se selecciona dentro del mismo estimador y los rangos siguen siendo 
 - Es un dashboard.
 - Cuenta visitas.
 
-## 9. Checklist de entrega
+## 10. Checklist de entrega
 
 Para cada negocio, crea y guarda:
 
@@ -124,11 +160,11 @@ Para cada negocio, crea y guarda:
 - [ ] URL de QR.
 - [ ] URL directa (`source=direct`).
 
-## 10. Explicación para el dueño
+## 11. Explicación para el dueño
 
 > “Cada enlace lleva el mismo estimador, pero marca el origen para que cuando alguien te escriba por WhatsApp puedas ver si vino de Google, Facebook, Instagram, WhatsApp Business o QR.”
 
-## 11. Documentos relacionados
+## 12. Documentos relacionados
 
 - [`docs/publish-business-in-10-minutes.md`](publish-business-in-10-minutes.md)
 - [`docs/pre-publish-checklist.md`](pre-publish-checklist.md)
