@@ -9,6 +9,7 @@ const BUSINESSES_FILE = path.join(ROOT_DIR, "businesses.js");
 const BASE_URL = "https://nunobaja.github.io/priceguide";
 const REQUIRED_SLUG_FIELDS = ["citySlug", "categorySlug", "businessSlug"];
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const CAMPAIGN_PATTERN = /^[a-z0-9_-]+$/;
 const SOURCES = [
   ["Google Business Profile", "google-business-profile"],
   ["Facebook", "facebook"],
@@ -38,6 +39,37 @@ function loadBusinesses() {
   return sandbox.window.BUSINESSES;
 }
 
+function normalizeCampaign(value) {
+  const campaign = typeof value === "string" ? value.trim().toLowerCase() : "";
+  if (!campaign || campaign.length > 60 || !CAMPAIGN_PATTERN.test(campaign)) return "";
+  return campaign;
+}
+
+function appendParams(baseUrl, params) {
+  const searchParams = new URLSearchParams();
+  Object.entries(params).forEach(([name, value]) => {
+    if (value) searchParams.set(name, value);
+  });
+  const query = searchParams.toString();
+  return query ? `${baseUrl}?${query}` : baseUrl;
+}
+
+function parseArgs(args) {
+  let requestedSlug = "";
+  let campaign = "";
+
+  args.forEach(arg => {
+    if (arg.startsWith("--campaign=")) {
+      campaign = normalizeCampaign(arg.slice("--campaign=".length));
+      return;
+    }
+
+    if (!requestedSlug) requestedSlug = arg;
+  });
+
+  return { requestedSlug, campaign };
+}
+
 function getBusinessBaseUrl(business, index) {
   const slugs = REQUIRED_SLUG_FIELDS.map(field => {
     const value = business && business[field];
@@ -56,7 +88,32 @@ function getBusinessBaseUrl(business, index) {
   return `${BASE_URL}/${slugs.join("/")}/`;
 }
 
-function printBusiness(business, index) {
+function printCampaignExamples(baseUrl, business, campaign) {
+  if (!campaign) return;
+
+  console.log("Campaign examples:");
+  console.log(`- Source only: ${appendParams(baseUrl, { source: "google-business-profile" })}`);
+
+  const firstService = Array.isArray(business.services) && business.services[0]
+    ? String(business.services[0].id || "")
+    : "";
+
+  if (firstService) {
+    console.log(`- Source + service: ${appendParams(baseUrl, { source: "direct", service: firstService })}`);
+  }
+
+  console.log(`- Source + campaign: ${appendParams(baseUrl, { source: "whatsapp-business", campaign })}`);
+
+  if (firstService) {
+    console.log(`- Source + service + campaign: ${appendParams(baseUrl, {
+      source: "qr",
+      service: firstService,
+      campaign
+    })}`);
+  }
+}
+
+function printBusiness(business, index, campaign = "") {
   const baseUrl = getBusinessBaseUrl(business, index);
   const name = typeof business.name === "string" && business.name.trim()
     ? business.name.trim()
@@ -66,22 +123,26 @@ function printBusiness(business, index) {
   console.log(`Main: ${baseUrl}`);
 
   SOURCES.forEach(([label, source]) => {
-    console.log(`${label}: ${baseUrl}?source=${source}`);
+    console.log(`${label}: ${appendParams(baseUrl, { source })}`);
   });
 
   if (Array.isArray(business.services) && business.services.length > 0) {
     console.log("Services:");
     business.services.forEach(service => {
       const serviceId = service && service.id;
-      const params = new URLSearchParams({ service: String(serviceId), source: "direct" });
-      console.log(`- ${String(serviceId)}: ${baseUrl}?${params.toString()}`);
+      console.log(`- ${String(serviceId)}: ${appendParams(baseUrl, {
+        service: String(serviceId),
+        source: "direct"
+      })}`);
     });
   }
+
+  printCampaignExamples(baseUrl, business, campaign);
 }
 
 function main() {
   const businesses = loadBusinesses();
-  const requestedSlug = process.argv[2];
+  const { requestedSlug, campaign } = parseArgs(process.argv.slice(2));
   let selectedBusinesses = businesses;
 
   if (requestedSlug) {
@@ -100,7 +161,7 @@ function main() {
     }
 
     const originalIndex = businesses.indexOf(business);
-    printBusiness(business, originalIndex);
+    printBusiness(business, originalIndex, campaign);
   });
 }
 
