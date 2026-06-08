@@ -329,10 +329,21 @@
     $("#leadName").addEventListener("input", buildWhatsAppUrl);
     $("#leadTel").addEventListener("input", buildWhatsAppUrl);
     setLanguage(getLanguageFromUrl());
+
+    const initialService = getServiceFromUrl();
+    if (initialService) {
+      const button = document.querySelector(`#servicios [data-id="${initialService.id}"]`);
+      selectService(initialService, button, false);
+    }
   }
 
   function getLanguageFromUrl() {
     return new URL(window.location.href).searchParams.get("lang") === "en" ? "en" : "es";
+  }
+
+  function getServiceFromUrl() {
+    const serviceId = new URL(window.location.href).searchParams.get("service");
+    return business.services.find(service => service.id === serviceId) || null;
   }
 
   async function copyCurrentPageLink() {
@@ -389,8 +400,20 @@
   }
 
   function updateLanguageInUrl(language) {
+    updateQueryParameter("lang", language);
+  }
+
+  function updateServiceInUrl(serviceId) {
+    updateQueryParameter("service", serviceId);
+  }
+
+  function updateQueryParameter(name, value) {
     const url = new URL(window.location.href);
-    url.searchParams.set("lang", language);
+    if (value) {
+      url.searchParams.set(name, value);
+    } else {
+      url.searchParams.delete(name);
+    }
     window.history.replaceState(window.history.state, "", url.href);
     updateMetaTag("property", "og:url", url.href);
   }
@@ -486,11 +509,12 @@
     return phone.replace(/(\d{3})(\d{3})(\d{4})/, "$1 $2 $3");
   }
 
-  function selectService(service, button) {
+  function selectService(service, button, updateUrl = true) {
     state.service = service;
     state.answers = {};
     state.zone = null;
     state.range = null;
+    if (updateUrl) updateServiceInUrl(service.id);
     document.querySelectorAll("#servicios .opt").forEach(option => option.classList.remove("sel"));
     button.classList.add("sel");
     renderQuestions(service);
@@ -572,6 +596,7 @@
     state.answers = {};
     state.zone = null;
     state.range = null;
+    updateServiceInUrl(null);
 
     document.querySelectorAll("#servicios .opt").forEach(option => option.classList.remove("sel"));
     $("#preguntas").innerHTML = "";
