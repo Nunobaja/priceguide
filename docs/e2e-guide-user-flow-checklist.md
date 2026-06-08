@@ -149,6 +149,8 @@ Para una corrida mínima, probar Carmona, Instal PV, el fixture interno de PR #6
 
 Usar `{validServiceSlug}` y `{validZoneSlug}` del negocio elegido. Para el fixture interno de PR #65 se recomiendan `inspeccion-preventiva` y `san-juan-de-ocotan`.
 
+Ejecutar primero el [harness interno de QA para parámetros URL](url-parameter-qa-harness.md). Después usar esta sección para validar en navegador el renderizado, la interacción, las copias y el handoff que el script sin browser no puede observar.
+
 En todos los casos confirmar: carga segura, ruta individual intacta, ausencia de ejecución de HTML/script, rango/formulación sin cambios indebidos y posibilidad de completar el flujo.
 
 | Variante | Verificación esperada | Resultado |
@@ -307,6 +309,7 @@ La salida esperada de una corrida es evidencia interna de calidad y, solo cuando
 ## 12. Documentos internos relacionados
 
 - [Matriz interna de validación de producto](product-validation-matrix.md): dimensiones generales, reglas de pass/fail y límites de producto.
+- [Harness interno de QA para parámetros URL](url-parameter-qa-harness.md): validación determinista sin navegador para parámetros individuales, combinados y hostiles.
 - [Auditoría interna de cobertura de negocios demo](demo-business-coverage-audit.md): inventario vigente de fixtures y gaps de cobertura.
 - [Guía interna de enlaces por fuente](source-links-guide.md): contrato esperado para parámetros URL y contexto manual.
 - [Checklist interno de prepublicación](pre-publish-checklist.md): controles antes de publicar una guía individual.
