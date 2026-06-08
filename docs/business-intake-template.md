@@ -2,6 +2,8 @@
 
 > **Uso:** duplica este documento por cada negocio nuevo, reemplaza todos los campos entre corchetes (`[ ]`) y marca las casillas conforme se valide la información. La sección **1–7** se puede compartir con el negocio; las secciones **8–10** son para preparación interna y publicación en Precios Locales.
 
+> **Flujo recomendado:** primero pida al dueño completar la plantilla sencilla [`client-intake-template.md`](client-intake-template.md). Después use este documento como revisión operativa y técnica interna antes de publicar.
+
 ## Control del alta
 
 - **Responsable de Precios Locales:** [Nombre]
