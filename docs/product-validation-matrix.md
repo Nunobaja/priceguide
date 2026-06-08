@@ -250,6 +250,7 @@ Esta matriz es exclusivamente para QA y validación interna de producto. No es c
 
 ## 11. Documentos internos relacionados
 
+- [Auditoría interna de cobertura de negocios demo](demo-business-coverage-audit.md): inventario actual de `businesses.js`, cobertura de rutas/contacto/estimador y gaps recomendados para fixtures futuros.
 - [Guía interna de enlaces por fuente](source-links-guide.md): comportamiento esperado de `source`, `service`, `zone`, `lang` y `campaign`.
 - [Checklist interno de prepublicación](pre-publish-checklist.md): controles técnicos y visuales antes de publicar una guía.
 - [Guía interna de incorporación manual](onboarding-template.md): datos mínimos de una página individual.

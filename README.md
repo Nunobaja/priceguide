@@ -29,6 +29,8 @@ Antes de agregar un negocio real, usa la [`guía interna de incorporación manua
 
 Use the [`internal product validation matrix`](docs/product-validation-matrix.md) to validate the reusable static engine across individual business pages, contact states, services, zones, languages, URL parameters, and the complete estimator flow. This matrix is internal-only and must not be used as a public directory, sales checklist, commercial proposal, or client-facing roadmap.
 
+Use the [`internal demo business coverage audit`](docs/demo-business-coverage-audit.md) to review which current `businesses.js` fixtures cover reusable-engine edge cases, which validation states are still missing, and which gaps belong in a future data-only QA fixture PR.
+
 ## Publishing
 
 Para validar las primeras ventas de forma manual, usa el [`SOP interno para vender Precios Locales a 5 negocios reales`](docs/sell-to-5-businesses-sop.md) y copia su [`plantilla manual de seguimiento`](docs/templates/sell-to-5-businesses-tracker.md). Para presentar, cotizar y entregar el producto a un negocio local, consulta el [`paquete comercial interno de Precios Locales`](docs/commercial-package.md). Después de una conversación de venta, prepara la oferta escrita con la [`guía interna de propuestas comerciales`](docs/client-proposal-template.md) y su [`plantilla reutilizable`](docs/templates/client-proposal.md).
