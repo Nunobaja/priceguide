@@ -292,6 +292,8 @@ window.BUSINESSES = [
     heroSubheadline: "Responde unas preguntas rápidas y recibe una idea inicial antes de escribir por WhatsApp.",
     estimateIntro: "Elige el servicio que necesitas para estimar un rango inicial. Los precios finales dependen del equipo, instalación, altura, distancia y revisión del lugar.",
     priceDisclaimer: "Este es un rango estimado. El precio final puede variar según tipo de equipo, materiales, condiciones del inmueble, altura, distancia y alcance real del servicio.",
+    categoryDisclaimer: "En aire acondicionado y refrigeración, el rango puede cambiar por capacidad del equipo, altura, distancia de tubería, materiales, acceso y condiciones reales del inmueble.",
+    categoryDisclaimerEn: "For air conditioning and refrigeration, the range may change based on equipment capacity, height, pipe distance, materials, access, and actual property conditions.",
     whatsappCtaLabel: "Enviar solicitud por WhatsApp",
     whatsappHelperText: "Abriremos WhatsApp con tu solicitud ya escrita para que el negocio pueda revisar tu caso más rápido.",
     serviceAreaNote: "Atiende Cabo San Lucas y corredor turístico de Los Cabos.",
