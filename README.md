@@ -23,7 +23,7 @@ Configure the static host to serve `index.html` as the fallback for nested URLs.
 
 ## Alta de nuevos negocios
 
-Usa [`docs/business-intake-template.md`](docs/business-intake-template.md) para recopilar, validar y convertir la información de un negocio de Servicios para el Hogar al formato de `businesses.js`. La plantilla incluye el cuestionario para el propietario, criterios para normalizar precios y zonas, un bloque técnico listo para copiar y una lista de control de publicación.
+Antes de agregar un negocio real, completa [`docs/client-intake-template.md`](docs/client-intake-template.md) con el dueño. Después usa [`docs/business-intake-template.md`](docs/business-intake-template.md) para validar y convertir la información aprobada al formato de `businesses.js`.
 
 ## Publishing
 
