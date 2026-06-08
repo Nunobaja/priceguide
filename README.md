@@ -25,6 +25,10 @@ Configure the static host to serve `index.html` as the fallback for nested URLs.
 
 Antes de agregar un negocio real, usa la [`guía interna de incorporación manual`](docs/onboarding-template.md) y copia la [`plantilla reutilizable de incorporación`](docs/templates/client-onboarding-intake.md) para reunir la información mínima de una sola página individual. Si se necesita el formulario ampliado, completa [`docs/client-intake-template.md`](docs/client-intake-template.md) con el dueño. Después usa [`docs/business-intake-template.md`](docs/business-intake-template.md) para validar la información aprobada y la [`guía interna de mapeo a businesses.js`](docs/intake-to-businesses-js-guide.md) para convertirla al formato de configuración.
 
+## Internal QA and product validation
+
+Use the [`internal product validation matrix`](docs/product-validation-matrix.md) to validate the reusable static engine across individual business pages, contact states, services, zones, languages, URL parameters, and the complete estimator flow. This matrix is internal-only and must not be used as a public directory, sales checklist, commercial proposal, or client-facing roadmap.
+
 ## Publishing
 
 Para validar las primeras ventas de forma manual, usa el [`SOP interno para vender Precios Locales a 5 negocios reales`](docs/sell-to-5-businesses-sop.md) y copia su [`plantilla manual de seguimiento`](docs/templates/sell-to-5-businesses-tracker.md). Para presentar, cotizar y entregar el producto a un negocio local, consulta el [`paquete comercial interno de Precios Locales`](docs/commercial-package.md). Después de una conversación de venta, prepara la oferta escrita con la [`guía interna de propuestas comerciales`](docs/client-proposal-template.md) y su [`plantilla reutilizable`](docs/templates/client-proposal.md).
