@@ -262,7 +262,11 @@ Cualquier PR posterior debe:
 - no incluir materiales comerciales o de marketing;
 - separar cualquier corrección de comportamiento en un PR posterior respaldado por un caso reproducible.
 
-## 12. Límites de producto
+## 12. Checklist E2E relacionado
+
+Usar el [checklist interno E2E del flujo de una guía individual](e2e-guide-user-flow-checklist.md) para convertir esta cobertura de fixtures en corridas completas de entrada, estimador, resultado, copias, handoff, parámetros URL y móvil. Los gaps de contacto ausente registrados en esta auditoría deben marcarse como gaps de validación sin inventar fixtures.
+
+## 13. Límites de producto
 
 - Esta auditoría es **QA interno**.
 - No es un documento de ventas.

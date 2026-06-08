@@ -27,6 +27,8 @@ Antes de agregar un negocio real, usa la [`guía interna de incorporación manua
 
 ## Internal QA and product validation
 
+Use the [`internal end-to-end guide user-flow checklist`](docs/e2e-guide-user-flow-checklist.md) to validate a real user's path through one individual business guide, from page entry and estimation through summary/link copy and a safe WhatsApp or call handoff.
+
 Use the [`internal product validation matrix`](docs/product-validation-matrix.md) to validate the reusable static engine across individual business pages, contact states, services, zones, languages, URL parameters, and the complete estimator flow. This matrix is internal-only and must not be used as a public directory, sales checklist, commercial proposal, or client-facing roadmap.
 
 Use the [`internal demo business coverage audit`](docs/demo-business-coverage-audit.md) to review which current `businesses.js` fixtures cover reusable-engine edge cases, which validation states are still missing, and which gaps belong in a future data-only QA fixture PR.
