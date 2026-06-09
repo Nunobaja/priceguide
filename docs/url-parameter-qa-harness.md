@@ -74,9 +74,9 @@ Ejemplo resumido, sin fijar cantidades futuras:
 
 ```text
 Summary
-  Businesses checked: 3
-  URL cases checked: 72
-  Passed: 72
+  Businesses checked: 5
+  URL cases checked: 130
+  Passed: 130
   Failed: 0
   Skipped/warnings: 0
 
@@ -89,10 +89,11 @@ La selección se hace por capacidad, no por promoción del negocio, y elimina du
 
 1. fixture interno de PR #65: `/priceguide/guadalajara/fumigacion/fixture-interno-control-preventivo/`;
 2. fixture interno sin contacto de Task #73: `/priceguide/guadalajara/electricista/fixture-interno-sin-contacto/`;
-3. negocio con WhatsApp presente y no marcado como pendiente;
-4. negocio con más de un servicio;
-5. negocio con copy inglés disponible;
-6. negocio con una lista larga de ocho o más zonas.
+3. fixture interno bilingüe cross-category de Task #76: `/priceguide/guadalajara/jardineria/fixture-interno-jardineria-bilingue/`;
+4. negocio con WhatsApp presente y no marcado como pendiente;
+5. negocio con más de un servicio;
+6. negocio con copy inglés disponible;
+7. negocio con una lista larga de ocho o más zonas.
 
 La selección usa solo datos existentes. No crea negocios, servicios, zonas, rutas ni slugs. Si falta una capacidad, se registra como advertencia o skip en lugar de modificar `businesses.js` o convertir automáticamente el gap en fallo de producto.
 
@@ -124,10 +125,15 @@ Para cada fixture seleccionado se generan estos casos:
 - `?lang=en&source=direct-link&service={validServiceSlug}`;
 - `?lang=es&source=whatsapp-business&service={validServiceSlug}&campaign=promo-junio`;
 - `?source=qr-physical&service={validServiceSlug}&campaign=qa-no-contact&lang=en&zone={validZoneSlug}`;
+- `?lang=en&service={validServiceSlug}&source=google-business-profile&campaign=qa-bilingual&zone={validZoneSlug}`;
 - una mezcla hostil con valores script-like en todos los parámetros relevantes.
 
 `{validServiceSlug}` y `{validZoneSlug}` se derivan del primer servicio y la primera zona ya configurados en cada fixture. Esto hace la corrida determinista y evita escribir o alterar datos.
 
+
+## Cobertura bilingüe de Task #76
+
+El harness selecciona explícitamente `/priceguide/guadalajara/jardineria/fixture-interno-jardineria-bilingue/` y exige que tenga copy inglés y WhatsApp confirmado. También cubre la combinación `lang=en`, servicio, fuente, campaña `qa-bilingual` y zona. Esto reduce la dependencia de Carmona para parsing bilingüe, pero no verifica traducción visual completa ni afirma que todos los fixtures estén traducidos.
 
 ## Cobertura de Task #73
 

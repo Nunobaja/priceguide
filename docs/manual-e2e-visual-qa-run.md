@@ -53,12 +53,13 @@ Usar las rutas individuales siguientes. Si el entorno requiere el prefijo de Git
 | Cobertura obligatoria | Página / fixture | Ruta exacta | Datos de prueba recomendados |
 |---|---|---|---|
 | WhatsApp confirmado; Carmona; bilingüe; above the fold | **Carmona Hnos Climas y Refrigeración** | `/cabo-san-lucas/aire-acondicionado/carmona-hnos-climas-refrigeracion` | Servicio `instalacion-climas`; zona `cabo-san-lucas`; repetir con `?lang=en`. |
+| Segundo bilingüe interno; WhatsApp-only | **Fixture interno QA Jardín Bilingüe** | `/guadalajara/jardineria/fixture-interno-jardineria-bilingue` | Servicio `mantenimiento-jardin-demo`; repetir en `lang=es` y `lang=en`, incluido `zone=jardines-del-pais` y `campaign=qa-bilingual`. |
 | WhatsApp pendiente/no confirmado + teléfono fallback | **Instal PV** | `/puerto-vallarta/electricista/instal-pv` | Servicio `diagnostico-reparacion-fallas`; zona `puerto-vallarta`. |
 | WhatsApp ausente + teléfono fallback; zonas largas | **Fixture interno de control preventivo** | `/guadalajara/fumigacion/fixture-interno-control-preventivo` | Servicio `inspeccion-preventiva`; zona `san-juan-de-ocotan`; revisar las ocho zonas. |
 | Sin contacto, fixture interno de Task #73 | **Fixture interno QA sin contacto** | `/guadalajara/electricista/fixture-interno-sin-contacto` | Servicio `revision-electrica-demo`; zona `centro`; repetir con parámetros combinados e inglés. |
 | Multi-servicio | **Plomería Mario** | `/los-cabos/plomeros/plomeria-mario` | Cambiar entre `fuga`, `calentador`, `destape` e `instalacion`; completar al menos un cálculo. |
 
-Carmona cubre a la vez el fixture confirmado, la validación bilingüe y la revisión above the fold. El fixture de control preventivo cubre a la vez el fallback de teléfono sin WhatsApp y la variante de zonas largas. Estas coincidencias no eliminan ningún check: deben registrarse ambas coberturas en las notas de la corrida.
+Carmona cubre el fixture confirmado, una validación bilingüe y la revisión above the fold; el fixture interno de jardinería repite el bilingüe en otra categoría y cubre WhatsApp-only. El fixture de control preventivo cubre a la vez el fallback de teléfono sin WhatsApp y la variante de zonas largas. Estas coincidencias no eliminan ningún check: deben registrarse ambas coberturas en las notas de la corrida.
 
 ## 4. Checklist visual y funcional por cada página y viewport
 

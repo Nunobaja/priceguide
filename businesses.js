@@ -752,6 +752,77 @@ window.BUSINESSES = [
   },
   {
     citySlug: "guadalajara",
+    categorySlug: "jardineria",
+    businessSlug: "fixture-interno-jardineria-bilingue",
+    name: "Fixture interno QA Jardín Bilingüe",
+    tone: "professional",
+    city: "Guadalajara",
+    category: "Jardinería residencial",
+    categoryLabel: "Prueba interna bilingüe de jardinería",
+    metaTitle: "Fixture interno QA Jardín Bilingüe · Guía de precios",
+    metaDescription: "Fixture interno de QA para validar una guía bilingüe individual de jardinería con WhatsApp confirmado.",
+    shareTitle: "Fixture interno QA Jardín Bilingüe · Guía de precios",
+    shareDescription: "Prueba interna bilingüe de una guía individual con rangos aproximados de jardinería.",
+    // Número deliberadamente ficticio y no enrutable, reservado para QA interno.
+    whatsapp: "520000000076",
+    whatsappConfirmed: true,
+    currency: "MXN",
+    currencyLabel: "pesos mexicanos",
+    heroHeadline: "Estima un servicio interno de jardinería.",
+    heroSubheadline: "Responde preguntas simples para validar esta guía bilingüe de QA.",
+    estimateIntro: "Elige las condiciones del servicio para ver un rango aproximado de prueba interna.",
+    priceDisclaimer: "Este rango es aproximado y existe únicamente para validación interna de QA.",
+    categoryDisclaimer: "En jardinería, el rango puede variar por tamaño del área, estado actual y acceso.",
+    categoryDisclaimerEn: "For gardening, the range may vary based on area size, current condition, and access.",
+    whatsappCtaLabel: "Abrir WhatsApp de prueba",
+    whatsappHelperText: "Abriremos un enlace de WhatsApp con el resumen de QA; no envíes el mensaje.",
+    serviceAreaNote: "Zonas ficticias configuradas exclusivamente para validación interna.",
+    pricingNotes: "Rangos ficticios de QA; no representan una cotización ni precios de mercado.",
+    english: {
+      heroHeadline: "Estimate an internal gardening service.",
+      heroSubheadline: "Answer a few simple questions to validate this bilingual QA guide.",
+      estimateIntro: "Choose the service conditions to see an approximate internal test range.",
+      priceDisclaimer: "This range is approximate and exists only for internal QA validation.",
+      whatsappCtaLabel: "Open test WhatsApp",
+      whatsappHelperText: "We’ll open a WhatsApp link with the QA summary; do not send the message.",
+      serviceAreaNote: "Fictional zones configured exclusively for internal validation.",
+      pricingNotes: "Fictional QA ranges; they are not a quote or market prices."
+    },
+    zones: [
+      { label: "Centro", labelEn: "Downtown", factor: 1.0 },
+      { label: "Jardines del País", labelEn: "Jardines del País", factor: 1.05 },
+      { label: "Colonia Americana", labelEn: "Americana neighborhood", factor: 1.1 },
+      { label: "Rincón del Bosque", labelEn: "Rincón del Bosque", factor: 1.15 }
+    ],
+    services: [
+      {
+        id: "mantenimiento-jardin-demo",
+        name: "Mantenimiento de jardín demo",
+        nameEn: "Demo garden maintenance",
+        helperText: "Prueba interna para poda ligera, limpieza y revisión general de un jardín residencial.",
+        helperTextEn: "Internal test for light trimming, cleanup, and a general residential garden check.",
+        base: [500, 900],
+        questions: [
+          { id: "tamano-area", label: "¿Qué tamaño tiene el área?", labelEn: "How large is the area?", options: [
+            { label: "Área pequeña", labelEn: "Small area", factor: 1.0 },
+            { label: "Área mediana", labelEn: "Medium area", factor: 1.35 },
+            { label: "Área amplia", labelEn: "Large area", factor: 1.7 }
+          ] },
+          { id: "estado-jardin", label: "¿Cuál es el estado actual?", labelEn: "What is its current condition?", options: [
+            { label: "Mantenimiento reciente", labelEn: "Recently maintained", factor: 1.0 },
+            { label: "Crecimiento moderado", labelEn: "Moderate overgrowth", factor: 1.2 },
+            { label: "Requiere limpieza adicional", labelEn: "Needs additional cleanup", factor: 1.45 }
+          ] },
+          { id: "acceso-jardin", label: "¿Cómo es el acceso?", labelEn: "How accessible is the garden?", options: [
+            { label: "Acceso directo", labelEn: "Direct access", factor: 1.0 },
+            { label: "Acceso por pasillo o escalera", labelEn: "Access through a hallway or stairs", factor: 1.15 }
+          ] }
+        ]
+      }
+    ]
+  },
+  {
+    citySlug: "guadalajara",
     categorySlug: "electricista",
     businessSlug: "fixture-interno-sin-contacto",
     name: "Fixture interno QA sin contacto",

@@ -136,6 +136,7 @@ function isConfirmedWhatsAppBusiness(business) {
 function selectFixtures(businesses, warnings) {
   const fixturePath = "/priceguide/guadalajara/fumigacion/fixture-interno-control-preventivo/";
   const noContactFixturePath = "/priceguide/guadalajara/electricista/fixture-interno-sin-contacto/";
+  const bilingualFixturePath = "/priceguide/guadalajara/jardineria/fixture-interno-jardineria-bilingue/";
   const selectors = [
     {
       role: "PR #65 internal QA fixture",
@@ -145,6 +146,11 @@ function selectFixtures(businesses, warnings) {
       role: "Task #73 internal no-contact fixture",
       find: business => businessRoute(business) === noContactFixturePath &&
         !business.phone && !business.whatsapp && business.whatsappConfirmed === false
+    },
+    {
+      role: "Task #76 internal bilingual cross-category fixture",
+      find: business => businessRoute(business) === bilingualFixturePath &&
+        hasEnglishCopy(business) && isConfirmedWhatsAppBusiness(business)
     },
     {
       role: "confirmed WhatsApp business",
@@ -271,6 +277,17 @@ function buildCases(validServiceSlug, validZoneSlug, zoneSupported) {
         source: "qr physical",
         service: validServiceSlug,
         campaign: "qa-no-contact",
+        zone: zoneSupported ? validZoneSlug : null
+      }
+    },
+    {
+      name: "bilingual combined QA context",
+      query: `?lang=en&service=${validServiceSlug}&source=google-business-profile&campaign=qa-bilingual&zone=${validZoneSlug}`,
+      expect: {
+        requestedLanguage: "en",
+        source: "google business profile",
+        service: validServiceSlug,
+        campaign: "qa-bilingual",
         zone: zoneSupported ? validZoneSlug : null
       }
     },
