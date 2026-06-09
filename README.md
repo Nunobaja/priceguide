@@ -60,3 +60,7 @@ node scripts/publish-preflight.js
 ```
 
 This regenerates both supported GitHub Pages route shells for every business and validates the site before committing. The generator does not overwrite `index.html`, `priceguide/index.html`, or `404.html`.
+
+## Agent workflow
+
+AI-assisted repository work follows the controlled operating instructions in [`AGENT.md`](AGENT.md), the product boundaries in [`PRODUCT_RULES.md`](PRODUCT_RULES.md), and the sequential backlog in [`TASK_QUEUE.md`](TASK_QUEUE.md). Read them in that order and take only the next unchecked task.
