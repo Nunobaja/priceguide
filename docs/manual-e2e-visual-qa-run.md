@@ -107,6 +107,8 @@ Aplicar **todos** los checks de esta sección a cada combinación página/viewpo
 - [ ] Ningún texto presenta la estimación como precio final o garantizado.
 - [ ] El resultado, disclaimer y acciones no se superponen ni generan crowding.
 
+Para decidir si una observación de esta sección permite proponer Task #72, aplicar el [gate de validación de claridad del resultado estimado](estimate-result-clarity-validation-gate.md). Un comentario subjetivo o una corrida no reproducible no autorizan ese trabajo.
+
 ### E. Copiar resumen, copiar enlace y reset
 
 - [ ] **Copiar resumen** produce feedback visible para la persona usuaria.
