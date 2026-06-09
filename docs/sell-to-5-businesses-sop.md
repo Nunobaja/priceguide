@@ -14,7 +14,7 @@ Este procedimiento existe para validar la oferta, conseguir las primeras ventas 
 
 ### Posicionamiento obligatorio
 
-**Precios Locales es:** una página individual y sencilla de precios guía para un negocio local de servicios para el hogar en México, que muestra rangos aproximados y facilita que la persona continúe por WhatsApp o llamada.
+**Precios Locales es:** una página individual y sencilla de precios guía para un negocio local de servicios para el hogar en México, que muestra rangos aproximados y, cuando existe, el medio de contacto público confirmado del negocio.
 
 **Precios Locales no es:**
 
@@ -50,7 +50,7 @@ No inventar importes al preparar ejemplos. Hablar únicamente de los tipos de se
 - **Por qué encaja:** tiene servicios reconocibles y factores de precio fáciles de explicar, como tipo de equipo, capacidad, acceso, materiales, cantidad de equipos y urgencia.
 - **Pregunta frecuente:** “¿Cuánto cuesta el mantenimiento, diagnóstico, reparación o instalación?”.
 - **Rangos que suelen pedir:** rango aproximado para mantenimiento, diagnóstico, reparación o instalación, sin asignar importes hasta que el negocio los apruebe.
-- **Explicación segura:** “Podemos organizar tus servicios y los rangos aproximados que tú apruebes, explicar qué puede cambiar el importe y dejar el paso directo a tu WhatsApp o teléfono”.
+- **Explicación segura:** “Podemos organizar tus servicios y los rangos aproximados que tú apruebes, explicar qué puede cambiar el importe y mostrar tu WhatsApp o teléfono cuando esté confirmado”.
 
 ### Plomería
 
@@ -71,7 +71,7 @@ No inventar importes al preparar ejemplos. Hablar únicamente de los tipos de se
 - **Por qué encaja:** el precio suele variar por tamaño del área, estado del jardín, frecuencia, retiro de residuos, acceso y herramientas necesarias.
 - **Pregunta frecuente:** “¿Cuánto cuesta podar, limpiar, dar mantenimiento o trabajar cierta superficie?”.
 - **Rangos que suelen pedir:** rango aproximado para poda, limpieza, mantenimiento, retiro o trabajo por tamaño y frecuencia.
-- **Explicación segura:** “Podemos mostrar rangos aproximados según tamaño o tipo de trabajo para que la persona llegue a WhatsApp con mejor contexto”.
+- **Explicación segura:** “Podemos mostrar rangos aproximados según tamaño o tipo de trabajo y tu WhatsApp confirmado como medio de contacto”.
 
 ### Control de plagas
 
