@@ -244,6 +244,7 @@ Un follow-up debe describir el fixture, viewport, control, pasos de reproducció
 
 ## 11. Documentos internos relacionados
 
+- [Checklist interno final de smoke test para una guía de negocio real](real-business-smoke-test-checklist.md): integra los checks mínimos de accesibilidad en la decisión final de compartir una URL individual.
 - [Corrida manual interna de QA visual E2E](manual-e2e-visual-qa-run.md)
 - [Checklist interno E2E del flujo de una guía individual](e2e-guide-user-flow-checklist.md)
 - [Informe interno final de validación de producto](final-product-validation-report.md)

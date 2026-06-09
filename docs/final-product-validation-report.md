@@ -228,6 +228,7 @@ No se recomiendan PRs de ventas, marketing, pitch, landing pages, CRM, lead capt
 
 ## 12. Evidencia interna relacionada
 
+- [Checklist interno final de smoke test para una guía de negocio real](real-business-smoke-test-checklist.md)
 - [Matriz interna de validación de producto](product-validation-matrix.md)
 - [Auditoría interna de cobertura de negocios demo](demo-business-coverage-audit.md)
 - [Checklist interno E2E del flujo de una guía individual](e2e-guide-user-flow-checklist.md)
