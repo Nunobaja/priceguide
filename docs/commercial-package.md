@@ -4,7 +4,7 @@
 
 Esta guía ayuda al equipo a presentar, cotizar, vender y entregar Precios Locales como un producto sencillo para un negocio individual de servicios para el hogar en México. Es material de uso interno y no sustituye la confirmación directa de alcance, servicios, rangos y datos con cada dueño.
 
-La oferta debe mantenerse pequeña y clara: una página individual de precios guía para un negocio local, con rangos aproximados y un paso directo hacia WhatsApp o llamada. No se deben agregar funciones ajenas a ese propósito.
+La oferta debe mantenerse pequeña y clara: una página individual de precios guía para un negocio local, con rangos aproximados y, cuando exista, un medio de contacto público confirmado. No se deben agregar funciones ajenas a ese propósito.
 
 ## 1. Posicionamiento
 
@@ -18,7 +18,7 @@ La página organiza, en un formato fácil de compartir:
 - Preguntas sencillas sobre los detalles que afectan el precio.
 - Una estimación o rango aproximado.
 - Avisos claros sobre lo que puede cambiar el importe real.
-- La forma de continuar la conversación directamente con el negocio.
+- El medio de contacto público confirmado del negocio, cuando esté disponible.
 
 La página orienta; no fija el importe definitivo. Toda estimación debe confirmarse con el negocio según los detalles reales, la zona, los materiales, la dificultad, la urgencia y cualquier condición no visible al inicio.
 
@@ -79,7 +79,7 @@ La oferta base puede presentarse con esta estructura:
 3. **Rangos aproximados por servicio.** Organización de las referencias que el dueño apruebe; no se inventan importes.
 4. **Preguntas del servicio.** Preguntas sencillas que reflejan los factores que el negocio usa para orientar el precio.
 5. **Avisos seguros sobre la estimación.** Texto visible para aclarar que el resultado es aproximado y debe confirmarse directamente.
-6. **Paso a WhatsApp o llamada.** Forma clara de continuar con el negocio usando sus datos públicos confirmados.
+6. **Contacto por WhatsApp o llamada.** Muestra únicamente un medio de contacto público confirmado; si no existe, conserva el fallback seguro.
 7. **Enlaces según el punto de uso.** Enlace directo, para Google Business Profile, para WhatsApp Business y para código QR físico.
 8. **Contexto opcional de servicio o campaña.** Variantes de enlace con etiquetas legibles para distinguir dónde se colocará cada una, sin cambiar la página ni afirmar resultados.
 9. **Mensaje de entrega al cliente.** Texto listo para explicar qué se publicó, cómo revisarlo y cómo compartirlo.
@@ -293,7 +293,7 @@ Se debe confirmar el precio antes de trabajar. Si la solicitud cambia por comple
 
 ### “¿Me va a traer clientes?”
 
-“No prometemos nuevos clientes. El producto sirve para explicar mejor los precios aproximados y facilitar el paso hacia tu contacto cuando una persona ya recibió el enlace.”
+“No prometemos nuevos clientes. El producto sirve para explicar mejor los precios aproximados y, cuando existe un medio público confirmado, mostrarlo después de la estimación.”
 
 ### “¿Esto me posiciona en Google?”
 
@@ -347,7 +347,7 @@ Si un posible cliente solicita alguna de estas funciones, debe explicarse que es
 
 ### Versión breve para WhatsApp
 
-Hola, [nombre]. Precios Locales es una página individual para tu negocio donde presentamos tus servicios y rangos aproximados de forma sencilla. Tus clientes pueden revisar una estimación antes de contactarte y después continuar por tu WhatsApp o teléfono para confirmar los detalles y el importe real.
+Hola, [nombre]. Precios Locales es una página individual para tu negocio donde presentamos tus servicios y rangos aproximados de forma sencilla. Tus clientes pueden revisar una estimación y, si existe un medio público confirmado, usar tu WhatsApp o teléfono para consultar los detalles y confirmar el importe real.
 
 Tú apruebas los servicios, rangos, zonas y datos de contacto antes de publicar. La página no presenta los importes como precios finales.
 
@@ -400,7 +400,7 @@ Evitar frases como:
 - “Es una cotización final.”
 - “Vas a poder medir todo.”
 
-En su lugar, hablar de claridad, referencias aproximadas, menos preguntas repetitivas y un paso más ordenado hacia el contacto directo.
+En su lugar, hablar de claridad, referencias aproximadas y la presentación segura del medio de contacto público confirmado, cuando esté disponible.
 
 ### Cómo explicar el uso en QR, Google y WhatsApp
 
@@ -441,4 +441,4 @@ Usar estos documentos durante la venta y entrega:
 
 ## Regla final para el equipo
 
-Vender exactamente lo que existe: una página individual, sencilla y útil, que presenta estimaciones y rangos aproximados de un negocio local y facilita el paso hacia su WhatsApp o teléfono. Si una solicitud convierte la oferta en otro tipo de producto, debe quedar fuera del alcance de Precios Locales.
+Vender exactamente lo que existe: una página individual, sencilla y útil, que presenta estimaciones y rangos aproximados de un negocio local y muestra su WhatsApp o teléfono únicamente cuando ese medio está confirmado. Si una solicitud convierte la oferta en otro tipo de producto, debe quedar fuera del alcance de Precios Locales.
