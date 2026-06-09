@@ -291,6 +291,7 @@ La existencia de este documento no equivale a haber ejecutado la corrida. Cada p
 
 ## 11. Documentos internos relacionados
 
+- [Registro de validación móvil de legibilidad del resultado — 2026-06-09](mobile-result-readability-validation-2026-06-09.md): corrida previa a Task #71; quedó `PARTIAL` por falta de navegador y no autoriza iniciar polish.
 - [Checklist interno final de smoke test para una guía de negocio real](real-business-smoke-test-checklist.md): sign-off mínimo antes de compartir una URL individual real.
 - [Checklist interno E2E del flujo de una guía individual](e2e-guide-user-flow-checklist.md)
 - [Checklist interno de QA de accesibilidad y tap targets](accessibility-tap-target-qa-checklist.md): recorrido específico de teclado, foco visible, legibilidad, targets táctiles, wrapping y acciones de contacto seguras.
