@@ -52,6 +52,22 @@ No agregar ni modificar fixtures al ejecutar este checklist.
 
 Para una corrida mínima, probar Carmona, Instal PV, los fixtures internos de PR #65 y Task #73, y Plomería Mario. Añadir Frío Express cuando se requiera cobertura explícita del tono técnico.
 
+### Suite mínima de cierre E2E
+
+Esta suite convierte los estados representativos anteriores en corridas reproducibles. No basta con inspeccionar el fixture o marcar una sección aislada: cada fila debe recorrer entrada, servicio, preguntas, zona, resultado, copias, acción de contacto disponible y reinicio.
+
+| Corrida | Ruta y contexto | Resultado de handoff esperado | Evidencia mínima |
+|---|---|---|---|
+| WhatsApp confirmado | Carmona, sin parámetros y después con `?lang=en` | Se muestra la acción `wa.me`; el mensaje incluye negocio, servicio, respuestas, zona, rango aproximado y contexto permitido. | URL probada, servicio/zona elegidos, rango mostrado y estado de WhatsApp. |
+| WhatsApp pendiente con teléfono | Instal PV, sin parámetros | No se ofrece `wa.me`; se explica que WhatsApp no está confirmado y se ofrece la llamada `tel:` al teléfono público. | Estado de WhatsApp pendiente, destino visible de llamada y ausencia de acción WhatsApp utilizable. |
+| WhatsApp ausente con teléfono | Fixture interno de control preventivo | No se ofrece `wa.me`; se conserva el fallback de llamada al teléfono simulado de QA. | Estado de contacto, destino `tel:` y confirmación de que el estimador y las copias siguen disponibles. |
+| Sin contacto público | Fixture interno QA sin contacto | No se ofrece `wa.me` ni `tel:`; la persona puede conservar resumen/enlace y reiniciar sin una acción rota. | Ausencia de canales, estado de ambas copias y resultado después del reinicio. |
+| Multi-servicio | Plomería Mario | Cambiar de servicio no mezcla respuestas; el handoff disponible corresponde al resultado actual. | Servicio inicial, servicio final, respuestas finales y canal mostrado. |
+| Parámetros combinados seguros | Cualquier fixture aplicable con `source`, `service`, `campaign`, `lang` y `zone` válidos; repetir con al menos un valor inválido | Los parámetros válidos conservan su contexto; el inválido se ignora de forma segura y no crea ni cambia un canal de contacto. | URL completa, valores aceptados/ignorados y comparación del flujo con la ruta sin parámetros. |
+| Móvil | Repetir al menos los estados de WhatsApp confirmado, teléfono fallback y sin contacto en `360px`, `390px` y `430px` | El flujo termina sin scroll horizontal, solapamientos ni acciones inaccesibles. | Viewport, estado de contacto, resultado y cualquier captura asociada únicamente a un fallo visual. |
+
+La suite queda `PASS` solo si todas las filas aplicables tienen evidencia completa. Una fila `N/A` por falta de fixture debe registrarse como gap; no se sustituye con datos inventados ni autoriza cambios de producto desde esta tarea documental.
+
 ## 4. Checklist principal del flujo de usuario
 
 ### A. Entrada
