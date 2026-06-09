@@ -6,7 +6,7 @@
 
 El harness carga una copia aislada de `window.BUSINESSES` desde `businesses.js`, selecciona un conjunto pequeño de fixtures existentes, genera URLs de páginas individuales y comprueba el resultado con `URL` y `URLSearchParams`. No muta los objetos de negocio ni escribe archivos.
 
-La lógica pura de parsing del script replica de manera mínima el comportamiento privado actual de `app.js`; no exporta helpers de la aplicación ni cambia el runtime. Si ese comportamiento cambia, el harness y este contrato deben actualizarse en el mismo PR enfocado o en un follow-up explícito.
+Para evitar que una copia de la lógica quede desactualizada, el harness extrae los helpers privados de URL directamente del texto actual de `app.js` y los ejecuta en un contexto aislado de `vm`, con solo una URL y un fixture de negocio. No ejecuta la aplicación completa, no exporta helpers al runtime y no cambia archivos de la app. Si un helper requerido desaparece o deja de poder aislarse, la preparación falla con código distinto de cero en vez de validar una réplica obsoleta.
 
 ## Qué valida
 
@@ -19,8 +19,8 @@ El script comprueba, sin automatización de navegador:
 - que un `service` válido coincide con un servicio configurado y uno inválido no coincide;
 - que `campaign` acepta valores en minúsculas con letras ASCII, números, guion o guion bajo, y rechaza valores vacíos, demasiado largos o con contenido script-like;
 - que `lang=es` usa español, `lang=en` solicita inglés y solo lo activa si el negocio tiene copy inglés, y cualquier otro idioma cae de forma segura a español;
-- que `zone` se marca explícitamente como soportado cuando existe `getZoneFromUrl()` en `app.js`, que una zona válida coincide con datos configurados y que una zona desconocida se ignora;
-- que, si el soporte de `zone` desaparece en una rama futura, el valor se ignora de forma segura y se emite la advertencia: **“Zone param not currently supported — expected behavior is safe ignore.”**;
+- que los helpers requeridos de `app.js` para idioma, fuente, servicio, campaña y zona existen y pueden ejecutarse de forma aislada;
+- que `zone` vacío o desconocido se ignora y que una zona válida coincide con los datos configurados;
 - que el orden de parámetros combinados no hace que un parámetro sobrescriba otro;
 - que valores hostiles no se aceptan como etiquetas seguras ni coinciden con servicios o zonas;
 - que ninguna URL generada introduce parámetros o rutas de búsqueda, comparación, ranking, marketplace o directorio.
@@ -102,11 +102,14 @@ La selección usa solo datos existentes. No crea negocios, servicios, zonas, rut
 Para cada fixture seleccionado se generan estos casos:
 
 - sin parámetros;
+- `?source=`;
+- `?source=google.profile`;
 - `?source=google-business-profile`;
 - `?source=whatsapp-business`;
 - `?source=qr-physical`;
 - `?source=direct-link`;
 - `?source=unknown-source`;
+- `?service=`;
 - `?service={validServiceSlug}`;
 - `?service=unknown-service`;
 - `?campaign=promo-verano`;
@@ -117,6 +120,7 @@ Para cada fixture seleccionado se generan estos casos:
 - `?lang=es`;
 - `?lang=en`;
 - `?lang=fr`;
+- `?zone=`;
 - `?zone={validZoneSlug}`;
 - `?zone=unknown-zone`;
 - `?source=google-business-profile&service={validServiceSlug}`;
@@ -141,11 +145,11 @@ El harness reconoce explícitamente el fixture interno sin contacto y valida su 
 
 ## Interpretación de advertencias y skips
 
-Una advertencia significa que la cobertura de fixture esperada no está disponible o que una capacidad, como `zone`, ya no está soportada por la aplicación actual. No significa por sí sola que el producto esté roto.
+Una advertencia significa que la cobertura de fixture esperada no está disponible. No significa por sí sola que el producto esté roto. Un helper requerido ausente, en cambio, hace fallar la preparación porque el harness debe comprobar la implementación real y no una copia local.
 
 - Fixture faltante: registrar el gap exacto y confirmar si la matriz vigente exige esa cobertura.
-- Zona no soportada: confirmar safe ignore; no implementar soporte desde el harness.
-- Servicio o zona faltante en un fixture seleccionado: omitir el caso afectado y revisar si el problema es de datos o de selección.
+- Servicio o zona faltante en un fixture seleccionado: omitir todos sus casos y revisar si el problema es de datos o de selección.
+- Helper de URL ausente o no aislable: tratar como fallo del contrato de QA y revisar el cambio de `app.js` antes de modificar el harness.
 - Shell de ruta faltante, parser inseguro o pérdida de contexto entre parámetros válidos: tratar como fallo reproducible.
 
 No se deben “resolver” warnings inventando datos, cambiando rangos o ampliando el producto dentro del mismo PR.
