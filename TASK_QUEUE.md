@@ -6,7 +6,7 @@ Follow [`AGENT.md`](AGENT.md) before taking work from this queue. Take only the 
 
 ## Product-validation backlog
 
-- [ ] **#64 Align repo language away from directory/lead-capture wording**
+- [x] **#64 Align repo language away from directory/lead-capture wording**
   - **Goal:** Audit and narrowly revise repository wording that incorrectly frames the product as a directory or lead-capture system, while preserving accurate historical, prohibition, and internal-QA context.
   - **Allowed files:** `README.md`, `docs/**/*.md`, `docs/templates/**/*`, and text-only copy in existing HTML or JavaScript files when the wording is user-visible and no behavior or data changes.
   - **Testing expectations:** Search for directory and lead-capture terminology; review every changed occurrence in context; run `node --check app.js`, `node --check businesses.js`, and `node scripts/publish-preflight.js` if app-shell copy changes.

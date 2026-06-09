@@ -104,7 +104,7 @@
 - **Facturación disponible:** [Sí / No]
 - **Notas que deben ver los clientes:** [Aclaraciones]
 
-## 6. Mensaje y atención del prospecto
+## 6. Mensaje y atención del cliente
 
 - **Saludo o tono preferido:** [Ej. Profesional y directo]
 - **Datos que necesita recibir por WhatsApp:** [Ej. Servicio, zona, fotos, horario]

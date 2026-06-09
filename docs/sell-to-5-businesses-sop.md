@@ -82,7 +82,7 @@ No inventar importes al preparar ejemplos. Hablar únicamente de los tipos de se
 
 ## 4. Criterios para elegir negocios
 
-Elegir prospectos que cumplan la mayoría de esta lista:
+Elegir negocios potenciales que cumplan la mayoría de esta lista:
 
 - [ ] Es un negocio local de servicios para el hogar en México.
 - [ ] Tiene teléfono público o WhatsApp visible.
@@ -93,9 +93,9 @@ Elegir prospectos que cumplan la mayoría de esta lista:
 - [ ] Sus datos públicos parecen vigentes y el negocio está activo.
 - [ ] Puede explicar qué cambia el precio y qué conceptos no están incluidos.
 
-Evitar prospectos que condicionen la compra a clientes o ventas garantizados, precios finales exactos, posiciones en Google, reseñas, calificaciones o exposición dentro de un listado de proveedores.
+Evitar negocios potenciales que condicionen la compra a clientes o ventas garantizados, precios finales exactos, posiciones en Google, reseñas, calificaciones o exposición dentro de un listado de proveedores.
 
-## 5. Flujo para crear la lista de prospectos
+## 5. Flujo para crear la lista de negocios potenciales
 
 1. Elegir **una ciudad o zona** de México.
 2. Elegir **un solo nicho** para la primera ronda.
@@ -359,7 +359,7 @@ El seguimiento confirma funcionamiento y vigencia de la información. No promete
 
 ## 15. Plantilla manual de seguimiento
 
-Usar una copia de [`docs/templates/sell-to-5-businesses-tracker.md`](templates/sell-to-5-businesses-tracker.md) para registrar los 25 prospectos, los cinco toques, el estado de las conversaciones, el paquete presentado y la siguiente acción.
+Usar una copia de [`docs/templates/sell-to-5-businesses-tracker.md`](templates/sell-to-5-businesses-tracker.md) para registrar los 25 negocios potenciales, los cinco toques, el estado de las conversaciones, el paquete presentado y la siguiente acción.
 
 Completarla manualmente y guardar sólo datos públicos del negocio y notas necesarias para esta validación. No registrar información de consumidores.
 
