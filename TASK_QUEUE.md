@@ -12,7 +12,7 @@ Follow [`AGENT.md`](AGENT.md) before taking work from this queue. Take only the 
   - **Testing expectations:** Search for directory and lead-capture terminology; review every changed occurrence in context; run `node --check app.js`, `node --check businesses.js`, and `node scripts/publish-preflight.js` if app-shell copy changes.
   - **Product-rule reminder:** Precios Locales is an individual static price-guide engine, not a directory, marketplace, CRM, analytics product, or lead-capture system.
 
-- [ ] **#65 Simplify above-the-fold business guide UX**
+- [x] **#65 Simplify above-the-fold business guide UX**
   - **Goal:** Reduce first-screen friction on an individual business guide without redesigning the product or changing estimator behavior.
   - **Allowed files:** `index.html`, `404.html`, `priceguide/index.html`, `app.js`, and existing stylesheet files or generated route shells only when required by the established publishing workflow.
   - **Testing expectations:** Run JavaScript syntax checks and `node scripts/publish-preflight.js`; manually inspect at least one individual guide at desktop and representative mobile widths; confirm routes and estimator output are unchanged.
