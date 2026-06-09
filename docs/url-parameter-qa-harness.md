@@ -88,10 +88,11 @@ Internal QA only: no analytics, tracking, storage, lead capture, or public direc
 La selección se hace por capacidad, no por promoción del negocio, y elimina duplicados cuando un fixture cubre varios estados:
 
 1. fixture interno de PR #65: `/priceguide/guadalajara/fumigacion/fixture-interno-control-preventivo/`;
-2. negocio con WhatsApp presente y no marcado como pendiente;
-3. negocio con más de un servicio;
-4. negocio con copy inglés disponible;
-5. negocio con una lista larga de ocho o más zonas.
+2. fixture interno sin contacto de Task #73: `/priceguide/guadalajara/electricista/fixture-interno-sin-contacto/`;
+3. negocio con WhatsApp presente y no marcado como pendiente;
+4. negocio con más de un servicio;
+5. negocio con copy inglés disponible;
+6. negocio con una lista larga de ocho o más zonas.
 
 La selección usa solo datos existentes. No crea negocios, servicios, zonas, rutas ni slugs. Si falta una capacidad, se registra como advertencia o skip en lugar de modificar `businesses.js` o convertir automáticamente el gap en fallo de producto.
 
@@ -122,9 +123,15 @@ Para cada fixture seleccionado se generan estos casos:
 - `?source=qr-physical&service={validServiceSlug}&campaign=volante-junio`;
 - `?lang=en&source=direct-link&service={validServiceSlug}`;
 - `?lang=es&source=whatsapp-business&service={validServiceSlug}&campaign=promo-junio`;
+- `?source=qr-physical&service={validServiceSlug}&campaign=qa-no-contact&lang=en&zone={validZoneSlug}`;
 - una mezcla hostil con valores script-like en todos los parámetros relevantes.
 
 `{validServiceSlug}` y `{validZoneSlug}` se derivan del primer servicio y la primera zona ya configurados en cada fixture. Esto hace la corrida determinista y evita escribir o alterar datos.
+
+
+## Cobertura de Task #73
+
+El harness reconoce explícitamente el fixture interno sin contacto y valida su ruta individual y parámetros válidos/inválidos. Sigue siendo una comprobación pura y sin navegador: no muta datos, no llama servicios externos y no crea analytics, tracking, CRM, lead capture ni recolección de contacto. La ausencia visual de WhatsApp, `tel:` y campos de contacto se confirma con el checklist E2E.
 
 ## Interpretación de advertencias y skips
 

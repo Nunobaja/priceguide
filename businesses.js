@@ -751,6 +751,56 @@ window.BUSINESSES = [
     ]
   },
   {
+    citySlug: "guadalajara",
+    categorySlug: "electricista",
+    businessSlug: "fixture-interno-sin-contacto",
+    name: "Fixture interno QA sin contacto",
+    tone: "professional",
+    city: "Guadalajara",
+    category: "Electricista",
+    categoryLabel: "Prueba interna de servicio eléctrico",
+    metaTitle: "Fixture interno QA sin contacto · Guía de precios",
+    metaDescription: "Fixture interno de QA para validar una guía individual sin WhatsApp confirmado ni teléfono público.",
+    shareTitle: "Fixture interno QA sin contacto · Guía de precios",
+    shareDescription: "Prueba interna de una guía individual con estimación aproximada y sin canal de contacto público.",
+    whatsappConfirmed: false,
+    currency: "MXN",
+    currencyLabel: "pesos mexicanos",
+    heroHeadline: "Estima este servicio interno de QA.",
+    heroSubheadline: "Responde preguntas simples para validar el estado de una guía sin contacto.",
+    estimateIntro: "Elige el servicio y las opciones para ver un rango aproximado de QA interno.",
+    serviceAreaNote: "Zonas demo configuradas exclusivamente para validación interna de QA.",
+    english: {
+      heroHeadline: "Estimate this internal QA service.",
+      heroSubheadline: "Answer a few simple questions to validate the no-contact guide state.",
+      estimateIntro: "Choose the service and options to see an approximate internal QA range.",
+      serviceAreaNote: "Demo zones configured exclusively for internal QA validation."
+    },
+    zones: [
+      { label: "Centro", labelEn: "Downtown", factor: 1.0 },
+      { label: "Americana", labelEn: "Americana", factor: 1.05 },
+      { label: "Chapalita", labelEn: "Chapalita", factor: 1.1 }
+    ],
+    services: [
+      {
+        id: "revision-electrica-demo",
+        name: "Revisión eléctrica demo",
+        nameEn: "Demo electrical inspection",
+        base: [450, 850],
+        questions: [
+          { id: "tipo-espacio", label: "¿Qué espacio se revisará?", labelEn: "What space will be inspected?", options: [
+            { label: "Casa o departamento", labelEn: "House or apartment", factor: 1.0 },
+            { label: "Local pequeño", labelEn: "Small commercial space", factor: 1.2 }
+          ] },
+          { id: "alcance-revision", label: "¿Qué alcance necesita la revisión?", labelEn: "What inspection scope is needed?", options: [
+            { label: "Un punto o circuito", labelEn: "One outlet or circuit", factor: 1.0 },
+            { label: "Varios puntos", labelEn: "Several outlets", factor: 1.3 }
+          ] }
+        ]
+      }
+    ]
+  },
+  {
     citySlug: "puerto-vallarta",
     categorySlug: "electricista",
     businessSlug: "solara-proyectos-electricos-paneles-solares",

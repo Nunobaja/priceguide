@@ -46,10 +46,10 @@ No agregar ni modificar fixtures al ejecutar este checklist.
 | `tone: "professional"` | **Fixture interno de control preventivo** — `/guadalajara/fumigacion/fixture-interno-control-preventivo` | Branch explícito de tono profesional. |
 | `tone: "friendly"` | **Plomería Mario** — `/los-cabos/plomeros/plomeria-mario` | Branch explícito de tono amistoso. |
 | `tone: "technical"` | **Frío Express** — `/mazatlan/aire-acondicionado/frio-express` | Branch explícito de tono técnico. |
-| Sin contacto utilizable | **Missing fixture — do not block checklist; record as product validation gap.** | Fallback final cuando no hay WhatsApp confirmado ni teléfono público. No inventar datos para probarlo. |
+| Sin contacto utilizable | **Fixture interno QA sin contacto** — `/guadalajara/electricista/fixture-interno-sin-contacto` | Fallback neutral sin WhatsApp, `tel:`, acción rota ni campos de contacto; conserva estimador, copias y reset. |
 | WhatsApp confirmado sin teléfono | **Missing fixture — do not block checklist; record as product validation gap.** | Handoff de WhatsApp sin depender de un fallback de llamada. No inventar datos para probarlo. |
 
-Para una corrida mínima, probar Carmona, Instal PV, el fixture interno de PR #65 y Plomería Mario. Añadir Frío Express cuando se requiera cobertura explícita del tono técnico.
+Para una corrida mínima, probar Carmona, Instal PV, los fixtures internos de PR #65 y Task #73, y Plomería Mario. Añadir Frío Express cuando se requiera cobertura explícita del tono técnico.
 
 ## 4. Checklist principal del flujo de usuario
 
@@ -132,8 +132,9 @@ Para una corrida mínima, probar Carmona, Instal PV, el fixture interno de PR #6
 - [ ] Confirmar que WhatsApp pendiente, no confirmado o ausente no genera un enlace `wa.me` roto o engañoso.
 - [ ] En Instal PV y en el fixture interno de PR #65, confirmar que aparece el fallback al teléfono público esperado.
 - [ ] Confirmar que el enlace de llamada usa un `tel:` válido y el número del negocio.
-- [ ] Para ausencia total de contacto, registrar: **Missing fixture — do not block checklist; record as product validation gap.**
-- [ ] Si el estado sin contacto llega a representarse en un fixture futuro, confirmar que el fallback es seguro, no inventa un canal y no deja una acción rota.
+- [ ] En el fixture interno de Task #73, confirmar que no aparecen botón de WhatsApp, enlace `tel:` ni acción `#` presentada como activa.
+- [ ] Confirmar que aparece el mensaje neutral para guardar el resumen y contactar directamente al negocio solo cuando exista un canal válido.
+- [ ] Confirmar que no aparecen campos de nombre, teléfono, email ni formulario; el estado no captura, envía ni almacena contacto.
 - [ ] Confirmar que el mensaje de handoff mantiene lenguaje de estimación/rango aproximado y no promete un precio final.
 - [ ] Confirmar que `source` y `campaign`, cuando están presentes, aparecen solo como contexto manual legible; no como analytics, tracking o reporte automático.
 - [ ] Confirmar que el handoff no captura datos en la aplicación ni crea una ficha de lead.
@@ -174,6 +175,7 @@ En todos los casos confirmar: carga segura, ruta individual intacta, ausencia de
 | `?source=qr-physical&service={validServiceSlug}&campaign=volante-junio` | Conserva los tres contextos soportados sin alterar cálculo ni seguridad. | ☐ PASS ☐ FAIL ☐ N/A |
 | `?lang=en&source=direct-link&service={validServiceSlug}` | Aplica idioma, fuente y servicio juntos con fallback de traducción seguro. | ☐ PASS ☐ FAIL ☐ N/A |
 | `?lang=es&source=whatsapp-business&service={validServiceSlug}&campaign=promo-junio` | Mantiene idioma, fuente, servicio y campaña durante resultado, copia y handoff. | ☐ PASS ☐ FAIL ☐ N/A |
+| `?source=qr-physical&service=revision-electrica-demo&campaign=qa-no-contact&lang=en&zone=centro` | En el fixture sin contacto conserva contexto, preselecciones e inglés sin crear un canal de contacto. | ☐ PASS ☐ FAIL ☐ N/A |
 
 `zone` está soportado actualmente. Si ese soporte cambia en una rama futura, registrar exactamente: **“Zone param not currently supported — expected behavior is safe ignore.”** No implementar soporte desde una corrida documental.
 
