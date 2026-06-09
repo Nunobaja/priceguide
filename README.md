@@ -35,6 +35,8 @@ Use the [`final internal product validation report`](docs/final-product-validati
 
 Use the [`internal end-to-end guide user-flow checklist`](docs/e2e-guide-user-flow-checklist.md) to validate a real user's path through one individual business guide, from page entry and estimation through summary/link copy and a safe WhatsApp or call handoff.
 
+Use the [`internal manual E2E visual QA runbook`](docs/manual-e2e-visual-qa-run.md) to execute and record browser checks at desktop, 360px, 390px, and 430px widths across confirmed WhatsApp, phone fallback, no-contact, bilingual, multi-service, and long-zone individual-guide fixtures. The runbook is documentation for future manual runs; its existence does not mean those browser checks have been completed.
+
 Use the [`internal URL parameter QA harness`](docs/url-parameter-qa-harness.md) to run deterministic Node checks for safe `source`, `service`, `campaign`, `lang`, and `zone` behavior on existing individual guide fixtures. The harness is internal-only, stores no visits, and does not provide analytics or tracking.
 
 Use the [`internal product validation matrix`](docs/product-validation-matrix.md) to validate the reusable static engine across individual business pages, contact states, services, zones, languages, URL parameters, and the complete estimator flow. This matrix is internal-only and must not be used as a public directory, sales checklist, commercial proposal, or client-facing roadmap.
