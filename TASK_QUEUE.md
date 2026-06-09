@@ -48,7 +48,7 @@ Follow [`AGENT.md`](AGENT.md) before taking work from this queue. Take only the 
   - **Testing expectations:** Run the harness, `node --check` on every changed JavaScript file, and `node scripts/publish-preflight.js`; cover valid, missing, and invalid parameter cases without network calls or persistence.
   - **Product-rule reminder:** `source` and `campaign` mark message/link context only and are never analytics; do not add storage, attribution reporting, user profiling, or lead capture.
 
-- [ ] **#71 Mobile result readability polish if validation shows friction**
+- [ ] **#71 Mobile result readability polish if validation shows friction** — Not authorized / not started; PR #88 did not provide reproducible validation evidence.
   - **Goal:** Apply minimal mobile readability changes to estimate results only when recorded validation evidence shows a concrete friction point.
   - **Allowed files:** Existing app markup, renderer, and stylesheet files that control result presentation, plus generated route shells when required; relevant validation documentation may record evidence and outcome.
   - **Testing expectations:** Cite the validation evidence; run syntax checks and `node scripts/publish-preflight.js`; manually inspect result states at 360px, 390px, and 430px widths; verify estimator values and routes are unchanged.
