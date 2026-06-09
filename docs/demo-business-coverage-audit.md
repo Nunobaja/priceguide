@@ -9,9 +9,9 @@ Esta auditoría comprueba si los datos actuales de negocios demo cubren suficien
 Responde cuatro preguntas:
 
 1. **¿Qué cobertura ya existe?** Nueve negocios, cinco ciudades/rutas de ciudad, tres estados, cinco slugs de categoría, varios niveles de precio, los cuatro estados de tono y ejemplos en español e inglés.
-2. **¿Qué cobertura falta?** Siguen faltando teléfono ausente, WhatsApp confirmado como único contacto y ausencia total de contacto. El fixture interno nuevo cubre WhatsApp ausente con teléfono, un negocio de un solo servicio, una pregunta mínima, una lista de zonas larga y `tone: "professional"` explícito.
-3. **¿Qué gaps importan para validar el producto?** Los estados restantes con teléfono ausente son los gaps más importantes porque el fallback sin contacto actual no ofrece copy específico. La estructura mínima del estimador, el tono profesional y la longitud de zonas ya tienen cobertura directa.
-4. **¿Qué debe atenderse en PRs posteriores?** Solo deben añadirse fixtures de teléfono ausente cuando exista un contacto confirmado seguro o un fallback sin contacto seguro. Cualquier cambio de comportamiento debe quedar separado y requerir un fallo reproducible.
+2. **¿Qué cobertura falta?** El fixture de Task #73 cubre teléfono ausente y ausencia total de contacto; sigue faltando WhatsApp confirmado como único contacto. El fixture interno nuevo cubre WhatsApp ausente con teléfono, un negocio de un solo servicio, una pregunta mínima, una lista de zonas larga y `tone: "professional"` explícito.
+3. **¿Qué gaps importan para validar el producto?** El fallback sin contacto y su fixture interno ya están cubiertos; el gap restante de contacto es WhatsApp confirmado como único canal. La estructura mínima del estimador, el tono profesional y la longitud de zonas ya tienen cobertura directa.
+4. **¿Qué debe atenderse en PRs posteriores?** No debe añadirse un fixture de WhatsApp confirmado sin teléfono hasta disponer de un número interno seguro; el fixture sin contacto ya existe. Cualquier cambio de comportamiento debe quedar separado y requerir un fallo reproducible.
 
 La auditoría no determina si los negocios, categorías o precios representan el mercado. Solo determina si los fixtures actuales permiten probar el motor.
 
@@ -41,9 +41,9 @@ El único dato agregado es un fixture ficticio y explícitamente interno de QA, 
 
 | Dimensión | Cobertura actual |
 |---|---|
-| Negocios | 9 |
+| Negocios | 10 |
 | Ciudades/slugs de ciudad | 5: Los Cabos, Mazatlán, Guadalajara, Cabo San Lucas y Puerto Vallarta |
-| Estados | 3: Baja California Sur (3 negocios), Sinaloa (1) y Jalisco (5) |
+| Estados | 3: Baja California Sur (3 negocios), Sinaloa (1) y Jalisco (6) |
 | Slugs de categoría | 5: `plomeros`, `aire-acondicionado`, `fumigacion`, `plomeria`, `electricista` |
 | Dominios de servicio amplios | 4: plomería, aire acondicionado/refrigeración, fumigación/control de plagas y electricidad/solar |
 
@@ -54,6 +54,7 @@ El único dato agregado es un fixture ficticio y explícitamente interno de QA, 
 | Los Cabos | Baja California Sur | `plomeros` | 1 |
 | Mazatlán | Sinaloa | `aire-acondicionado` | 1 |
 | Guadalajara | Jalisco | `fumigacion` | 2 |
+| Guadalajara | Jalisco | `electricista` | 1 |
 | Cabo San Lucas | Baja California Sur | `aire-acondicionado` | 1 |
 | Cabo San Lucas | Baja California Sur | `plomeria` | 1 |
 | Puerto Vallarta | Jalisco | `electricista` | 3 |
@@ -66,14 +67,14 @@ La repetición de tres negocios en Puerto Vallarta/electricista y dos en Guadala
 |---|---:|---|
 | WhatsApp confirmado | 5 | Plomería Mario, Frío Express, Control Total, Carmona Hnos, De la Hoz |
 | WhatsApp pendiente/no confirmado | 3 | Instal PV, Servicios Profesionales Martínez, Solara |
-| WhatsApp ausente | 1 | Fixture interno de control preventivo |
-| Teléfono público disponible | 9 | Todos |
-| Teléfono público ausente | 0 | — |
+| WhatsApp ausente | 2 | Fixture interno de control preventivo y fixture interno QA sin contacto |
+| Teléfono público disponible | 9 | Todos excepto el fixture interno QA sin contacto |
+| Teléfono público ausente | 1 | Fixture interno QA sin contacto |
 | Ambos campos, WhatsApp y teléfono, presentes | 8 | Los ocho fixtures previos; en 3 el WhatsApp está pendiente |
 | WhatsApp confirmado como único contacto | 0 | — |
 | Solo WhatsApp presente, sin teléfono | 0 | — |
 | Solo teléfono utilizable, con WhatsApp pendiente/ausente | 4 | Instal PV, Servicios Profesionales Martínez, Solara y el fixture interno |
-| Sin ruta de contacto utilizable | 0 | — |
+| Sin ruta de contacto utilizable | 1 | Fixture interno QA sin contacto |
 
 ## 4. Tabla A — Inventario de negocios
 
@@ -87,6 +88,7 @@ La repetición de tres negocios en Puerto Vallarta/electricista y dos en Guadala
 | Instal PV | Puerto Vallarta | Jalisco | Electricista | `/puerto-vallarta/electricista/instal-pv` | 3 | 3 | Pendiente/no confirmado | Disponible | Español; nota de contacto también en inglés | Ausente | Fallback de llamada; mezcla servicio bajo ($450) y proyecto alto ($4,200). |
 | Servicios Profesionales de Electricidad y Plomería Martínez | Puerto Vallarta | Jalisco | Electricista | `/puerto-vallarta/electricista/servicios-profesionales-electricidad-plomeria-martinez` | 3 | 4 | Pendiente/no confirmado | Disponible | Español; nota de contacto también en inglés | Ausente | Nombre/ruta muy largos y servicios de dos dominios bajo una categoría. |
 | Fixture interno de control preventivo | Guadalajara | Jalisco | Control preventivo de plagas (`fumigacion`) | `/guadalajara/fumigacion/fixture-interno-control-preventivo` | 1 | 8 | Ausente | Disponible; número simulado de QA | Solo español | `professional` | Fixture explícitamente interno: un servicio, una pregunta con dos opciones, rango aproximado bajo y lista larga con acentos y nombres compuestos. |
+| Fixture interno QA sin contacto | Guadalajara | Jalisco | Electricista | `/guadalajara/electricista/fixture-interno-sin-contacto` | 1 | 3 | Ausente | Ausente | Español + inglés de QA | `professional` | Fixture ficticio e interno de Task #73; valida el mensaje neutral sin WhatsApp, `tel:` ni recolección de contacto. |
 | Solara Proyectos Eléctricos y Paneles Solares | Puerto Vallarta | Jalisco | Electricista | `/puerto-vallarta/electricista/solara-proyectos-electricos-paneles-solares` | 3 | 3 | Pendiente/no confirmado | Disponible | Español; nota de contacto también en inglés | Ausente | Mayor máximo base ($7,500); mezcla mantenimiento bajo y solar alto. |
 
 ## 5. Tabla B — Matriz de cobertura
@@ -163,7 +165,7 @@ No se observan slugs inválidos con el contrato actual. La concentración de tre
 | WhatsApp confirmado sin teléfono | No | — | No se valida la ausencia del enlace telefónico con handoff principal disponible. |
 | Sin contacto | No | — | No se valida la presentación final cuando no hay WhatsApp confirmado ni teléfono. |
 
-**Conclusión de contacto:** el happy path, WhatsApp pendiente y WhatsApp ausente con teléfono están cubiertos. Siguen sin cobertura el caso de WhatsApp confirmado sin teléfono y la ausencia total de contacto. No se agrega un fixture sin contacto porque el copy compartido actual presupone que existe un teléfono; cualquier cambio de ese comportamiento debe ir en un PR separado respaldado por un fallo reproducible.
+**Conclusión de contacto:** el happy path, WhatsApp pendiente y WhatsApp ausente con teléfono están cubiertos. Task #73 cubre la ausencia total de contacto con copy neutral, sin acciones rotas ni campos de contacto. Sigue sin cobertura el caso de WhatsApp confirmado sin teléfono.
 
 ## 8. Auditoría de servicios y estimador
 
@@ -221,8 +223,8 @@ Ningún parámetro debe cambiar rangos base, factores, fórmulas, rutas, slugs o
 
 ### Alta
 
-- Falta teléfono ausente y, por consecuencia, faltan los casos “solo WhatsApp” y “sin contacto”.
-- El estado sin contacto no debe añadirse hasta que exista copy de fallback seguro que no presuponga un teléfono.
+- Falta el caso “solo WhatsApp” con teléfono ausente.
+- El estado sin contacto está cubierto por el fixture interno de Task #73 y su fallback seguro.
 - La reutilización de rutas está demostrada en cinco ciudades y cinco slugs de categoría; no se identifica una ciudad/categoría obligatoria adicional. El riesgo alto no es cantidad geográfica, sino no cubrir nuevos patrones estructurales cuando se introduzcan.
 
 ### Media
@@ -242,7 +244,7 @@ Ningún parámetro debe cambiar rangos base, factores, fórmulas, rutas, slugs o
 |---|---|---|---|---|
 | WhatsApp ausente + teléfono presente | Distingue campo ausente de un número pendiente. | Cubierto por el fixture interno de control preventivo. | Data-only completado | Cerrado |
 | WhatsApp presente + teléfono ausente | Valida el happy path sin depender del campo telefónico. | Mantener pendiente hasta disponer de un WhatsApp confirmado y seguro para un fixture interno; no inventar un contacto utilizable. | Data-only cuando exista dato seguro | Alta |
-| Sin WhatsApp ni teléfono | Valida el fallback seguro final. | El copy actual presupone un teléfono; corregir comportamiento en un PR separado antes de publicar el fixture sin contacto. | Comportamiento separado, luego data-only | Alta |
+| Sin WhatsApp ni teléfono | Valida el fallback seguro final. | Cubierto por Task #73 con mensaje neutral y fixture interno, sin contacto inventado. | Comportamiento y fixture completados | Cerrado |
 | Estructura mínima válida del estimador | Detecta supuestos de 3 servicios, 3 preguntas o 3 opciones. | Cubierto con 1 servicio, 1 pregunta y 2 opciones. | Data-only completado | Cerrado |
 | Lista de zonas larga | Prueba overflow, wrapping y selección móvil. | Cubierto con ocho zonas realistas en el fixture interno. | Data-only completado | Cerrado |
 | `tone: "professional"` explícito | Permite demostrar el branch profesional en vez de inferirlo del default. | Cubierto por el fixture interno de control preventivo. | Data-only completado | Cerrado |
@@ -251,7 +253,7 @@ Ningún parámetro debe cambiar rangos base, factores, fórmulas, rutas, slugs o
 
 ### Recomendación para el próximo PR
 
-Este PR interno y data-only cubre WhatsApp ausente con teléfono, un negocio de un solo servicio con estructura mínima válida, una lista larga de zonas y tono profesional explícito. Los estados con teléfono ausente permanecen fuera porque requieren un WhatsApp confirmado seguro o copy específico de ausencia total de contacto.
+Este PR interno y data-only cubre WhatsApp ausente con teléfono, un negocio de un solo servicio con estructura mínima válida, una lista larga de zonas y tono profesional explícito. Task #73 añade el estado sin contacto de forma segura. Solo permanece fuera WhatsApp confirmado como único contacto, que requiere un número interno seguro.
 
 Cualquier PR posterior debe:
 
@@ -264,7 +266,7 @@ Cualquier PR posterior debe:
 
 ## 12. Checklist E2E relacionado
 
-Usar el [checklist interno E2E del flujo de una guía individual](e2e-guide-user-flow-checklist.md) para convertir esta cobertura de fixtures en corridas completas de entrada, estimador, resultado, copias, handoff, parámetros URL y móvil. Los gaps de contacto ausente registrados en esta auditoría deben marcarse como gaps de validación sin inventar fixtures.
+Usar el [checklist interno E2E del flujo de una guía individual](e2e-guide-user-flow-checklist.md) para convertir esta cobertura de fixtures en corridas completas de entrada, estimador, resultado, copias, handoff, parámetros URL y móvil. El fixture sin contacto debe ejecutarse como regresión; el gap de WhatsApp confirmado sin teléfono permanece sin inventar datos.
 
 ## Informe final relacionado
 

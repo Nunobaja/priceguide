@@ -12,7 +12,6 @@ const REQUIRED_BUSINESS_FIELDS = [
   "name",
   "city",
   "category",
-  "phone",
   "citySlug",
   "categorySlug",
   "businessSlug",

@@ -65,11 +65,11 @@
       <h3 data-ui="sendSummary"></h3>
       <p data-ui="handoffExplanation"></p>
     </div>
-    <div class="field">
+    <div class="field" id="leadNameField">
       <label for="leadName"><span data-ui="yourName"></span> <span style="font-weight:400;color:var(--ink-soft)">(<span data-ui="optional"></span>)</span></label>
       <input type="text" id="leadName" autocomplete="name" data-placeholder-ui="namePlaceholder">
     </div>
-    <div class="field">
+    <div class="field" id="leadTelField">
       <label for="leadTel"><span data-ui="yourPhone"></span> <span style="font-weight:400;color:var(--ink-soft)">(<span data-ui="optional"></span>)</span></label>
       <input type="tel" id="leadTel" autocomplete="tel" inputmode="tel" data-placeholder-ui="phonePlaceholder">
     </div>
@@ -152,7 +152,7 @@
       callBusiness: "Llama al negocio para confirmar",
       callExplanation: "Puedes copiar el resumen como referencia y llamar al teléfono público. El negocio confirma el precio final directamente contigo.",
       saveSummary: "Guarda el resumen de tu estimación",
-      noContactExplanation: "No hay un canal de contacto público disponible. Puedes copiar el resumen o el enlace para conservar esta estimación.",
+      noContactExplanation: "Guarda este resumen y confirma el precio final directamente con el negocio cuando tengas un canal de contacto válido.",
       handoffTrust: "Este es un rango aproximado, no un precio final. El precio final depende de los detalles del servicio y el negocio lo confirma directamente con el cliente.",
       yourName: "Tu nombre",
       yourPhone: "Tu teléfono",
@@ -163,7 +163,7 @@
       directWhatsApp: "WhatsApp directo",
       pendingWhatsApp: "WhatsApp por confirmar",
       whatsappUnavailable: "WhatsApp no está disponible. Usa el teléfono público para confirmar el precio final directamente con el negocio.",
-      contactUnavailable: "Este negocio no tiene un canal de contacto público disponible en esta guía.",
+      contactUnavailable: "Guarda este resumen y confirma el precio final directamente con el negocio cuando tengas un canal de contacto válido.",
       copyLink: "Copiar enlace",
       linkCopied: "Enlace copiado",
       copySummary: "Copiar resumen",
@@ -199,7 +199,7 @@
       callBusiness: "Call the business to confirm",
       callExplanation: "You can copy the summary for reference and call the public phone number. The business confirms the final price directly with you.",
       saveSummary: "Save your estimate summary",
-      noContactExplanation: "No public contact channel is available. You can copy the summary or link to keep this estimate.",
+      noContactExplanation: "Save this summary and confirm the final price directly with the business when you have a valid contact channel.",
       handoffTrust: "This is an approximate range, not a final price. The final price depends on the service details and the business confirms it directly with the customer.",
       yourName: "Your name",
       yourPhone: "Your phone",
@@ -210,7 +210,7 @@
       directWhatsApp: "Direct WhatsApp",
       pendingWhatsApp: "WhatsApp to confirm",
       whatsappUnavailable: "WhatsApp is not available. Use the public phone number to confirm the final price directly with the business.",
-      contactUnavailable: "This business does not have a public contact channel available in this guide.",
+      contactUnavailable: "Save this summary and confirm the final price directly with the business when you have a valid contact channel.",
       copyLink: "Copy link",
       linkCopied: "Link copied",
       copySummary: "Copy summary",
@@ -769,6 +769,9 @@
     const fallbackPhone = $("#whatsappFallbackPhone");
     const handoffHeading = document.querySelector(".handoff-intro h3");
     const handoffExplanation = document.querySelector(".handoff-intro p");
+    const leadNameField = $("#leadNameField");
+    const leadTelField = $("#leadTelField");
+    const noContact = !confirmedWhatsApp && !phone;
 
     if (contactLabel) {
       contactLabel.textContent = pending ? labels.pendingWhatsApp : labels.directWhatsApp;
@@ -803,8 +806,13 @@
       }
     }
 
+    if (leadNameField && leadTelField) {
+      leadNameField.classList.toggle("hidden", noContact);
+      leadTelField.classList.toggle("hidden", noContact);
+    }
+
     if (trustMessage) {
-      trustMessage.classList.toggle("hidden", !confirmedWhatsApp && !phone);
+      trustMessage.classList.toggle("hidden", noContact);
     }
 
     if (fallback && fallbackMessage && fallbackPhone) {

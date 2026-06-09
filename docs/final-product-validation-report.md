@@ -8,7 +8,7 @@ Este informe responde una pregunta de producto:
 
 > **¿Precios Locales es actualmente coherente como un motor estático reutilizable de guías de precios aproximados para páginas individuales de negocios locales?**
 
-**Respuesta corta:** sí, para validación interna de demos. La estructura de rutas individuales, configuración por negocio, estimador, lenguaje de rango aproximado, resultado, handoff seguro, parámetros URL y documentación interna forman un producto coherente sin backend. La conclusión todavía no equivale a aprobar un piloto con un negocio real: falta completar QA visual/manual en navegador y siguen existiendo gaps de fixtures para teléfono ausente y ausencia total de contacto.
+**Respuesta corta:** sí, para validación interna de demos. La estructura de rutas individuales, configuración por negocio, estimador, lenguaje de rango aproximado, resultado, handoff seguro, parámetros URL y documentación interna forman un producto coherente sin backend. La conclusión todavía no equivale a aprobar un piloto con un negocio real: falta completar QA visual/manual en navegador y el estado sin contacto ya tiene fallback seguro y fixture interno; sigue faltando cobertura de WhatsApp confirmado como único contacto.
 
 La evaluación resume el estado acumulado después de:
 
@@ -77,7 +77,7 @@ Un estado `partial` no autoriza a inventar datos ni a cambiar fórmulas para con
 |---|---|---|---|---|
 | Individual route rendering | pass | El renderer admite el prefijo `/priceguide`; existen shells de rutas y el preflight/validador comprueba las rutas configuradas. | Bajo: una ruta nueva aún debe pasar el flujo normal de publicación. | Sí, smoke test por cada alta real. |
 | `/priceguide/` internal QA behavior | pass | README, renderer y documentación lo definen como vista interna de QA/demo y revisión de rutas. | Bajo: un cambio futuro de wording o navegación podría hacerlo parecer directorio. | Sí, conservar esta restricción en QA. |
-| Business metadata | pass | `businesses.js` centraliza identidad, ubicación, contacto, zonas, servicios, preguntas y rangos; la auditoría documenta nueve fixtures actuales. | Medio: la calidad de una página nueva depende de datos revisados. | Sí, validación de datos por alta. |
+| Business metadata | pass | `businesses.js` centraliza identidad, ubicación, contacto, zonas, servicios, preguntas y rangos; la auditoría documenta diez fixtures actuales, incluido uno interno sin contacto. | Medio: la calidad de una página nueva depende de datos revisados. | Sí, validación de datos por alta. |
 | Above-the-fold clarity | partial | Task #71 redujo contenido inicial y enfocó identidad, propósito aproximado y comienzo del estimador. | Falta confirmación visual final en viewports reales. | Sí, QA manual en navegador. |
 | Service selection | partial | El renderer genera opciones desde servicios configurados y el harness valida preselección válida/inválida por URL. | No se ejecutó interacción manual de todos los fixtures en browser en esta fase. | Sí, checklist E2E manual. |
 | Estimator questions | partial | Los fixtures cubren estructuras múltiples y una estructura mínima de una pregunta con dos opciones. | Pueden quedar problemas visuales o de reset no detectados sin navegador. | Sí, checklist E2E manual. |
@@ -90,18 +90,18 @@ Un estado `partial` no autoriza a inventar datos ni a cambiar fórmulas para con
 | Copy link | partial | Existe acción separada para copiar la URL individual y feedback de estado. | Clipboard y preservación visual de contexto necesitan prueba manual. | Sí, E2E manual. |
 | Confirmed WhatsApp handoff | partial | Hay cinco fixtures con WhatsApp confirmado; el código usa `wa.me` solo cuando el contacto está confirmado. | No se abrió el handoff real en navegador durante esta validación documental. | Sí, prueba manual sin enviar mensaje. |
 | Pending/unconfirmed WhatsApp fallback | pass | Tres fixtures representan WhatsApp pendiente; el CTA activo se oculta y se ofrece llamada cuando hay teléfono público. | Bajo mientras el contrato `whatsappConfirmed: false` se mantenga. | Sí, regresión E2E periódica. |
-| Public phone fallback | pass | Todos los fixtures tienen teléfono; cuatro dependen de llamada por WhatsApp pendiente o ausente. | No cubre todavía teléfono ausente. | Sí, conservar prueba de `tel:` y añadir cobertura ausente por separado. |
-| No-contact fallback | gap | No existe fixture sin WhatsApp ni teléfono; la auditoría indica que el copy actual presupone teléfono. | Alto para cualquier configuración futura sin contacto utilizable. | Sí, PR de comportamiento seguro y luego fixture interno. |
+| Public phone fallback | pass | Los fixtures con WhatsApp pendiente o ausente y teléfono público mantienen la llamada por `tel:`. | Sigue faltando el estado de WhatsApp confirmado como único contacto. | Sí, conservar la regresión de llamada. |
+| No-contact fallback | pass | Task #73 oculta WhatsApp, `tel:` y campos opcionales cuando no existe contacto; muestra copy neutral y mantiene resumen, enlace y reset. El fixture interno dedicado cubre el estado. | Bajo mientras no se reintroduzca una acción rota o captura de contacto. | Sí, regresión E2E periódica. |
 | `source` URL param | pass | El harness cubre cuatro fuentes permitidas, fuente desconocida y valores hostiles. | Bajo; no debe transformarse en analytics o atribución almacenada. | No para esta fase. |
 | `service` URL param | pass | El harness valida servicio válido, inválido y combinación con otros parámetros. | Bajo; los IDs/slugs nuevos deben seguir siendo estables. | Sí, corrida automatizada tras cambios de datos. |
 | `campaign` URL param | pass | El harness valida valores permitidos, vacío, longitud excesiva y contenido hostil. | Bajo; debe seguir siendo contexto efímero, no tracking. | No para esta fase. |
 | `lang` URL param | pass | El harness valida `es`, `en` y fallback seguro para idioma no soportado. | La profundidad real del inglés depende del fixture. | Sí, ampliar fixture bilingüe solo si QA lo requiere. |
 | `zone` URL param | pass | El soporte actual se detecta y valida con zona configurada y zona desconocida ignorada de forma segura. | Una regresión futura podría retirar soporte o desalinear slugs. | Sí, mantener documentación y harness sincronizados. |
-| Combined URL params | pass | El harness cubre combinaciones de fuente, servicio, campaña, idioma y valores hostiles; 72/72 casos pasan actualmente. | Bajo mientras no se agregue persistencia o comportamiento analítico. | No para esta fase. |
+| Combined URL params | pass | El harness cubre combinaciones de fuente, servicio, campaña, idioma y valores hostiles; 100/100 casos pasan actualmente. | Bajo mientras no se agregue persistencia o comportamiento analítico. | No para esta fase. |
 | Spanish copy | pass | Español es la experiencia base y todos los fixtures permanecen utilizables en español. | Bajo; revisar copy por negocio al publicar. | Sí, revisión editorial por alta. |
 | English behavior where available | partial | Carmona ofrece cobertura bilingüe sustantiva; otros fixtures prueban principalmente fallback seguro a español. | Una sola cobertura profunda puede ocultar regresiones específicas de otra categoría. | Sí, segundo fixture bilingüe interno si se necesita mayor cobertura. |
 | Tone variants | pass | La cobertura demo incluye los cuatro estados de tono, incluido `professional` explícito en el fixture interno. | Bajo; la diferenciación visual/textual aún puede requerir revisión manual. | Opcional, dentro de QA de copy. |
-| Demo fixture coverage | partial | Nueve fixtures cubren ciudades, categorías, rangos, servicios múltiples/mínimos, zonas largas, idiomas y contactos confirmados/pendientes/ausentes con teléfono. | Faltan teléfono ausente, solo WhatsApp confirmado y ausencia total de contacto. | Sí, fixtures internos seguros y enfocados. |
+| Demo fixture coverage | partial | Diez fixtures cubren ciudades, categorías, rangos, servicios múltiples/mínimos, zonas largas, idiomas y estados de contacto confirmado, pendiente, solo teléfono y sin contacto. | Falta WhatsApp confirmado como único contacto. | Sí, solo cuando exista un dato interno seguro. |
 | Internal QA documentation | pass | Existen matriz, auditoría, fixture documentado, checklist E2E, harness URL y este informe consolidado. | Bajo: los documentos pueden divergir si no se enlazan y actualizan juntos. | Sí, mantener cross-links y estados. |
 | Repo wording consistency | pass | Task #70 alineó README, UI y matriz con páginas individuales, rangos aproximados y límites del producto. | Un documento histórico todavía podría introducir lenguaje comercial fuera de esta validación; no cambia la definición actual. | Sí, revisar wording en PRs de producto. |
 | Prohibited feature avoidance | pass | La app permanece estática y no añade búsqueda, filtros, reviews, ratings, rankings, marketplace, directorio público, backend, CRM, login, pagos, analytics, cookies, tracking ni lead capture. | Scope creep futuro. | Sí, mantener como criterio bloqueante. |
@@ -118,13 +118,13 @@ Un estado `partial` no autoriza a inventar datos ni a cambiar fórmulas para con
 
 - **Qué añadió o mejoró:** inventarió los fixtures y comparó ciudades, categorías, servicios, zonas, idiomas, tonos, rangos y estados de contacto.
 - **Por qué importa:** separó defects de producto de simples gaps de datos y evitó “resolver” cobertura inventando negocios o cambiando fórmulas.
-- **Riesgo restante:** siguen sin representación los estados con teléfono ausente, incluido el fallback sin contacto.
+- **Riesgo restante:** Task #73 ya cubre teléfono ausente sin contacto; sigue faltando WhatsApp confirmado como único contacto.
 
 ### #65: Minimal internal demo coverage fixture
 
 - **Qué añadió o mejoró:** incorporó un fixture ficticio e interno con un servicio, una pregunta mínima, ocho zonas, WhatsApp ausente, teléfono simulado y tono profesional explícito.
 - **Por qué importa:** cerró gaps de estructura mínima, lista larga de zonas, WhatsApp ausente con teléfono y branch de tono profesional sin usar un negocio real.
-- **Riesgo restante:** no cubre WhatsApp confirmado como único contacto ni ausencia total de contacto.
+- **Riesgo restante:** no cubre WhatsApp confirmado como único contacto; Task #73 ya cubre ausencia total de contacto.
 
 ### #66: E2E guide user-flow checklist
 
@@ -162,6 +162,14 @@ Un estado `partial` no autoriza a inventar datos ni a cambiar fórmulas para con
 - **Por qué importa:** mejora foco y coherencia sin rediseñar el producto ni añadir comportamiento.
 - **Riesgo restante:** falta confirmar visualmente la jerarquía final en móvil y desktop.
 
+
+### #73: Safe no-contact fallback and internal fixture
+
+- La guía individual ahora muestra un mensaje neutral cuando no hay WhatsApp confirmado ni teléfono público.
+- No presenta botón de WhatsApp, enlace `tel:`, acción `#` activa ni campos para nombre/teléfono en ese estado.
+- El fixture interno `/priceguide/guadalajara/electricista/fixture-interno-sin-contacto/` valida estimador, zonas, idiomas, resumen, enlace, reset y parámetros URL.
+- Este flujo no es lead capture, CRM, analytics, tracking ni recolección de contacto; no envía ni almacena información.
+
 ## 7. Fortalezas actuales
 
 - El motor estático funciona sin backend.
@@ -176,8 +184,8 @@ Un estado `partial` no autoriza a inventar datos ni a cambiar fórmulas para con
 
 ## 8. Gaps restantes de producto
 
-1. **Fallback sin contacto:** no hay fixture sin WhatsApp ni teléfono, y la auditoría vigente indica que el copy actual presupone un teléfono. Este es el gap funcional/de cobertura más importante.
-2. **Teléfono ausente:** tampoco existe cobertura para WhatsApp confirmado como único contacto. No debe inventarse un número utilizable para cerrar el gap.
+1. **WhatsApp confirmado como único contacto:** sigue sin fixture; no debe inventarse un número utilizable para cerrar el gap.
+2. **QA visual/manual:** el fallback sin contacto de Task #73 requiere mantenerse en las corridas E2E de desktop y móvil.
 3. **QA visual en navegador:** esta validación automatizada/documental no confirma layout, wrapping, tap targets, clipboard, apertura real de `wa.me`/`tel:` ni legibilidad en viewports móviles y desktop.
 4. **Cobertura bilingüe profunda limitada:** Carmona concentra la cobertura inglesa sustantiva; el fallback seguro existe, pero otra categoría bilingüe reduciría dependencia de un solo fixture.
 5. **Cobertura de ciudades/categorías:** la diversidad actual es suficiente para demo interno, pero algunas categorías solo tienen un ejemplo. Solo debe añadirse otro fixture si responde a un riesgo de engine concreto, no por volumen.
@@ -191,13 +199,13 @@ Estos gaps son de producto/QA. No justifican tareas de ventas, marketing, analyt
 
 Precios Locales es coherente en la fase actual como motor estático reutilizable de páginas individuales de guías de precios aproximados. Las rutas, datos configurables, estimador, lenguaje de precio aproximado, resultado, handoff, parámetros URL y límites de alcance están suficientemente alineados para ejecutar demos y validación interna controlada.
 
-Esta recomendación **no** aprueba todavía un piloto con un negocio real. Antes de elevar la recomendación a “Ready for limited real-business pilot”, debe existir como mínimo una corrida E2E manual documentada en navegador sobre desktop y móvil, y debe decidirse/validarse el fallback seguro para configuraciones sin contacto utilizable.
+Esta recomendación **no** aprueba todavía un piloto con un negocio real. Antes de elevar la recomendación a “Ready for limited real-business pilot”, debe existir como mínimo una corrida E2E manual documentada en navegador sobre desktop y móvil, y debe completarse la corrida E2E documentada del fallback seguro sin contacto.
 
 La recomendación es exclusivamente de producto. No considera demanda, adquisición, ventas, marketing ni viabilidad comercial.
 
 ## 10. Siguientes PRs sugeridos de producto/QA
 
-1. **Añadir un fallback neutral y seguro para ausencia total de contacto**, sin inventar canales; después añadir un fixture interno sin WhatsApp ni teléfono.
+1. **Documentar una corrida E2E visual/manual del fallback sin contacto** en desktop y móvil, sin enviar ni recolectar datos.
 2. **Documentar una corrida E2E visual/manual** con screenshots o notas de desktop y móvil para above the fold, zonas largas, resultado, copias y handoff.
 3. **Ejecutar QA de accesibilidad y tap targets** sobre selección, resultado y acciones móviles sin rediseñar la interfaz.
 4. **Añadir un segundo fixture bilingüe interno** en otra categoría únicamente si se necesita reducir el riesgo de regresión inglesa.

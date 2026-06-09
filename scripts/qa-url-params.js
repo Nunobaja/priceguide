@@ -135,10 +135,16 @@ function isConfirmedWhatsAppBusiness(business) {
 
 function selectFixtures(businesses, warnings) {
   const fixturePath = "/priceguide/guadalajara/fumigacion/fixture-interno-control-preventivo/";
+  const noContactFixturePath = "/priceguide/guadalajara/electricista/fixture-interno-sin-contacto/";
   const selectors = [
     {
       role: "PR #65 internal QA fixture",
       find: business => businessRoute(business) === fixturePath
+    },
+    {
+      role: "Task #73 internal no-contact fixture",
+      find: business => businessRoute(business) === noContactFixturePath &&
+        !business.phone && !business.whatsapp && business.whatsappConfirmed === false
     },
     {
       role: "confirmed WhatsApp business",
@@ -255,6 +261,17 @@ function buildCases(validServiceSlug, validZoneSlug, zoneSupported) {
         source: "whatsapp business",
         service: validServiceSlug,
         campaign: "promo-junio"
+      }
+    },
+    {
+      name: "no-contact combined QA context",
+      query: `?source=qr-physical&service=${validServiceSlug}&campaign=qa-no-contact&lang=en&zone=${validZoneSlug}`,
+      expect: {
+        requestedLanguage: "en",
+        source: "qr physical",
+        service: validServiceSlug,
+        campaign: "qa-no-contact",
+        zone: zoneSupported ? validZoneSlug : null
       }
     },
     {

@@ -81,7 +81,7 @@ No se deben agregar reseñas, ratings, filtros, pagos, login, cookies, base de d
 | Copiar enlace | Usar **Copiar enlace** antes y después de cambiar idioma, servicio y zona. | Permite compartir el mismo estado sin backend. | Copia una URL válida y conserva parámetros presentes/actualizados sin crear rutas nuevas. | ☐ PASS ☐ FAIL ☐ N/A | — | ☐ Sí ☐ No | ☐ Sí ☐ No |
 | Handoff de WhatsApp | Completar todos los campos y abrir WhatsApp. | Confirma continuidad entre estimación y contacto. | Número y mensaje son correctos, codificados y coherentes con el resumen; no promete precio final. | ☐ PASS ☐ FAIL ☐ N/A | — | ☐ Sí ☐ No | ☐ Sí ☐ No |
 | Handoff de llamada | Usar la llamada en un caso con WhatsApp no confirmado o ausente. | Mantiene un siguiente paso cuando existe teléfono público. | El enlace `tel:` funciona y no se etiqueta como WhatsApp. | ☐ PASS ☐ FAIL ☐ N/A | — | ☐ Sí ☐ No | ☐ Sí ☐ No |
-| Fallback sin contacto | Probar ausencia de WhatsApp y teléfono cuando haya fixture válido. | Evita enlaces rotos y expectativas falsas. | Aparece un mensaje seguro de contacto pendiente/no disponible, sin CTA roto. | ☐ PASS ☐ FAIL ☐ N/A | Cobertura actual por confirmar. | ☐ Sí ☐ No | ☐ Sí ☐ No |
+| Fallback sin contacto | Probar el fixture interno sin WhatsApp ni teléfono. | Evita enlaces rotos, expectativas falsas y captura de contacto. | Aparece el mensaje neutral; no hay WhatsApp, `tel:`, acción `#` activa ni campos de nombre/teléfono; copiar y reset siguen disponibles. | ☐ PASS ☐ FAIL ☐ N/A | Cubierto por Task #73. | ☑ Sí ☐ No | ☐ Sí ☑ No |
 | Vista madre de QA interna | Abrir `/` y `/priceguide/` y revisar enlaces/documentación de publicación. | La vista madre es una utilidad interna de revisión de rutas y no debe evolucionar a navegación pública del producto. | Permanece identificada y usada solo como apoyo interno de QA/demo, no se comparte con clientes y no agrega búsqueda, filtros, rankings ni señales de directorio; solo se comparten URLs individuales de negocios. | ☐ PASS ☐ FAIL ☐ N/A | — | ☐ Sí ☐ No | ☐ Sí ☐ No |
 
 ## 5. Validación de parámetros URL
@@ -185,7 +185,12 @@ Esta evaluación describe los datos existentes después del fixture interno de c
 
 ### Gaps de cobertura conocidos
 
-La cobertura actual ya demuestra WhatsApp ausente con teléfono, un negocio con exactamente un servicio, una pregunta con dos opciones, una lista de ocho zonas y tono profesional explícito. Siguen faltando WhatsApp confirmado sin teléfono y ausencia total de contacto. No debe agregarse un fixture sin contacto hasta que exista un fallback seguro que no presuponga un teléfono; cualquier cambio de comportamiento pertenece a otro PR.
+La cobertura actual ya demuestra WhatsApp ausente con teléfono, un negocio con exactamente un servicio, una pregunta con dos opciones, una lista de ocho zonas y tono profesional explícito. Task #73 añade fallback seguro y fixture para ausencia total de contacto. Sigue faltando WhatsApp confirmado sin teléfono; no debe inventarse un número para cubrirlo.
+
+
+### Cobertura añadida en Task #73
+
+El fixture `/priceguide/guadalajara/electricista/fixture-interno-sin-contacto/` cubre el estado sin WhatsApp confirmado ni teléfono público. La validación debe confirmar que este estado conserva estimador, rango aproximado, resumen, enlace, reset y parámetros URL, pero no muestra acciones rotas ni solicita datos de contacto. No es lead capture, CRM, analytics, tracking ni un flujo de recolección.
 
 ## 8. Reglas de pass/fail
 
