@@ -31,6 +31,8 @@ Antes de agregar un negocio real, usa la [`guía interna de incorporación manua
 
 ## Internal QA and product validation
 
+Use the [`final internal product validation report`](docs/final-product-validation-report.md) for the consolidated Tasks #63–#71 product-readiness conclusion, current pass/partial/gap statuses, remaining QA risks, and product-only recommendation for the reusable static individual-guide engine.
+
 Use the [`internal end-to-end guide user-flow checklist`](docs/e2e-guide-user-flow-checklist.md) to validate a real user's path through one individual business guide, from page entry and estimation through summary/link copy and a safe WhatsApp or call handoff.
 
 Use the [`internal URL parameter QA harness`](docs/url-parameter-qa-harness.md) to run deterministic Node checks for safe `source`, `service`, `campaign`, `lang`, and `zone` behavior on existing individual guide fixtures. The harness is internal-only, stores no visits, and does not provide analytics or tracking.

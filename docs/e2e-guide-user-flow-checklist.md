@@ -310,6 +310,7 @@ La salida esperada de una corrida es evidencia interna de calidad y, solo cuando
 
 ## 12. Documentos internos relacionados
 
+- [Informe interno final de validación de producto](final-product-validation-report.md): usa este checklist como evidencia para cerrar los estados visuales e interactivos que permanecen parciales.
 - [Matriz interna de validación de producto](product-validation-matrix.md): dimensiones generales, reglas de pass/fail y límites de producto.
 - [Harness interno de QA para parámetros URL](url-parameter-qa-harness.md): validación determinista sin navegador para parámetros individuales, combinados y hostiles.
 - [Auditoría interna de cobertura de negocios demo](demo-business-coverage-audit.md): inventario vigente de fixtures y gaps de cobertura.

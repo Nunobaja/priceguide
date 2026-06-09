@@ -252,6 +252,7 @@ Esta matriz es exclusivamente para QA y validación interna de producto. No es c
 
 ## 11. Documentos internos relacionados
 
+- [Informe interno final de validación de producto](final-product-validation-report.md): conclusión consolidada de la fase Tasks #63–#71, estados actuales, gaps y recomendación exclusivamente de producto.
 - [Checklist interno E2E del flujo de una guía individual](e2e-guide-user-flow-checklist.md): recorrido ejecutable desde la entrada hasta el resultado, copias, handoff y regresión móvil.
 - [Harness interno de QA para parámetros URL](url-parameter-qa-harness.md): comprobación determinista con Node de `source`, `service`, `campaign`, `lang`, `zone` y valores hostiles.
 - [Auditoría interna de cobertura de negocios demo](demo-business-coverage-audit.md): inventario actual de `businesses.js`, cobertura de rutas/contacto/estimador y gaps recomendados para fixtures futuros.
