@@ -232,4 +232,5 @@ No se recomiendan PRs de ventas, marketing, pitch, landing pages, CRM, lead capt
 - [Auditoría interna de cobertura de negocios demo](demo-business-coverage-audit.md)
 - [Checklist interno E2E del flujo de una guía individual](e2e-guide-user-flow-checklist.md)
 - [Corrida manual interna de QA visual E2E](manual-e2e-visual-qa-run.md)
+- [Checklist interno de QA de accesibilidad y tap targets](accessibility-tap-target-qa-checklist.md)
 - [Harness interno de QA para parámetros URL](url-parameter-qa-harness.md)
