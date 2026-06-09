@@ -1,6 +1,6 @@
 # Plantilla manual de seguimiento para vender a 5 negocios
 
-> **Uso interno y manual.** Hacer una copia por ronda de 25 prospectos. Esta plantilla no es un CRM, una base de datos, una herramienta de analítica, un mecanismo de rastreo ni un medio de captura de prospectos de los negocios. Registrar únicamente datos públicos del negocio y notas necesarias para el contacto; no registrar datos de sus consumidores.
+> **Uso interno y manual.** Hacer una copia por ronda de 25 negocios potenciales. Esta plantilla no es un CRM, una base de datos, una herramienta de analítica, un mecanismo de rastreo ni un medio de captura de prospectos de los negocios. Registrar únicamente datos públicos del negocio y notas necesarias para el contacto; no registrar datos de sus consumidores.
 
 ## Datos de la ronda
 
@@ -20,9 +20,9 @@
 - **Paquete conversado:** escribir `Básico`, `Pro`, `Local Completo`, `por definir` o `no aplica`.
 - **Resultado:** anotar sólo el resultado comercial real, sin interpretar desempeño futuro.
 
-## Lista de 25 prospectos
+## Lista de 25 negocios potenciales
 
-| Núm. de prospecto | Nombre del negocio | Nicho | Ciudad o zona | Teléfono público | ¿WhatsApp visible? sí/no/pendiente | Fuente encontrada | Hipótesis del problema | Toque 1 | Toque 2 | Toque 3 | Toque 4 | Toque 5 | Estado de conversación | Oferta mostrada | Paquete conversado | Resultado | Siguiente acción | Notas |
+| Núm. de negocio | Nombre del negocio | Nicho | Ciudad o zona | Teléfono público | ¿WhatsApp visible? sí/no/pendiente | Fuente encontrada | Hipótesis del problema | Toque 1 | Toque 2 | Toque 3 | Toque 4 | Toque 5 | Estado de conversación | Oferta mostrada | Paquete conversado | Resultado | Siguiente acción | Notas |
 |---:|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | 1 |  |  |  |  | pendiente |  |  |  |  |  |  |  | sin contactar | no | por definir |  |  |  |
 | 2 |  |  |  |  | pendiente |  |  |  |  |  |  |  | sin contactar | no | por definir |  |  |  |

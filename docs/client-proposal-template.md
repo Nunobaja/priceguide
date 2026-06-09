@@ -16,7 +16,7 @@ Copia y completa la [plantilla reutilizable de propuesta](templates/client-propo
 
 Usa esta guía:
 
-- Después de que un prospecto muestre interés.
+- Después de que un negocio interesado confirme que desea recibir una propuesta.
 - Después de presentar una demostración.
 - Después de elegir el paquete Básico, Pro o Local Completo.
 - Antes de iniciar la incorporación.
