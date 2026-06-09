@@ -313,6 +313,7 @@ La salida esperada de una corrida es evidencia interna de calidad y, solo cuando
 
 ## 12. Documentos internos relacionados
 
+- [Checklist interno final de smoke test para una guía de negocio real](real-business-smoke-test-checklist.md): sign-off final de datos, ruta, flujo, contacto, parámetros, visual y accesibilidad antes de compartir una guía real.
 - [Corrida manual interna de QA visual E2E](manual-e2e-visual-qa-run.md): instrucciones, viewports, fixtures y tabla `PASS`/`PARTIAL`/`FAIL` para ejecutar y registrar la validación visual en navegador.
 - [Checklist interno de QA de accesibilidad y tap targets](accessibility-tap-target-qa-checklist.md): validación enfocada de teclado, foco, claridad de controles, targets móviles, resultado, wrapping y handoff seguro.
 - [Informe interno final de validación de producto](final-product-validation-report.md): usa este checklist como evidencia para cerrar los estados visuales e interactivos que permanecen parciales.
