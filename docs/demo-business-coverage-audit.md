@@ -9,11 +9,13 @@ Esta auditoría comprueba si los datos actuales de negocios demo cubren suficien
 Responde cuatro preguntas:
 
 1. **¿Qué cobertura ya existe?** Once negocios, cinco ciudades/rutas de ciudad, tres estados, seis slugs de categoría, varios niveles de precio, los cuatro estados de tono y ejemplos en español e inglés.
-2. **¿Qué cobertura falta?** Task #73 cubre la ausencia total de contacto y Task #76 cubre un segundo caso bilingüe en jardinería con WhatsApp confirmado como único contacto. La traducción completa todavía no existe en todos los fixtures.
+2. **¿Qué cobertura falta?** La ausencia total de contacto y el caso bilingüe de jardinería con WhatsApp confirmado como único contacto ya tienen fixtures internos. La traducción completa todavía no existe en todos los fixtures.
 3. **¿Qué gaps importan para validar el producto?** El fallback sin contacto y su fixture interno ya están cubiertos; el estado de WhatsApp confirmado como único canal ya tiene un fixture ficticio de QA; permanece la cobertura inglesa desigual fuera de los fixtures bilingües. La estructura mínima del estimador, el tono profesional y la longitud de zonas ya tienen cobertura directa.
-4. **¿Qué debe atenderse en PRs posteriores?** Debe mantenerse el número deliberadamente ficticio de Task #76 solo para QA y no tratarlo como contacto público; el fixture sin contacto ya existe. Cualquier cambio de comportamiento debe quedar separado y requerir un fallo reproducible.
+4. **¿Qué debe atenderse en PRs posteriores?** Debe mantenerse el número deliberadamente ficticio del fixture bilingüe solo para QA y no tratarlo como contacto público. Cualquier cambio de comportamiento debe quedar separado y requerir un fallo reproducible.
 
 La auditoría no determina si los negocios, categorías o precios representan el mercado. Solo determina si los fixtures actuales permiten probar el motor.
+
+**Corte de evidencia:** 9 de junio de 2026. Inventario contrastado con `businesses.js`, los shells bajo `priceguide/` y los fixtures usados por `scripts/qa-url-params.js`.
 
 ## 2. Fuentes de datos y método
 
@@ -33,7 +35,7 @@ Reglas de lectura usadas en esta auditoría:
 - “Lista corta de zonas” significa 3 zonas, que es el mínimo entre los fixtures previos; la lista larga del fixture interno contiene 8 zonas y permite estresar wrapping y selección.
 - Los estados se normalizan a partir de la ciudad declarada: Baja California Sur, Sinaloa y Jalisco.
 
-Los datos agregados para cobertura son fixtures ficticios y explícitamente internos de QA. Task #76 usa un número de WhatsApp no enrutable aceptado por la validación; no representa un negocio real ni hace afirmaciones comerciales.
+Los datos agregados para cobertura son fixtures ficticios y explícitamente internos de QA. El fixture bilingüe usa un número de WhatsApp deliberadamente ficticio y no enrutable; no representa un negocio real ni hace afirmaciones comerciales.
 
 ## 3. Resumen cuantitativo
 
@@ -81,16 +83,16 @@ La repetición de tres negocios en Puerto Vallarta/electricista y dos en Guadala
 
 | Negocio | Ciudad | Estado | Categoría | Slug/path | Servicios | Zonas | Estado WhatsApp | Teléfono público | Cobertura de idioma | Tono | Notas |
 |---|---|---|---|---|---:|---:|---|---|---|---|---|
-| Plomería Mario | Los Cabos | Baja California Sur | Plomería profesional (`plomeros`) | `/los-cabos/plomeros/plomeria-mario` | 4 | 4 | Confirmado por contrato actual | Disponible | Solo español | `friendly` | Único fixture con 4 servicios; incluye un servicio de 2 preguntas y nombres con `/` y paréntesis. |
-| Frío Express | Mazatlán | Sinaloa | Aire acondicionado | `/mazatlan/aire-acondicionado/frio-express` | 3 | 4 | Confirmado por contrato actual | Disponible | Solo español | `technical` | Cubre mantenimiento, reparación e instalación; llega a $3,200 base. |
-| Control Total | Guadalajara | Jalisco | Fumigación y control de plagas | `/guadalajara/fumigacion/control-total` | 3 | 4 | Confirmado por contrato actual | Disponible | Solo español | Ausente | Categoría distinta de instalaciones/reparaciones; incluye una opción con solo 2 respuestas. |
-| Carmona Hnos Climas y Refrigeración | Cabo San Lucas | Baja California Sur | Aire acondicionado y refrigeración | `/cabo-san-lucas/aire-acondicionado/carmona-hnos-climas-refrigeracion` | 3 | 4 | Confirmado por contrato actual | Disponible | Español + inglés sustantivo | Ausente | Principal fixture bilingüe; máximo base de $4,200. |
-| De la Hoz Plomería | Cabo San Lucas | Baja California Sur | Plomería residencial | `/cabo-san-lucas/plomeria/de-la-hoz-plomeria` | 3 | 3 | Confirmado por contrato actual | Disponible | Solo español | Ausente | Lista corta actual; prueba el slug de categoría `plomeria`. |
+| Plomería Mario | Los Cabos | Baja California Sur | Plomería profesional (`plomeros`) | `/los-cabos/plomeros/plomeria-mario` | 4 | 4 | Campo `whatsapp` presente y no marcado como pendiente | Disponible | Solo español | `friendly` | Único fixture con 4 servicios; incluye un servicio de 2 preguntas y nombres con `/` y paréntesis. |
+| Frío Express | Mazatlán | Sinaloa | Aire acondicionado | `/mazatlan/aire-acondicionado/frio-express` | 3 | 4 | Campo `whatsapp` presente y no marcado como pendiente | Disponible | Solo español | `technical` | Cubre mantenimiento, reparación e instalación; llega a $3,200 base. |
+| Control Total | Guadalajara | Jalisco | Fumigación y control de plagas | `/guadalajara/fumigacion/control-total` | 3 | 4 | Campo `whatsapp` presente y no marcado como pendiente | Disponible | Solo español | Ausente | Categoría distinta de instalaciones/reparaciones; incluye una opción con solo 2 respuestas. |
+| Carmona Hnos Climas y Refrigeración | Cabo San Lucas | Baja California Sur | Aire acondicionado y refrigeración | `/cabo-san-lucas/aire-acondicionado/carmona-hnos-climas-refrigeracion` | 3 | 4 | Campo `whatsapp` presente y no marcado como pendiente | Disponible | Español + inglés sustantivo | Ausente | Principal fixture bilingüe; máximo base de $4,200. |
+| De la Hoz Plomería | Cabo San Lucas | Baja California Sur | Plomería residencial | `/cabo-san-lucas/plomeria/de-la-hoz-plomeria` | 3 | 3 | Campo `whatsapp` presente y no marcado como pendiente | Disponible | Solo español | Ausente | Lista corta actual; prueba el slug de categoría `plomeria`. |
 | Instal PV | Puerto Vallarta | Jalisco | Electricista | `/puerto-vallarta/electricista/instal-pv` | 3 | 3 | Pendiente/no confirmado | Disponible | Español; nota de contacto también en inglés | Ausente | Fallback de llamada; mezcla servicio bajo ($450) y proyecto alto ($4,200). |
 | Servicios Profesionales de Electricidad y Plomería Martínez | Puerto Vallarta | Jalisco | Electricista | `/puerto-vallarta/electricista/servicios-profesionales-electricidad-plomeria-martinez` | 3 | 4 | Pendiente/no confirmado | Disponible | Español; nota de contacto también en inglés | Ausente | Nombre/ruta muy largos y servicios de dos dominios bajo una categoría. |
 | Fixture interno de control preventivo | Guadalajara | Jalisco | Control preventivo de plagas (`fumigacion`) | `/guadalajara/fumigacion/fixture-interno-control-preventivo` | 1 | 8 | Ausente | Disponible; número simulado de QA | Solo español | `professional` | Fixture explícitamente interno: un servicio, una pregunta con dos opciones, rango aproximado bajo y lista larga con acentos y nombres compuestos. |
-| Fixture interno QA Jardín Bilingüe | Guadalajara | Jalisco | Jardinería residencial (`jardineria`) | `/guadalajara/jardineria/fixture-interno-jardineria-bilingue` | 1 | 4 | Confirmado; número ficticio de QA | Ausente | Español + inglés sustantivo | `professional` | Fixture ficticio de Task #76; un servicio, tres preguntas, zonas con espacios y acentos, y handoff WhatsApp-only sin contacto real. |
-| Fixture interno QA sin contacto | Guadalajara | Jalisco | Electricista | `/guadalajara/electricista/fixture-interno-sin-contacto` | 1 | 3 | Ausente | Ausente | Español + inglés de QA | `professional` | Fixture ficticio e interno de Task #73; valida el mensaje neutral sin WhatsApp, `tel:` ni recolección de contacto. |
+| Fixture interno QA Jardín Bilingüe | Guadalajara | Jalisco | Jardinería residencial (`jardineria`) | `/guadalajara/jardineria/fixture-interno-jardineria-bilingue` | 1 | 4 | Confirmado; número ficticio de QA | Ausente | Español + inglés sustantivo | `professional` | Fixture ficticio interno; un servicio, tres preguntas, zonas con espacios y acentos, y handoff WhatsApp-only sin contacto real. |
+| Fixture interno QA sin contacto | Guadalajara | Jalisco | Electricista | `/guadalajara/electricista/fixture-interno-sin-contacto` | 1 | 3 | Ausente | Ausente | Español + inglés de QA | `professional` | Fixture ficticio interno; valida el mensaje neutral sin WhatsApp, `tel:` ni recolección de contacto. |
 | Solara Proyectos Eléctricos y Paneles Solares | Puerto Vallarta | Jalisco | Electricista | `/puerto-vallarta/electricista/solara-proyectos-electricos-paneles-solares` | 3 | 3 | Pendiente/no confirmado | Disponible | Español; nota de contacto también en inglés | Ausente | Mayor máximo base ($7,500); mezcla mantenimiento bajo y solar alto. |
 
 ## 5. Tabla B — Matriz de cobertura
@@ -118,7 +120,7 @@ La repetición de tres negocios en Puerto Vallarta/electricista y dos en Guadala
 | Rangos altos | Sí | Solara hasta $7,500 | Valida formato y legibilidad de cifras más largas. | Baja | No |
 | Mezcla barato/caro | Sí | Instal PV y Solara | Valida cambios grandes de escala dentro del mismo negocio. | Baja | No |
 | Solo español | Sí | Plomería Mario | Valida el fallback de copy cuando se solicita inglés sin traducción específica. | Baja | No |
-| Campos/copy en inglés | Sí, parcial | Carmona Hnos y Fixture interno QA Jardín Bilingüe | Dos categorías tienen copy bilingüe sustantivo; otros fixtures aún dependen de traducción parcial o fallback. | Baja | Sí, regresión |
+| Campos/copy en inglés | Sí, parcial | Carmona Hnos, Fixture interno QA Jardín Bilingüe y Fixture interno QA sin contacto | Tres categorías tienen copy bilingüe sustantivo; otros fixtures aún dependen de traducción parcial o fallback. | Baja | Sí, regresión |
 | `tone: professional` | Sí | Fixture interno de control preventivo | Valida el branch profesional explícito. | Baja | No |
 | `tone: friendly` | Sí | Plomería Mario | Valida copy de voz amigable. | Baja | No |
 | `tone: technical` | Sí | Frío Express | Valida copy de voz técnica. | Baja | No |
@@ -153,7 +155,7 @@ La segunda variante es el prefijo opcional para GitHub Pages. Los shells existen
 | Servicios Profesionales Martínez | `/puerto-vallarta/electricista/servicios-profesionales-electricidad-plomeria-martinez` | `puerto-vallarta` | `electricista` | `servicios-profesionales-electricidad-plomeria-martinez` | Sí | Ruta excepcionalmente larga; útil para QA de copia y móvil. |
 | Solara | `/puerto-vallarta/electricista/solara-proyectos-electricos-paneles-solares` | `puerto-vallarta` | `electricista` | `solara-proyectos-electricos-paneles-solares` | Sí | Ruta larga y categoría amplia frente al servicio solar. |
 | Fixture interno de control preventivo | `/guadalajara/fumigacion/fixture-interno-control-preventivo` | `guadalajara` | `fumigacion` | `fixture-interno-control-preventivo` | Sí | Ruta interna explícita que reutiliza ciudad/categoría sin colisión. |
-| Fixture interno QA Jardín Bilingüe | `/guadalajara/jardineria/fixture-interno-jardineria-bilingue` | `guadalajara` | `jardineria` | `fixture-interno-jardineria-bilingue` | Sí | Ruta interna individual de Task #76 en una categoría distinta, sin comportamiento de directorio. |
+| Fixture interno QA Jardín Bilingüe | `/guadalajara/jardineria/fixture-interno-jardineria-bilingue` | `guadalajara` | `jardineria` | `fixture-interno-jardineria-bilingue` | Sí | Ruta interna individual en una categoría distinta, sin comportamiento de directorio. |
 
 No se observan slugs inválidos con el contrato actual. La concentración de tres rutas bajo Puerto Vallarta/electricista es útil para detectar colisiones; los slugs de negocio son distintos.
 
@@ -168,11 +170,11 @@ No se observan slugs inválidos con el contrato actual. La concentración de tre
 | WhatsApp confirmado sin teléfono | Sí | Fixture interno QA Jardín Bilingüe | Se valida el handoff principal sin inventar un enlace telefónico. |
 | Sin contacto | Sí | Fixture interno QA sin contacto | Se valida copy neutral, resumen, copias y reset sin acciones de contacto rotas. |
 
-**Conclusión de contacto:** el happy path, WhatsApp pendiente y WhatsApp ausente con teléfono están cubiertos. Task #73 cubre la ausencia total de contacto con copy neutral, sin acciones rotas ni campos de contacto. Task #76 cubre WhatsApp confirmado sin teléfono con un número ficticio no enrutable, reservado para QA.
+**Conclusión de contacto:** el happy path, WhatsApp pendiente, WhatsApp ausente con teléfono, ausencia total de contacto y WhatsApp confirmado sin teléfono están cubiertos por configuraciones observables. Los fixtures internos usan copy neutral o contactos ficticios reservados para QA, según corresponde.
 
 ## 8. Auditoría de servicios y estimador
 
-Todos los servicios actuales tienen `id`, nombre, rango `base`, preguntas y opciones con factores. Los 27 servicios tienen rangos de dos extremos y lenguaje de resultado aproximado proporcionado por la app. No se encontró un servicio sin preguntas, sin opciones o sin rango.
+Todos los servicios actuales tienen `id`, nombre, rango `base`, preguntas y opciones con factores. Los 28 servicios tienen rangos de dos extremos y lenguaje de resultado aproximado proporcionado por la app. No se encontró un servicio sin preguntas, sin opciones o sin rango.
 
 | Negocio | Servicios | Preguntas/opciones requeridas | Rangos presentes | Lenguaje aproximado | Slugs para `service` | Riesgo estructural |
 |---|---:|---|---|---|---|---|
@@ -211,7 +213,7 @@ Los gaps restantes no prueban un defecto. La cardinalidad mínima y la lista lar
 | `source` | Compatible en todos los negocios | `?source=google-business-profile` | Normalización, conservación en resumen/handoff y fallo seguro | No depende de campos por negocio; el corpus no aporta contrastes de datos. No debe interpretarse como tracking. |
 | `service` | Compatible en todos | `?service=inspeccion-preventiva` en el fixture interno | Preselección por ID en un negocio de un solo servicio; también por nombre slugificado y `nameEn` cuando existe | Los nombres complejos deben seguir probándose explícitamente en fixtures existentes. |
 | `campaign` | Compatible en todos | `?campaign=qa-junio` | Conservación de contexto válido y rechazo seguro de valores inválidos | Es contexto de enlace, no analytics ni atribución automática. |
-| `lang` | Compatible; inglés sustantivo en dos fixtures | `?lang=en` en Carmona y jardinería interna | UI inglesa y campos ingleses con fallback a español | La dependencia de Carmona se reduce, pero otros fixtures siguen con traducción parcial o fallback. |
+| `lang` | Compatible; inglés sustantivo en tres fixtures | `?lang=en` en Carmona, jardinería interna y fixture sin contacto | UI inglesa y campos ingleses con fallback a español | La dependencia de Carmona se reduce, pero otros fixtures siguen con traducción parcial o fallback. |
 | `zone` | **Soportado actualmente** | `?service=inspeccion-preventiva&zone=san-juan-de-ocotan` en el fixture interno | Preselección de zona por slug ES o EN y combinación con servicio | No se debe documentar como “no soportado”. Ocho zonas permiten probar una selección larga. |
 
 Combinaciones mínimas recomendadas para QA actual:
@@ -227,13 +229,13 @@ Ningún parámetro debe cambiar rangos base, factores, fórmulas, rutas, slugs o
 
 ### Alta
 
-- Falta el caso “solo WhatsApp” con teléfono ausente.
-- El estado sin contacto está cubierto por el fixture interno de Task #73 y su fallback seguro.
+- El caso “solo WhatsApp” con teléfono ausente está cubierto por el fixture bilingüe interno con un número ficticio no enrutable.
+- El estado sin contacto está cubierto por el fixture interno dedicado y su fallback seguro.
 - La reutilización de rutas está demostrada en cinco ciudades y seis slugs de categoría; no se identifica una ciudad/categoría obligatoria adicional. El riesgo alto no es cantidad geográfica, sino no cubrir nuevos patrones estructurales cuando se introduzcan.
 
 ### Media
 
-- Solo un negocio tiene cobertura inglesa sustantiva.
+- Tres fixtures tienen cobertura inglesa sustantiva; el resto conserva cobertura parcial o fallback a español.
 - La variedad de precios bajos/altos sí existe; no hay gap de rango prioritario con los umbrales de esta auditoría.
 
 ### Baja
@@ -247,8 +249,8 @@ Ningún parámetro debe cambiar rangos base, factores, fórmulas, rutas, slugs o
 | Gap | Por qué importa | Próximo PR recomendado | ¿Data-only o cambio de comportamiento? | Prioridad |
 |---|---|---|---|---|
 | WhatsApp ausente + teléfono presente | Distingue campo ausente de un número pendiente. | Cubierto por el fixture interno de control preventivo. | Data-only completado | Cerrado |
-| WhatsApp presente + teléfono ausente | Valida el happy path sin depender del campo telefónico. | Mantener pendiente hasta disponer de un WhatsApp confirmado y seguro para un fixture interno; no inventar un contacto utilizable. | Data-only cuando exista dato seguro | Alta |
-| Sin WhatsApp ni teléfono | Valida el fallback seguro final. | Cubierto por Task #73 con mensaje neutral y fixture interno, sin contacto inventado. | Comportamiento y fixture completados | Cerrado |
+| WhatsApp presente + teléfono ausente | Valida el happy path sin depender del campo telefónico. | Cubierto por el fixture bilingüe con un número ficticio no enrutable reservado para QA. | Cobertura existente | Cerrado |
+| Sin WhatsApp ni teléfono | Valida el fallback seguro final. | Cubierto por el fixture interno con mensaje neutral, sin contacto inventado. | Cobertura existente | Cerrado |
 | Estructura mínima válida del estimador | Detecta supuestos de 3 servicios, 3 preguntas o 3 opciones. | Cubierto con 1 servicio, 1 pregunta y 2 opciones. | Data-only completado | Cerrado |
 | Lista de zonas larga | Prueba overflow, wrapping y selección móvil. | Cubierto con ocho zonas realistas en el fixture interno. | Data-only completado | Cerrado |
 | `tone: "professional"` explícito | Permite demostrar el branch profesional en vez de inferirlo del default. | Cubierto por el fixture interno de control preventivo. | Data-only completado | Cerrado |
@@ -257,7 +259,7 @@ Ningún parámetro debe cambiar rangos base, factores, fórmulas, rutas, slugs o
 
 ### Recomendación para el próximo PR
 
-Este PR interno y data-only cubre WhatsApp ausente con teléfono, un negocio de un solo servicio con estructura mínima válida, una lista larga de zonas y tono profesional explícito. Task #73 añade el estado sin contacto de forma segura. Task #76 cubre además WhatsApp confirmado como único contacto mediante un número ficticio no enrutable y añade una segunda categoría bilingüe. La traducción total de todos los fixtures permanece fuera de alcance.
+La cobertura actual incluye WhatsApp ausente con teléfono, ausencia total de contacto, WhatsApp confirmado como único contacto mediante un número ficticio no enrutable, un negocio de un solo servicio con estructura mínima válida, una lista larga de zonas, tono profesional explícito y una segunda categoría bilingüe. La traducción total de todos los fixtures permanece fuera de alcance.
 
 Cualquier PR posterior debe:
 

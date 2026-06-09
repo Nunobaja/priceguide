@@ -21,6 +21,8 @@ Esta matriz debe probar el producto a través de:
 
 La matriz valida el motor y sus límites. No autoriza cambios en rangos, fórmulas, rutas, slugs ni datos de negocios.
 
+**Corte de evidencia:** 9 de junio de 2026. Los estados de cobertura se contrastaron con `PRODUCT_RULES.md`, `businesses.js`, `app.js`, los shells bajo `priceguide/`, `scripts/publish-preflight.js` y `scripts/qa-url-params.js`. Las casillas manuales permanecen sin marcar hasta ejecutar cada corrida reproducible.
+
 ## 2. Qué no debe convertirse esta validación
 
 Esta validación:
@@ -81,7 +83,7 @@ No se deben agregar reseñas, ratings, filtros, pagos, login, cookies, base de d
 | Copiar enlace | Usar **Copiar enlace** antes y después de cambiar idioma, servicio y zona. | Permite compartir el mismo estado sin backend. | Copia una URL válida y conserva parámetros presentes/actualizados sin crear rutas nuevas. | ☐ PASS ☐ FAIL ☐ N/A | — | ☐ Sí ☐ No | ☐ Sí ☐ No |
 | Handoff de WhatsApp | Completar todos los campos y abrir WhatsApp. | Confirma continuidad entre estimación y contacto. | Número y mensaje son correctos, codificados y coherentes con el resumen; no promete precio final. | ☐ PASS ☐ FAIL ☐ N/A | — | ☐ Sí ☐ No | ☐ Sí ☐ No |
 | Handoff de llamada | Usar la llamada en un caso con WhatsApp no confirmado o ausente. | Mantiene un siguiente paso cuando existe teléfono público. | El enlace `tel:` funciona y no se etiqueta como WhatsApp. | ☐ PASS ☐ FAIL ☐ N/A | — | ☐ Sí ☐ No | ☐ Sí ☐ No |
-| Fallback sin contacto | Probar el fixture interno sin WhatsApp ni teléfono. | Evita enlaces rotos, expectativas falsas y captura de contacto. | Aparece el mensaje neutral; no hay WhatsApp, `tel:`, acción `#` activa ni campos de nombre/teléfono; copiar y reset siguen disponibles. | ☐ PASS ☐ FAIL ☐ N/A | Cubierto por Task #73. | ☑ Sí ☐ No | ☐ Sí ☑ No |
+| Fallback sin contacto | Probar el fixture interno sin WhatsApp ni teléfono. | Evita enlaces rotos, expectativas falsas y captura de contacto. | Aparece el mensaje neutral; no hay WhatsApp, `tel:`, acción `#` activa ni campos de nombre/teléfono; copiar y reset siguen disponibles. | ☐ PASS ☐ FAIL ☐ N/A | Fixture actual: `fixture-interno-sin-contacto`. | ☐ Sí ☑ No | ☐ Sí ☑ No |
 | Vista madre de QA interna | Abrir `/` y `/priceguide/` y revisar enlaces/documentación de publicación. | La vista madre es una utilidad interna de revisión de rutas y no debe evolucionar a navegación pública del producto. | Permanece identificada y usada solo como apoyo interno de QA/demo, no se comparte con clientes y no agrega búsqueda, filtros, rankings ni señales de directorio; solo se comparten URLs individuales de negocios. | ☐ PASS ☐ FAIL ☐ N/A | — | ☐ Sí ☐ No | ☐ Sí ☐ No |
 
 ## 5. Validación de parámetros URL
@@ -101,7 +103,7 @@ Antes de la validación manual, ejecutar el [harness interno de QA para parámet
 | Campaña válida | `?campaign=promo-verano` | Incluye `promo-verano` en resumen/handoff; no crea analytics ni cambia el cálculo. | ☐ PASS ☐ FAIL | — |
 | Español explícito | `?lang=es` | Usa español. | ☐ PASS ☐ FAIL | — |
 | Inglés explícito | `?lang=en` | Usa inglés cuando la guía tiene copy inglés; si no lo tiene, permanece usable con fallback seguro. | ☐ PASS ☐ FAIL | — |
-| Bilingüe cross-category | `/guadalajara/jardineria/fixture-interno-jardineria-bilingue?lang=en&service=mantenimiento-jardin-demo&source=google-business-profile&campaign=qa-bilingual&zone=jardines-del-pais` | Mantiene inglés sustantivo, servicio, fuente, campaña y zona en el fixture interno de jardinería sin alterar cálculo ni rango aproximado. | ☐ PASS ☐ FAIL | Task #76; no implica traducción completa de todos los fixtures. |
+| Bilingüe cross-category | `/guadalajara/jardineria/fixture-interno-jardineria-bilingue?lang=en&service=mantenimiento-jardin-demo&source=google-business-profile&campaign=qa-bilingual&zone=jardines-del-pais` | Mantiene inglés sustantivo, servicio, fuente, campaña y zona en el fixture interno de jardinería sin alterar cálculo ni rango aproximado. | ☐ PASS ☐ FAIL | Fixture interno actual; no implica traducción completa de todos los fixtures. |
 | Zona válida | `?zone={validZoneSlug}` | **Actualmente soportado:** preselecciona una zona existente sin cambiar datos ni crear una zona. | ☐ PASS ☐ FAIL | — |
 | Zona desconocida | `?zone=unknown-zone` | **Actualmente soportado:** ignora el valor desconocido y permite elegir una zona manualmente. | ☐ PASS ☐ FAIL | — |
 | Fuente + servicio | `?source=google-business-profile&service={validServiceSlug}` | Conserva la fuente y preselecciona el servicio; ambos llegan al resumen/handoff cuando corresponde. | ☐ PASS ☐ FAIL | — |
@@ -176,7 +178,7 @@ Esta evaluación describe los datos existentes después del fixture interno de c
 | Rangos bajos | yes | Fixture interno parte de $350 MXN; Plomería Mario parte de $400 MXN | Formato confuso en cifras pequeñas | Probar mínimo y factores más bajos. |
 | Rangos altos | yes | Solara llega a $7,500 MXN base; Carmona e Instal PV llegan a $4,200 MXN | Wrapping o lectura ambigua en cifras altas | Probar máximo con factores altos y viewport móvil. |
 | Solo español | yes | Plomería Mario, Frío Express, Control Total y otros | Fallback de idioma no validado | Abrir con y sin `lang=en`. |
-| Español + inglés | yes | Carmona Hnos Climas y Refrigeración y Fixture interno QA Jardín Bilingüe | Traducción parcial o cambio de cálculo | Ejecutar el flujo completo en ambos idiomas. |
+| Español + inglés | yes | Carmona Hnos Climas y Refrigeración, Fixture interno QA Jardín Bilingüe y Fixture interno QA sin contacto | Traducción parcial o cambio de cálculo | Ejecutar el flujo completo en ambos idiomas. |
 | Tono amigable | yes | Plomería Mario (`friendly`) | Motor demasiado rígido en voz | Revisar copy sin convertirlo en material comercial. |
 | Tono profesional | yes | Fixture interno de control preventivo (`professional`) | Cobertura difícil de demostrar | Validar el branch explícito y conservar también regresión del fallback sin `tone`. |
 | Tono técnico | yes | Frío Express (`technical`) | Preguntas o ayudas técnicas poco claras | Probar comprensión y legibilidad móvil. |
@@ -186,10 +188,10 @@ Esta evaluación describe los datos existentes después del fixture interno de c
 
 ### Gaps de cobertura conocidos
 
-La cobertura actual ya demuestra WhatsApp ausente con teléfono, un negocio con exactamente un servicio, una pregunta con dos opciones, una lista de ocho zonas y tono profesional explícito. Task #73 añade fallback seguro y fixture para ausencia total de contacto. Task #76 añade WhatsApp confirmado sin teléfono con un número deliberadamente ficticio y no enrutable, reservado para QA. La traducción completa sigue limitada a fixtures concretos.
+La cobertura actual demuestra WhatsApp ausente con teléfono, ausencia total de contacto, WhatsApp confirmado sin teléfono, negocios con exactamente un servicio, una pregunta con dos opciones, una lista de ocho zonas y tono profesional explícito. Los contactos ficticios permanecen reservados para QA. La traducción completa sigue limitada a fixtures concretos.
 
 
-### Cobertura añadida en Task #73
+### Cobertura actual sin contacto
 
 El fixture `/priceguide/guadalajara/electricista/fixture-interno-sin-contacto/` cubre el estado sin WhatsApp confirmado ni teléfono público. La validación debe confirmar que este estado conserva estimador, rango aproximado, resumen, enlace, reset y parámetros URL, pero no muestra acciones rotas ni solicita datos de contacto. No es lead capture, CRM, analytics, tracking ni un flujo de recolección.
 
@@ -258,7 +260,7 @@ Esta matriz es exclusivamente para QA y validación interna de producto. No es c
 
 ## 11. Documentos internos relacionados
 
-- [Informe interno final de validación de producto](final-product-validation-report.md): conclusión consolidada de la fase Tasks #63–#71, estados actuales, gaps y recomendación exclusivamente de producto.
+- [Informe interno final de validación de producto](final-product-validation-report.md): conclusión consolidada de la fase de validación, estados actuales, gaps y recomendación exclusivamente de producto.
 - [Checklist interno E2E del flujo de una guía individual](e2e-guide-user-flow-checklist.md): recorrido ejecutable desde la entrada hasta el resultado, copias, handoff y regresión móvil.
 - [Harness interno de QA para parámetros URL](url-parameter-qa-harness.md): comprobación determinista con Node de `source`, `service`, `campaign`, `lang`, `zone` y valores hostiles.
 - [Auditoría interna de cobertura de negocios demo](demo-business-coverage-audit.md): inventario actual de `businesses.js`, cobertura de rutas/contacto/estimador y gaps recomendados para fixtures futuros.
