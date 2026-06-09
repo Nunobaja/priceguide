@@ -18,19 +18,19 @@ Follow [`AGENT.md`](AGENT.md) before taking work from this queue. Take only the 
   - **Testing expectations:** Run JavaScript syntax checks and `node scripts/publish-preflight.js`; manually inspect at least one individual guide at desktop and representative mobile widths; confirm routes and estimator output are unchanged.
   - **Product-rule reminder:** Keep the experience focused on one business's approximate price guide; do not add discovery, listings, search, rankings, reviews, lead capture, or new claims.
 
-- [ ] **#66 Create internal product validation matrix**
+- [x] **#66 Create internal product validation matrix** — Completed by PR #82.
   - **Goal:** Create or update one internal matrix that maps product rules and supported guide states to explicit validation evidence and gaps.
   - **Allowed files:** `docs/product-validation-matrix.md` and `README.md` only if its documentation link needs correction.
   - **Testing expectations:** Check every matrix row against current repository behavior and data; verify links and terminology; confirm the change is documentation only.
   - **Product-rule reminder:** The matrix is internal QA documentation, not a public directory, sales artifact, analytics report, or source of invented validation claims.
 
-- [ ] **#67 Audit demo business coverage**
+- [x] **#67 Audit demo business coverage** — Completed by PR #82.
   - **Goal:** Document which existing demo businesses cover required product states and identify genuine validation gaps without changing business data.
   - **Allowed files:** `docs/demo-business-coverage-audit.md` and `README.md` only if its documentation link needs correction.
   - **Testing expectations:** Compare the audit against `businesses.js`, routes, and existing QA fixtures; distinguish observed coverage from untested gaps; confirm the change is documentation only.
   - **Product-rule reminder:** Do not invent business facts, prices, coverage, contact status, or claims, and do not present demo fixtures as public listings.
 
-- [ ] **#68 Add/adjust demo coverage only where product gaps exist**
+- [x] **#68 Add/adjust demo coverage only where product gaps exist** — Not needed; PR #82 confirmed the existing demo coverage is already sufficient.
   - **Goal:** Make the smallest data or fixture adjustment needed to cover gaps proven by task #67, and make no unrelated demo expansion.
   - **Allowed files:** `businesses.js`, generated route shells, and the specific QA documentation or scripts needed to register and verify the approved fixture change.
   - **Testing expectations:** Run `node --check businesses.js`, `node --check app.js`, `node scripts/publish-preflight.js`, and relevant QA scripts; verify every changed value is explicitly supported by the prior audit or marked as an internal fixture.
