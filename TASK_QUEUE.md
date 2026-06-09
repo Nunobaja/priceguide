@@ -42,7 +42,7 @@ Follow [`AGENT.md`](AGENT.md) before taking work from this queue. Take only the 
   - **Testing expectations:** Trace the checklist against the current app and representative contact states; verify all steps are reproducible; confirm the change is documentation only.
   - **Product-rule reminder:** Validate one-business guide behavior only; do not add lead capture, analytics, reviews, search, rankings, or directory flows.
 
-- [ ] **#70 Source/service/zone/campaign URL QA script or harness**
+- [x] **#70 Source/service/zone/campaign URL QA script or harness** — Completed by PR #86.
   - **Goal:** Add or refine deterministic internal QA for supported URL context parameters without storing, reporting, or tracking visits.
   - **Allowed files:** `scripts/qa-url-params.js`, directly related QA documentation, and minimal test fixtures required by the harness; app files only if an observed defect is separately authorized before implementation.
   - **Testing expectations:** Run the harness, `node --check` on every changed JavaScript file, and `node scripts/publish-preflight.js`; cover valid, missing, and invalid parameter cases without network calls or persistence.
