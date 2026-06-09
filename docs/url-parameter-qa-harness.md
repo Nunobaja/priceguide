@@ -149,6 +149,10 @@ Los hallazgos deben convertirse en PRs pequeños y enfocados:
 
 No cambiar fórmulas, rangos, rutas, slugs o datos para ocultar un fallo de parsing. No añadir refactors amplios solo para que el harness pueda importar helpers privados.
 
+## Informe final relacionado
+
+Los resultados de este harness se consolidan, junto con la matriz, la auditoría de fixtures y el checklist E2E, en el [informe interno final de validación de producto](final-product-validation-report.md).
+
 ## Límites internos obligatorios
 
 Este harness y su salida son exclusivamente para QA y validación interna de páginas de guía individuales.

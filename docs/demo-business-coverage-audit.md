@@ -266,6 +266,10 @@ Cualquier PR posterior debe:
 
 Usar el [checklist interno E2E del flujo de una guía individual](e2e-guide-user-flow-checklist.md) para convertir esta cobertura de fixtures en corridas completas de entrada, estimador, resultado, copias, handoff, parámetros URL y móvil. Los gaps de contacto ausente registrados en esta auditoría deben marcarse como gaps de validación sin inventar fixtures.
 
+## Informe final relacionado
+
+La conclusión consolidada de esta fase, incluidos los gaps que esta auditoría mantiene abiertos, está en el [informe interno final de validación de producto](final-product-validation-report.md).
+
 ## 13. Límites de producto
 
 - Esta auditoría es **QA interno**.
