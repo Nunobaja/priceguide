@@ -36,7 +36,7 @@ Follow [`AGENT.md`](AGENT.md) before taking work from this queue. Take only the 
   - **Testing expectations:** Run `node --check businesses.js`, `node --check app.js`, `node scripts/publish-preflight.js`, and relevant QA scripts; verify every changed value is explicitly supported by the prior audit or marked as an internal fixture.
   - **Product-rule reminder:** Demo coverage exists only for internal validation; do not invent real-business prices or claims, add public listing behavior, or alter pricing formulas.
 
-- [ ] **#69 End-to-end QA checklist for guide user flow**
+- [x] **#69 End-to-end QA checklist for guide user flow** — Completed by PR #84.
   - **Goal:** Create or refine an internal checklist for the complete individual-guide flow from entry through approximate estimate and safe contact handoff.
   - **Allowed files:** `docs/e2e-guide-user-flow-checklist.md` and `README.md` only if its documentation link needs correction.
   - **Testing expectations:** Trace the checklist against the current app and representative contact states; verify all steps are reproducible; confirm the change is documentation only.
