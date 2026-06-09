@@ -46,63 +46,50 @@ function slugify(value) {
     .replace(/[\s-]+/g, "-");
 }
 
-// These pure parsers intentionally mirror the private helpers in app.js.
-function parseLanguage(params, business) {
-  const requested = params.get("lang") === "en" ? "en" : "es";
-  return requested === "en" && hasEnglishCopy(business) ? "en" : "es";
-}
+const APP_URL_HELPERS = [
+  "getLanguageFromUrl",
+  "getServiceFromUrl",
+  "getSourceFromUrl",
+  "getCampaignFromUrl",
+  "slugify",
+  "getZoneSlug",
+  "getZoneFromUrl"
+];
 
-function parseService(params, business) {
-  const serviceParam = params.get("service");
-  const trimmedService = typeof serviceParam === "string" ? serviceParam.trim() : "";
-  if (!trimmedService || !/^[\p{L}\p{N}\s-]+$/u.test(trimmedService)) return null;
+function extractFunctionDeclaration(source, functionName) {
+  const marker = `function ${functionName}(`;
+  const start = source.indexOf(marker);
+  if (start === -1) throw new Error(`app.js helper not found: ${functionName}`);
 
-  const requestedService = slugify(trimmedService);
-  return business.services.find(service => slugify(service.id) === requestedService) ||
-    business.services.find(service =>
-      slugify(service.name) === requestedService || slugify(service.nameEn) === requestedService
-    ) || null;
-}
+  const bodyStart = source.indexOf("{", start + marker.length);
+  if (bodyStart === -1) throw new Error(`app.js helper body not found: ${functionName}`);
 
-function parseSource(params) {
-  const source = params.get("source");
-  if (typeof source !== "string") return "";
-
-  const trimmedSource = source.trim();
-  if (!trimmedSource || !/^[\p{L}\p{N} _-]+$/u.test(trimmedSource)) return "";
-
-  return trimmedSource
-    .replace(/[-_]+/g, " ")
-    .replace(/\s+/g, " ")
-    .trim()
-    .slice(0, 60)
-    .trim();
-}
-
-function parseCampaign(params) {
-  const campaign = params.get("campaign");
-  if (typeof campaign !== "string") return "";
-
-  const trimmedCampaign = campaign.trim().toLowerCase();
-  if (
-    !trimmedCampaign ||
-    trimmedCampaign.length > 60 ||
-    !/^[a-z0-9_-]+$/.test(trimmedCampaign)
-  ) {
-    return "";
+  let depth = 0;
+  for (let index = bodyStart; index < source.length; index += 1) {
+    if (source[index] === "{") depth += 1;
+    if (source[index] === "}") depth -= 1;
+    if (depth === 0) return source.slice(start, index + 1);
   }
 
-  return trimmedCampaign;
+  throw new Error(`app.js helper body is incomplete: ${functionName}`);
 }
 
-function parseZone(params, business, zoneSupported) {
-  if (!zoneSupported) return null;
-  const requestedZone = slugify(params.get("zone"));
-  if (!requestedZone) return null;
+function createAppUrlParser(appSource) {
+  const helperSource = APP_URL_HELPERS
+    .map(functionName => extractFunctionDeclaration(appSource, functionName))
+    .join("\n\n");
+  const factorySource = `(function parseAppUrl(window, business) {
+    ${helperSource}
+    return {
+      requestedLanguage: getLanguageFromUrl(),
+      service: getServiceFromUrl(),
+      source: getSourceFromUrl(),
+      campaign: getCampaignFromUrl(),
+      zone: getZoneFromUrl()
+    };
+  })`;
 
-  return business.zones.find(zone =>
-    slugify(zone.label) === requestedZone || slugify(zone.labelEn) === requestedZone
-  ) || null;
+  return vm.runInNewContext(factorySource, { URL }, { filename: APP_PATH });
 }
 
 function hasEnglishCopy(business) {
@@ -182,9 +169,11 @@ function selectFixtures(businesses, warnings) {
   return selected;
 }
 
-function buildCases(validServiceSlug, validZoneSlug, zoneSupported) {
+function buildCases(validServiceSlug, validZoneSlug) {
   const cases = [
     { name: "no params", query: "", expect: {} },
+    { name: "empty source", query: "?source=", expect: { source: "" } },
+    { name: "invalid source", query: "?source=google.profile", expect: { source: "" } },
     ...SUPPORTED_SOURCE_VALUES.map(source => ({
       name: `supported source: ${source}`,
       query: `?source=${source}`,
@@ -195,6 +184,7 @@ function buildCases(validServiceSlug, validZoneSlug, zoneSupported) {
       query: "?source=unknown-source",
       expect: { source: "unknown source" }
     },
+    { name: "empty service", query: "?service=", expect: { service: null } },
     {
       name: "valid service",
       query: `?service=${validServiceSlug}`,
@@ -229,10 +219,11 @@ function buildCases(validServiceSlug, validZoneSlug, zoneSupported) {
     { name: "Spanish language", query: "?lang=es", expect: { requestedLanguage: "es" } },
     { name: "English language", query: "?lang=en", expect: { requestedLanguage: "en" } },
     { name: "unsupported language", query: "?lang=fr", expect: { requestedLanguage: "es" } },
+    { name: "empty zone", query: "?zone=", expect: { zone: null } },
     {
-      name: zoneSupported ? "valid zone" : "zone safely ignored (unsupported)",
+      name: "valid zone",
       query: `?zone=${validZoneSlug}`,
-      expect: { zone: zoneSupported ? validZoneSlug : null }
+      expect: { zone: validZoneSlug }
     },
     {
       name: "unknown zone",
@@ -277,7 +268,7 @@ function buildCases(validServiceSlug, validZoneSlug, zoneSupported) {
         source: "qr physical",
         service: validServiceSlug,
         campaign: "qa-no-contact",
-        zone: zoneSupported ? validZoneSlug : null
+        zone: validZoneSlug
       }
     },
     {
@@ -288,7 +279,7 @@ function buildCases(validServiceSlug, validZoneSlug, zoneSupported) {
         source: "google business profile",
         service: validServiceSlug,
         campaign: "qa-bilingual",
-        zone: zoneSupported ? validZoneSlug : null
+        zone: validZoneSlug
       }
     },
     {
@@ -305,16 +296,13 @@ function assertCase(condition, reason, failures) {
   if (!condition) failures.push(reason);
 }
 
-function runCase(testCase, business, zoneSupported) {
+function runCase(testCase, business, parseAppUrl) {
   const route = businessRoute(business);
   const url = new URL(route + testCase.query, BASE_URL);
   const params = new URLSearchParams(url.search);
-  const service = parseService(params, business);
-  const source = parseSource(params);
-  const campaign = parseCampaign(params);
-  const zone = parseZone(params, business, zoneSupported);
-  const requestedLanguage = params.get("lang") === "en" ? "en" : "es";
-  const effectiveLanguage = parseLanguage(params, business);
+  const parsed = parseAppUrl({ location: { href: url.href } }, business);
+  const { service, source, campaign, zone, requestedLanguage } = parsed;
+  const effectiveLanguage = requestedLanguage === "en" && hasEnglishCopy(business) ? "en" : "es";
   const failures = [];
 
   assertCase(url.pathname === route, `route changed to ${url.pathname}`, failures);
@@ -380,21 +368,18 @@ function main() {
   const warnings = [];
   const failures = [];
   let businesses;
+  let parseAppUrl;
 
   try {
     businesses = loadBusinesses();
+    parseAppUrl = createAppUrlParser(fs.readFileSync(APP_PATH, "utf8"));
   } catch (error) {
     console.error(`FAIL setup: ${error.message}`);
     process.exitCode = 1;
     return;
   }
 
-  const appSource = fs.readFileSync(APP_PATH, "utf8");
-  const zoneSupported = /function\s+getZoneFromUrl\s*\(/.test(appSource);
   const selectedBusinesses = selectFixtures(businesses, warnings);
-  if (!zoneSupported) {
-    warnings.push("Zone param not currently supported — expected behavior is safe ignore.");
-  }
   if (selectedBusinesses.length === 0) {
     failures.push("No business fixtures were available for URL parameter QA");
   }
@@ -403,7 +388,7 @@ function main() {
   let passedCases = 0;
 
   console.log("Internal URL parameter QA harness");
-  console.log(`Zone behavior: ${zoneSupported ? "supported; valid configured zones are matched" : "unsupported; values must be ignored safely"}`);
+  console.log("Parser source: isolated helpers extracted from app.js");
   console.log("");
 
   for (const business of selectedBusinesses) {
@@ -413,18 +398,19 @@ function main() {
       warnings.push(`${business.name}: no service fixture available; URL cases skipped`);
       continue;
     }
-    if (zoneSupported && !validZone) {
-      warnings.push(`${business.name}: no zone fixture available; zone cases use an empty slug`);
+    if (!validZone) {
+      warnings.push(`${business.name}: no zone fixture available; URL cases skipped`);
+      continue;
     }
 
     const validServiceSlug = slugify(validService.id);
-    const validZoneSlug = validZone ? slugify(validZone.label) : "missing-zone-fixture";
-    const testCases = buildCases(validServiceSlug, validZoneSlug, zoneSupported);
+    const validZoneSlug = slugify(validZone.label);
+    const testCases = buildCases(validServiceSlug, validZoneSlug);
     console.log(`Fixture: ${business.name} (${businessRoute(business)})`);
 
     for (const testCase of testCases) {
       checkedCases += 1;
-      const caseFailures = runCase(testCase, business, zoneSupported);
+      const caseFailures = runCase(testCase, business, parseAppUrl);
       if (caseFailures.length === 0) {
         passedCases += 1;
         console.log(`  PASS ${testCase.name}`);
