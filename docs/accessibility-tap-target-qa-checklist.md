@@ -33,6 +33,7 @@ Ejecutar la corrida contra todos los estados siguientes. Si el entorno necesita 
 | Solo teléfono / WhatsApp ausente | **Fixture interno de control preventivo** | `/guadalajara/fumigacion/fixture-interno-control-preventivo` | Enlace de llamada sin botón falso de WhatsApp. |
 | Sin contacto, fixture interno de #73 | **Fixture interno QA sin contacto** | `/guadalajara/electricista/fixture-interno-sin-contacto` | Mensaje neutral; ninguna CTA falsa de WhatsApp o llamada. |
 | Carmona para comportamiento bilingüe | **Carmona Hnos Climas y Refrigeración** | `/cabo-san-lucas/aire-acondicionado/carmona-hnos-climas-refrigeracion?lang=en` | Toggle alcanzable, traducciones disponibles, wrapping y expansión en inglés. |
+| Segundo bilingüe interno | **Fixture interno QA Jardín Bilingüe** | `/guadalajara/jardineria/fixture-interno-jardineria-bilingue?lang=en` | Repetir toggle, foco, wrapping, labels y handoff WhatsApp-only en una categoría distinta. |
 | Multi-servicio | **Plomería Mario** | `/los-cabos/plomeros/plomeria-mario` | Nombres y selección de cuatro servicios; cambiar de servicio sin perder claridad. |
 | Zonas largas | **Fixture interno de control preventivo** | `/guadalajara/fumigacion/fixture-interno-control-preventivo` | Revisar las ocho zonas y seleccionar una de nombre largo, por ejemplo `san-juan-de-ocotan`. |
 
@@ -102,7 +103,7 @@ En los tres anchos móviles, usar touch emulado o un dispositivo real además de
 - [ ] El selector no desborda a `360px`, `390px` o `430px` y la selección visible no provoca scroll horizontal.
 - [ ] El toggle de idioma permanece visible, alcanzable y fácil de tocar en todos los viewports.
 - [ ] El estado/idioma activo se entiende sin depender únicamente del color.
-- [ ] En Carmona, cambiar a inglés conserva el orden, los labels, el foco y la operabilidad del flujo.
+- [ ] En Carmona y en el fixture interno bilingüe de jardinería, cambiar a inglés conserva el orden, los labels, el foco y la operabilidad del flujo.
 - [ ] La expansión de texto en inglés, donde exista traducción, envuelve sin solapar controles, ocultar texto o provocar scroll horizontal.
 
 ### F. Resultado y legibilidad
@@ -176,7 +177,7 @@ En los tres anchos móviles, usar touch emulado o un dispositivo real además de
 6. Revisar tarjeta, rango aproximado, wrapping y ausencia de scroll horizontal.
 7. Probar copiar resumen, copiar enlace y reset sin pegar contenido en servicios externos.
 8. Revisar únicamente la preparación del handoff permitido; no enviar WhatsApp ni realizar llamadas.
-9. En Carmona, repetir en inglés y observar expansión de texto, toggle y labels.
+9. En ambos fixtures bilingües, repetir en inglés y observar expansión de texto, toggle y labels.
 10. Registrar cada área como `pass`, `partial` o `fail`; no asumir un resultado por otro viewport.
 
 ## 7. Criterios de aceptación

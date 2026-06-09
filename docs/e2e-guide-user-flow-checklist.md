@@ -43,6 +43,7 @@ No agregar ni modificar fixtures al ejecutar este checklist.
 | Negocio multi-servicio | **Plomería Mario** — `/los-cabos/plomeros/plomeria-mario` | Cuatro servicios, cantidades variables de preguntas/opciones, cambio de servicio y nombres con puntuación. |
 | Zonas largas | **Fixture interno de control preventivo** — `/guadalajara/fumigacion/fixture-interno-control-preventivo` | Ocho zonas, nombres compuestos, wrapping y selección móvil. |
 | Comportamiento en inglés | **Carmona Hnos Climas y Refrigeración** — `/cabo-san-lucas/aire-acondicionado/carmona-hnos-climas-refrigeracion?lang=en` | Campos ingleses sustantivos y fallback seguro a español donde corresponda. |
+| Segundo comportamiento bilingüe interno | **Fixture interno QA Jardín Bilingüe** — `/guadalajara/jardineria/fixture-interno-jardineria-bilingue?lang=en` | Jardinería con hero, servicio, preguntas, respuestas, zonas y disclaimers en inglés; reduce dependencia de Carmona. No implica traducción completa de todos los fixtures. |
 | `tone: "professional"` | **Fixture interno de control preventivo** — `/guadalajara/fumigacion/fixture-interno-control-preventivo` | Branch explícito de tono profesional. |
 | `tone: "friendly"` | **Plomería Mario** — `/los-cabos/plomeros/plomeria-mario` | Branch explícito de tono amistoso. |
 | `tone: "technical"` | **Frío Express** — `/mazatlan/aire-acondicionado/frio-express` | Branch explícito de tono técnico. |
