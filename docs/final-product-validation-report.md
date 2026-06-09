@@ -8,7 +8,7 @@ Este informe responde una pregunta de producto:
 
 > **¿Precios Locales es actualmente coherente como un motor estático reutilizable de guías de precios aproximados para páginas individuales de negocios locales?**
 
-**Respuesta corta:** sí, para validación interna de demos. La estructura de rutas individuales, configuración por negocio, estimador, lenguaje de rango aproximado, resultado, handoff seguro, parámetros URL y documentación interna forman un producto coherente sin backend. La conclusión todavía no equivale a aprobar un piloto con un negocio real: falta completar QA visual/manual en navegador y el estado sin contacto ya tiene fallback seguro y fixture interno; sigue faltando cobertura de WhatsApp confirmado como único contacto.
+**Respuesta corta:** sí, para validación interna de demos. La estructura de rutas individuales, configuración por negocio, estimador, lenguaje de rango aproximado, resultado, handoff seguro, parámetros URL y documentación interna forman un producto coherente sin backend. La [corrida manual interna de QA visual E2E](manual-e2e-visual-qa-run.md) ya documenta viewports, fixtures, checks y criterios de aceptación, pero su existencia no equivale a haber ejecutado las pruebas. La conclusión todavía no aprueba un piloto con un negocio real: cada página o piloto futuro necesita una corrida visual/manual registrada en navegador; el estado sin contacto ya tiene fallback seguro y fixture interno, y sigue faltando cobertura de WhatsApp confirmado como único contacto.
 
 La evaluación resume el estado acumulado después de:
 
@@ -20,7 +20,9 @@ La evaluación resume el estado acumulado después de:
 - #68: pulido móvil del resultado, handoff y tap targets;
 - #69: pulido de claridad del resultado del estimador;
 - #70: alineación del wording del repositorio;
-- #71: simplificación above the fold.
+- #71: simplificación above the fold;
+- #73: fallback seguro sin contacto y fixture interno;
+- #74: documentación de la corrida manual visual E2E (pendiente de ejecución por página/piloto).
 
 Este informe valida coherencia y preparación del producto actual. No valida demanda de mercado, exactitud comercial de precios ni readiness de ventas.
 
@@ -185,8 +187,8 @@ Un estado `partial` no autoriza a inventar datos ni a cambiar fórmulas para con
 ## 8. Gaps restantes de producto
 
 1. **WhatsApp confirmado como único contacto:** sigue sin fixture; no debe inventarse un número utilizable para cerrar el gap.
-2. **QA visual/manual:** el fallback sin contacto de Task #73 requiere mantenerse en las corridas E2E de desktop y móvil.
-3. **QA visual en navegador:** esta validación automatizada/documental no confirma layout, wrapping, tap targets, clipboard, apertura real de `wa.me`/`tel:` ni legibilidad en viewports móviles y desktop.
+2. **QA visual/manual:** ya existe la [corrida manual interna de QA visual E2E](manual-e2e-visual-qa-run.md), y el fallback sin contacto de Task #73 forma parte obligatoria de sus checks en desktop y móvil; aún debe ejecutarse y registrarse por página o piloto.
+3. **QA visual en navegador:** esta validación automatizada/documental no confirma por sí sola layout, wrapping, tap targets, clipboard, preparación real de `wa.me`/`tel:` ni legibilidad en viewports móviles y desktop.
 4. **Cobertura bilingüe profunda limitada:** Carmona concentra la cobertura inglesa sustantiva; el fallback seguro existe, pero otra categoría bilingüe reduciría dependencia de un solo fixture.
 5. **Cobertura de ciudades/categorías:** la diversidad actual es suficiente para demo interno, pero algunas categorías solo tienen un ejemplo. Solo debe añadirse otro fixture si responde a un riesgo de engine concreto, no por volumen.
 6. **Comportamiento de `zone`:** está soportado actualmente y pasa el harness. La documentación debe seguir diciendo explícitamente que una zona desconocida se ignora de forma segura y que, si el soporte cambia, el harness debe reportarlo sin implementar funcionalidad nueva.
@@ -199,14 +201,14 @@ Estos gaps son de producto/QA. No justifican tareas de ventas, marketing, analyt
 
 Precios Locales es coherente en la fase actual como motor estático reutilizable de páginas individuales de guías de precios aproximados. Las rutas, datos configurables, estimador, lenguaje de precio aproximado, resultado, handoff, parámetros URL y límites de alcance están suficientemente alineados para ejecutar demos y validación interna controlada.
 
-Esta recomendación **no** aprueba todavía un piloto con un negocio real. Antes de elevar la recomendación a “Ready for limited real-business pilot”, debe existir como mínimo una corrida E2E manual documentada en navegador sobre desktop y móvil, y debe completarse la corrida E2E documentada del fallback seguro sin contacto.
+Esta recomendación **no** aprueba todavía un piloto con un negocio real. Antes de elevar la recomendación a “Ready for limited real-business pilot”, debe ejecutarse y registrarse como mínimo la [corrida manual interna de QA visual E2E](manual-e2e-visual-qa-run.md) en navegador sobre desktop y los anchos móviles definidos, incluido el fallback seguro sin contacto. La disponibilidad del runbook no cambia por sí sola los estados visuales `partial`.
 
 La recomendación es exclusivamente de producto. No considera demanda, adquisición, ventas, marketing ni viabilidad comercial.
 
 ## 10. Siguientes PRs sugeridos de producto/QA
 
-1. **Documentar una corrida E2E visual/manual del fallback sin contacto** en desktop y móvil, sin enviar ni recolectar datos.
-2. **Documentar una corrida E2E visual/manual** con screenshots o notas de desktop y móvil para above the fold, zonas largas, resultado, copias y handoff.
+1. **Ejecutar y registrar la corrida E2E visual/manual del fallback sin contacto** en desktop y los anchos móviles definidos, sin enviar ni recolectar datos.
+2. **Ejecutar y registrar la corrida E2E visual/manual** por página/piloto para above the fold, zonas largas, resultado, copias y handoff; adjuntar screenshots solo cuando documenten un hallazgo visual.
 3. **Ejecutar QA de accesibilidad y tap targets** sobre selección, resultado y acciones móviles sin rediseñar la interfaz.
 4. **Añadir un segundo fixture bilingüe interno** en otra categoría únicamente si se necesita reducir el riesgo de regresión inglesa.
 5. **Crear un smoke-test final para una página de negocio real** que confirme ruta individual, datos aprobados, rango aproximado, copy, contacto y publicación antes de compartir su URL.
@@ -229,4 +231,5 @@ No se recomiendan PRs de ventas, marketing, pitch, landing pages, CRM, lead capt
 - [Matriz interna de validación de producto](product-validation-matrix.md)
 - [Auditoría interna de cobertura de negocios demo](demo-business-coverage-audit.md)
 - [Checklist interno E2E del flujo de una guía individual](e2e-guide-user-flow-checklist.md)
+- [Corrida manual interna de QA visual E2E](manual-e2e-visual-qa-run.md)
 - [Harness interno de QA para parámetros URL](url-parameter-qa-harness.md)
